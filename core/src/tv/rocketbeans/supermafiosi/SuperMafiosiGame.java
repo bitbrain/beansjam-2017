@@ -16,25 +16,24 @@ import tv.rocketbeans.supermafiosi.screens.IntroScreen;
 import tv.rocketbeans.supermafiosi.screens.MenuScreen;
 import tv.rocketbeans.supermafiosi.ui.Styles;
 
-public class SuperMafiosiGame extends BrainGdxGame {
+public class SuperMafiosiGame extends BrainGdxGame
+{
 
-	@Override
-	protected GameAssetLoader getAssetLoader() {
-		SharedAssetManager.getInstance().setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
-		return new MafiosiAssetLoader();
-	}
+   @Override
+   protected GameAssetLoader getAssetLoader()
+   {
+      SharedAssetManager.getInstance().setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
+      return new MafiosiAssetLoader();
+   }
 
-	@Override
-	protected AbstractScreen<?> getInitialScreen() {
-		Styles.init();
-<<<<<<< HEAD
-=======
-		Bundle.load();
-		// Temporarily set to German for now
-		Bundle.setLocale(Locale.GERMAN);
->>>>>>> 9e7d1a3bce0386fb3e3728187fa79ec82198deb9
-		return new IntroScreen(this);
-	}
-	
-	
+   @Override
+   protected AbstractScreen<?> getInitialScreen()
+   {
+      Styles.init();
+      Bundle.load();
+      // Temporarily set to German for now
+      Bundle.setLocale(Locale.GERMAN);
+      return new IntroScreen(this);
+   }
+
 }
