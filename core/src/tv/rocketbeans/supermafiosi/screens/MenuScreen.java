@@ -15,9 +15,15 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
+import de.bitbrain.braingdx.graphics.pipeline.RenderPipe;
+import de.bitbrain.braingdx.graphics.pipeline.layers.RenderPipeIds;
+import de.bitbrain.braingdx.postprocessing.effects.Bloom;
+import de.bitbrain.braingdx.postprocessing.effects.Vignette;
+import de.bitbrain.braingdx.postprocessing.filters.Blur.BlurType;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.screens.TransitionCallback;
 import de.bitbrain.braingdx.tweens.ActorTween;
+import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
@@ -32,7 +38,9 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 
 	@Override
 	protected void onCreateStage(Stage stage, int width, int height) {
+		setBackgroundColor(Colors.BACKGROUND);
 		setupUI(stage);
+		setupShaders();
 	}
 	
 	// Defining general UI
@@ -89,4 +97,20 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		
 		stage.addActor(layout);
 	}
+	
+	private void setupShaders() {
+	      Bloom bloom = new Bloom(Math.round(Gdx.graphics.getWidth() * 0.9f), Math.round(Gdx.graphics.getHeight() * 0.9f));
+	      bloom.setBaseIntesity(1.1f);
+	      bloom.setBaseSaturation(1.0f);
+	      bloom.setBlurType(BlurType.Gaussian5x5b);
+	      bloom.setBlurAmount(0.5f);
+	      bloom.setBloomSaturation(0.9f);
+	      bloom.setBloomIntesity(0.9f);
+	      bloom.setBlurPasses(5);
+	      Vignette vignette = new Vignette(Math.round(Gdx.graphics.getWidth() / 2f),
+	            Math.round(Gdx.graphics.getHeight() / 2f), false);
+	      vignette.setIntensity(0.35f);
+	      RenderPipe uiPipe = getRenderPipeline().getPipe(RenderPipeIds.UI);
+	      uiPipe.addEffects(vignette, bloom);
+	   }
 }
