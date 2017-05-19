@@ -1,33 +1,30 @@
 package tv.rocketbeans.supermafiosi;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 
-public class SuperMafiosiGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
-	
-	@Override
-	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-	}
+import de.bitbrain.braingdx.BrainGdxGame;
+import de.bitbrain.braingdx.assets.GameAssetLoader;
+import de.bitbrain.braingdx.assets.SharedAssetManager;
+import de.bitbrain.braingdx.screens.AbstractScreen;
+import tv.rocketbeans.supermafiosi.assets.MafiosiAssetLoader;
+import tv.rocketbeans.supermafiosi.screens.IntroScreen;
+import tv.rocketbeans.supermafiosi.ui.Styles;
+
+public class SuperMafiosiGame extends BrainGdxGame {
 
 	@Override
-	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+	protected GameAssetLoader getAssetLoader() {
+		SharedAssetManager.getInstance().setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(new InternalFileHandleResolver()));
+		return new MafiosiAssetLoader();
+	}
+
+	@Override
+	protected AbstractScreen<?> getInitialScreen() {
+		Styles.init();
+		return new IntroScreen(this);
 	}
 	
-	@Override
-	public void dispose () {
-		batch.dispose();
-		img.dispose();
-	}
+	
 }
