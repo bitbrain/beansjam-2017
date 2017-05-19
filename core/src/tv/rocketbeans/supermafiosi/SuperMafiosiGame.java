@@ -24,7 +24,7 @@ public class SuperMafiosiGame extends BrainGdxGame {
 	@Override
 	protected AbstractScreen<?> getInitialScreen() {
 		Styles.init();
-		return new MenuScreen(this);
+		return new IntroScreen(this);
 	}
 	
 	
