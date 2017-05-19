@@ -6,14 +6,18 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenEquations;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.screens.TransitionCallback;
+import de.bitbrain.braingdx.tweens.ActorTween;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
@@ -37,10 +41,14 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		// Layout
 		Table layout = new Table();
 		layout.setFillParent(true);
-		
 		// Logo
 		Image image = new Image(new SpriteDrawable(new Sprite(SharedAssetManager.getInstance().get(Asset.Textures.LOGO, Texture.class))));
-		layout.add(image).row();
+		layout.add(image).padBottom(50f).row();
+		Tween.to(image, ActorTween.ALPHA, 1.5f)
+		     .target(0.9f)
+		     .repeatYoyo(Tween.INFINITY, 0f)
+		     .ease(TweenEquations.easeOutQuad)
+		     .start(getTweenManager());
 		
 		// New game
 		TextButton newGameButton = new TextButton(Bundle.translations.get(Message.MAINMENU_BUTTON_NEWGAME), Styles.TEXT_BUTTON_MAIN_MENU);
@@ -50,7 +58,7 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 				getScreenTransitions().out(new IngameStageScreen(getGame()), 1f);
 			}
 		});
-		layout.add(newGameButton).width(400f).height(100f).padTop(20f).padBottom(10f).row();
+		layout.add(newGameButton).width(400f).height(100f).padTop(20f).padBottom(20f).row();
 		
 		// End game
 		TextButton endGameButton = new TextButton(Bundle.translations.get(Message.MAINMENU_BUTTON_EXITGAME), Styles.TEXT_BUTTON_MAIN_MENU);		
@@ -74,6 +82,11 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 			}
 		});
 		layout.add(endGameButton).width(400f).height(100f).padBottom(10f).row();
+		
+		// Credits
+		Label credits = new Label(Bundle.translations.get(Message.MAINMENU_CREDITS), Styles.LABEL_CREDITS);
+		layout.add(credits).padTop(50f);
+		
 		stage.addActor(layout);
 	}
 }
