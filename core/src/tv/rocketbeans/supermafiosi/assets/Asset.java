@@ -16,6 +16,6 @@ public interface Asset {
 	}
 	
 	public interface Fonts {
-		String EIGHT_BIT_WONDER = "8bitwonder.ttf";
+		String EIGHT_BIT_WONDER = "fonts/8bitwonder.ttf";
 	}
 }
