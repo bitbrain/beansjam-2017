@@ -16,6 +16,8 @@ import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.screens.TransitionCallback;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
+import tv.rocketbeans.supermafiosi.i18n.Bundle;
+import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.ui.Styles;
 
 public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
@@ -41,7 +43,7 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		layout.add(image).row();
 		
 		// New game
-		TextButton newGameButton = new TextButton("New game", Styles.TEXT_BUTTON_MAIN_MENU);
+		TextButton newGameButton = new TextButton(Bundle.translations.get(Message.MAINMENU_BUTTON_NEWGAME), Styles.TEXT_BUTTON_MAIN_MENU);
 		newGameButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -51,7 +53,7 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		layout.add(newGameButton).width(400f).height(100f).padTop(20f).padBottom(10f).row();
 		
 		// End game
-		TextButton endGameButton = new TextButton("End game", Styles.TEXT_BUTTON_MAIN_MENU);		
+		TextButton endGameButton = new TextButton(Bundle.translations.get(Message.MAINMENU_BUTTON_EXITGAME), Styles.TEXT_BUTTON_MAIN_MENU);		
 		// Register listener to quit the game with a slight fade-out
 		endGameButton.addListener(new ClickListener() {
 			@Override
