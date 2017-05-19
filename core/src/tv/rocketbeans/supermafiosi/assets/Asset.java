@@ -4,7 +4,8 @@ public interface Asset {
 
 	// TODO
 	public interface Textures {
-		// TODO
+		String BUTTON_9PATCH = "textures/button.9.png";
+		String LOGO = "textures/logo.png";
 	}
 	
 	public interface Sounds {

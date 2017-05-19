@@ -1,6 +1,7 @@
 package tv.rocketbeans.supermafiosi.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
@@ -13,6 +14,8 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 
 	@Override
 	protected void onCreateStage(Stage stage, int width, int height) {
-		// TODO
+		Table layout = new Table();
+		
+		stage.addActor(layout);
 	}
 }

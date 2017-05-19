@@ -10,6 +10,7 @@ import de.bitbrain.braingdx.assets.SharedAssetManager;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import tv.rocketbeans.supermafiosi.assets.MafiosiAssetLoader;
 import tv.rocketbeans.supermafiosi.screens.IntroScreen;
+import tv.rocketbeans.supermafiosi.screens.MenuScreen;
 import tv.rocketbeans.supermafiosi.ui.Styles;
 
 public class SuperMafiosiGame extends BrainGdxGame {
@@ -23,7 +24,7 @@ public class SuperMafiosiGame extends BrainGdxGame {
 	@Override
 	protected AbstractScreen<?> getInitialScreen() {
 		Styles.init();
-		return new IntroScreen(this);
+		return new MenuScreen(this);
 	}
 	
 	
