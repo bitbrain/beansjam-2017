@@ -36,7 +36,7 @@ public final class Styles {
 		
 		LABEL_DIALOG.fontColor = Colors.FOREGROUND;
 		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 22);
-		LABEL_DIALOG_TITLE.fontColor = Colors.lighten(Colors.FOREGROUND, 0.4f);
+		LABEL_DIALOG_TITLE.fontColor =  Colors.BACKGROUND;
 		LABEL_DIALOG_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 28);
 	}
 	

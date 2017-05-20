@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import com.badlogic.gdx.graphics.Color;
 
 import de.bitbrain.braingdx.GameContext;
+import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.Config;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
@@ -21,9 +22,9 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 	private static final Map<Roast.Type, Color> ROAST_COLORS = new HashMap<Roast.Type, Color>();
 	
 	static {
-		ROAST_COLORS.put(Roast.Type.PAPER, Color.YELLOW);
-		ROAST_COLORS.put(Roast.Type.ROCK, Color.BLUE);
-		ROAST_COLORS.put(Roast.Type.SCISSORS, Color.ORANGE);
+		ROAST_COLORS.put(Roast.Type.PAPER, Colors.PAPER_COLOR);
+		ROAST_COLORS.put(Roast.Type.ROCK, Colors.ROCK_COLOR);
+		ROAST_COLORS.put(Roast.Type.SCISSORS, Colors.SCISSORS_COLOR);
 	}
 	
 	private final GameContext gameContext;
@@ -45,10 +46,9 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 				// 4. player tells the punchline
 				// Fake it for now
 				Mafiosi player = mafiosiGameContext.getPlayerMafiosi();
-				DialogManager dialogManager = mafiosiGameContext.getDialogManager();
 				Roast randomRoast = roastPool.getRandomRoast();
-				firedRoasts.put(player, randomRoast);
-				dialogManager.addDialog(player.getName() + " (You)", randomRoast.getMessageKey(), player.getAvatarId(), ROAST_COLORS.get(randomRoast.getType()));
+				fireRoast(player, randomRoast);
+				
 			} else {
 				notifyComplete(evaluateResult());
 			}
@@ -107,12 +107,15 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 	private void initialiseOtherMafiosis() {
 		for (Mafiosi mafiosi : mafiosiGameContext.getCandidates()) {
 			if (mafiosi != mafiosiGameContext.getPlayerMafiosi()) {
-				DialogManager dialogManager = mafiosiGameContext.getDialogManager();
 				Roast roast = roastPool.getRandomRoast();
-				dialogManager.addDialog(mafiosi.getName(), roast.getMessageKey(), mafiosi.getAvatarId());
-				firedRoasts.put(mafiosi, roast);
+				fireRoast(mafiosi, roast);
 			}
 		}
+	}
+	
+	private void fireRoast(Mafiosi player, Roast roast) {
+		firedRoasts.put(player, roast);
+		mafiosiGameContext.getDialogManager().addDialog(player.getName(), roast.getMessageKey(), player.getAvatarId(), ROAST_COLORS.get(roast.getType()));
 	}
 
 }
