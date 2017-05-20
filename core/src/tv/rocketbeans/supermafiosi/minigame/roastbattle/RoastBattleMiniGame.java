@@ -1,8 +1,9 @@
-package tv.rocketbeans.supermafiosi.minigame;
+package tv.rocketbeans.supermafiosi.minigame.roastbattle;
 
 import de.bitbrain.braingdx.GameContext;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager.DialogManagerListener;
+import tv.rocketbeans.supermafiosi.minigame.AbstractMiniGame;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 
@@ -12,6 +13,8 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 	private final MafiosiGameContext mafiosiGameContext;
 	
 	private boolean playersTurn;
+	
+	private RoastPool roastPool = new RoastPool();
 	
 	private final DialogManagerListener afterAllDialogsListener = new DialogManagerListener() {
 		@Override

@@ -3,7 +3,7 @@ package tv.rocketbeans.supermafiosi.minigame;
 import java.util.HashSet;
 import java.util.Set;
 
-abstract class AbstractMiniGame implements MiniGame {
+public abstract class AbstractMiniGame implements MiniGame {
 	
 	protected final Set<MiniGameListener> listeners = new HashSet<MiniGameListener>();
 

@@ -42,5 +42,30 @@ public interface Message {
 	String DIALOG_KIMMYJIMMEL_GREETING= "dialog.kimmyjimmel.greeting";
 	String DIALOG_PEDRO_GREETING= "dialog.pedro.greeting";
 	String DIALOG_HEINRICH_GREETING = "dialog.heinrich.greeting";
+	
+	/**
+	 * Mini Games
+	 */
+
+	String MINIGAME_ROAST_SCISSOR_1 = "minigame.roast.scissor.1";
+	String MINIGAME_ROAST_SCISSOR_2 = "minigame.roast.scissor.2";
+	String MINIGAME_ROAST_SCISSOR_3 = "minigame.roast.scissor.3";
+	String MINIGAME_ROAST_SCISSOR_4 = "minigame.roast.scissor.4";
+	String MINIGAME_ROAST_SCISSOR_5 = "minigame.roast.scissor.5";
+	String MINIGAME_ROAST_SCISSOR_6 = "minigame.roast.scissor.6";
+	
+	String MINIGAME_ROAST_ROCK_1 = "minigame.roast.rock.1";
+	String MINIGAME_ROAST_ROCK_2 = "minigame.roast.rock.2";
+	String MINIGAME_ROAST_ROCK_3 = "minigame.roast.rock.3";
+	String MINIGAME_ROAST_ROCK_4 = "minigame.roast.rock.4";
+	String MINIGAME_ROAST_ROCK_5 = "minigame.roast.rock.5";
+	String MINIGAME_ROAST_ROCK_6 = "minigame.roast.rock.6";
+	
+	String MINIGAME_ROAST_PAPER_1 = "minigame.roast.paper.1";
+	String MINIGAME_ROAST_PAPER_2 = "minigame.roast.paper.2";
+	String MINIGAME_ROAST_PAPER_3 = "minigame.roast.paper.3";
+	String MINIGAME_ROAST_PAPER_4 = "minigame.roast.paper.4";
+	String MINIGAME_ROAST_PAPER_5 = "minigame.roast.paper.5";
+	String MINIGAME_ROAST_PAPER_6 = "minigame.roast.paper.6";
 
 }
