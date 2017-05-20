@@ -166,20 +166,15 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
             if (tick == 85)
             {
-                Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
-               AudioManager.getInstance().fadeOutMusic(dying_don_music, 5f);
-            
-               
                textFadeOut(introlabel3);
                introlabel4 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_4));
-                Music menu_music = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_INTRO, Music.class);
-               menu_music.setLooping(true);
-               AudioManager.getInstance().fadeInMusic(menu_music, 1f);
+               
             }
 
             if (tick == 95)
             {
-              
+            	Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
+                AudioManager.getInstance().fadeOutMusic(dying_don_music, 4f);               
                textFadeOut(introlabel4);
                introlabel5 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_5));
             }
@@ -248,7 +243,6 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       Tween.to(logoGameObject, GameObjectTween.POS_Y, 5f).target(Gdx.graphics.getHeight() / 2 - logotexture.getHeight() / 2).ease(TweenEquations.easeOutBounce).start(getTweenManager());
       Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
       menu_music_main.setLooping(true);
-      AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
       AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
    }
 
