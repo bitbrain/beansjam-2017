@@ -4,6 +4,7 @@ public interface Asset {
 
 	// TODO
 	public interface Textures {
+		String DUMMY = "textures/dummy.png";
 		String BUTTON_9PATCH = "textures/button.9.png";
 		String LOGO = "textures/logo.png";
             String AVATAR_01 = "textures/avatar_01.png";
