@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGeneratorLoader;
 import de.bitbrain.braingdx.BrainGdxGame;
 import de.bitbrain.braingdx.assets.GameAssetLoader;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
+import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import tv.rocketbeans.supermafiosi.assets.MafiosiAssetLoader;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
@@ -30,6 +31,7 @@ public class SuperMafiosiGame extends BrainGdxGame
    {
       Styles.init();
       Bundle.load();
+      AudioManager.getInstance().setVolume(Config.MUSIC_VOLUME);
       // Temporarily set to German for now
       Bundle.setLocale(Locale.GERMAN);
       return new IntroScreen(this);

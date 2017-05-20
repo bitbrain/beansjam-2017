@@ -2,6 +2,8 @@ package tv.rocketbeans.supermafiosi.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
+import tv.rocketbeans.supermafiosi.Config;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 
 public class DesktopLauncher {
@@ -10,7 +12,7 @@ public class DesktopLauncher {
 		config.width = 1280;
 		config.height = 720;
 		config.resizable = false;
-		config.title = "Super Mafiosi (#beansjam edition)";
+		config.title = Config.APP_NAME;
 		new LwjglApplication(new SuperMafiosiGame(), config);
 	}
 }
