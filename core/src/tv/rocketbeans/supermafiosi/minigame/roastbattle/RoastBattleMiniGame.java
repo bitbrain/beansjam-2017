@@ -87,7 +87,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 				// Paper
 				Roast randomPaper = roastPool.getRandomRoast(Type.PAPER);
 				selectData.put(randomPaper, Bundle.translations.get(randomPaper.getMessageKey()));
-				select = new MultiSelect<Roast>(multiSelectListener, selectData);
+				select = new MultiSelect<Roast>(multiSelectListener, selectData, new RoastIconProvider());
 				select.setFillParent(true);
 				gameContext.getStage().addActor(select);
 			}

@@ -37,6 +37,10 @@ public interface Asset
 
       String LABEL_9PATCH = "textures/panel_top_right.9.png";
       String PANEL_9PATCH = "textures/panel_right.9.png";
+      
+      String MINIGAME_ROASTBATTLE_ICON_RAINDROP = "textures/raindrop.png";
+      String MINIGAME_ROASTBATTLE_ICON_SKULL = "textures/skull.png";
+      String MINIGAME_ROASTBATTLE_ICON_HEART = "textures/heart.png";
 
       /**
        * Intro

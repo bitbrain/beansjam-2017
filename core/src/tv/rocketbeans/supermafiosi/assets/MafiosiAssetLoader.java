@@ -36,7 +36,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.KAPPO, Texture.class);
 
             assets.put(Asset.Textures.DUMMY, Texture.class);
-            assets.put(Asset.Textures.AVATAR_MODERATOR, Texture.class);
+            //assets.put(Asset.Textures.AVATAR_MODERATOR, Texture.class);
             
             assets.put(Asset.Textures.JURY_BACKGROUND, Texture.class);
             assets.put(Asset.Textures.JURY_TABLE, Texture.class);
@@ -53,6 +53,10 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             
             assets.put(Asset.Textures.JURY_LASER, Texture.class);
             assets.put(Asset.Textures.JURY_LASER_ARM, Texture.class);
+            
+            assets.put(Asset.Textures.MINIGAME_ROASTBATTLE_ICON_RAINDROP, Texture.class);
+            assets.put(Asset.Textures.MINIGAME_ROASTBATTLE_ICON_HEART, Texture.class);
+            assets.put(Asset.Textures.MINIGAME_ROASTBATTLE_ICON_SKULL, Texture.class);
             
             /*
             *  Music tralalalaa
