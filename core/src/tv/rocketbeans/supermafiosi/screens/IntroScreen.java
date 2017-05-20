@@ -243,17 +243,17 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       dialogBox.setHeight(150f);
       dialogBox.setWidth(Gdx.graphics.getWidth());
       stage.addActor(dialogBox);
-      dialogManager.addDialog(Message.INTRO_DON_1, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_2, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_3, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_4, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_5, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_6, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_7, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_8, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_DON_9, Asset.Textures.OLDDON);
-      dialogManager.addDialog(Message.INTRO_KAPPO_1, Asset.Textures.KAPPO);
-      dialogManager.addDialog(Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
+      dialogManager.addDialog("Title", Message.INTRO_DON_1, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_2, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_3, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_4, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_5, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_6, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_7, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_8, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_DON_9, Asset.Textures.OLDDON);
+      dialogManager.addDialog("Title", Message.INTRO_KAPPO_1, Asset.Textures.KAPPO);
+      dialogManager.addDialog("Title", Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
 
       Tween.call(new TweenCallback()
       {

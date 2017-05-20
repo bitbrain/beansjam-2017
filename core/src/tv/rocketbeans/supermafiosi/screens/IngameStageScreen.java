@@ -134,7 +134,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 			o.setDimensions(mafiosiWidth, mafiosiWidth * 2f);
 			o.setPosition(startPosition.x + i * (mafiosiWidth + mafiosiGap), startPosition.y);
 			getRenderManager().register(m.getName(), new SpriteRenderer(m.getSpriteId()));
-			dialogManager.addDialog(m.getBioId(), m.getAvatarId());
+			dialogManager.addDialog(m.getName(), m.getBioId(), m.getAvatarId());
 		}
 	}
 	

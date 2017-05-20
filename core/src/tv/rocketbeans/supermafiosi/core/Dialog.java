@@ -9,10 +9,16 @@ public class Dialog {
 	
 	private final Sprite picture;
 	private final String text;
+	private final String title;
 	
-	public Dialog(String text, String pictureId) {
+	public Dialog(String title, String text, String pictureId) {
 		this.text = text;
+		this.title = title;
 		this.picture = new Sprite(SharedAssetManager.getInstance().get(pictureId, Texture.class));
+	}
+	
+	public String getTitle() {
+		return title;
 	}
 	
 	public Sprite getPicture() {
