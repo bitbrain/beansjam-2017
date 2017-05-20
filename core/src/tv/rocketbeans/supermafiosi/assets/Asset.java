@@ -17,7 +17,21 @@ public interface Asset
       /**
        * Ingame
        */
-      String JURY_TABLE = "textures/JuryTisch.png";
+      String JURY_BACKGROUND = "textures/Jury_bg.png";
+      String JURY_TABLE = "textures/Jury_table.png";
+      String JURY_UNDECIDED = "textures/Jury_nonbullet.png";
+      String JURY_NONBULLET = "textures/Jury_nonbullet.png";
+      String JURY_BULLET = "textures/Jury_bullet.png";
+      
+      String JURY_RICK = "textures/jury_rick.png";
+      String JURY_RICK_ARM = "textures/jury_rick_arm.png";
+      
+      String JURY_LASER = "textures/jury_laser.png";
+      String JURY_LASER_ARM = "textures/jury_laser_hands.png";
+      
+      String JURY_BLOB = "textures/jury_blob.png";
+      String JURY_BLOB_ARM = "textures/jury_blob_hands.png";
+      
       String DUMMY = "textures/dummy.png";
       String STAGE = "textures/stage.png";
       String AVATAR_01 = "textures/avatar_01.png";
@@ -32,7 +46,11 @@ public interface Asset
 
    public interface Sounds
    {
-      // TODO
+      String AUDIANCE_BOO = "sounds/audience_boo.ogg";
+      String AUDIANCE_CLAPPING1 = "sounds/audience_clapping_1.ogg";
+      String AUDIANCE_CLAPPING2 = "sounds/audience_clapping_2.ogg";
+      String AUDIANCE_CLAPPING3 = "sounds/audience_clapping_3.ogg";
+      String AUDIANCE_DRUMROLL = "sounds/drum_roll.ogg";
    }
 
    public interface Music
@@ -40,6 +58,7 @@ public interface Asset
 
       String DYING_DON = "music/dying_don.ogg";
       String MENU_CHAR_SELECT = "music/opener_char-select.ogg";
+      String TENSION = "music/tension_1.ogg";
    }
 
    public interface Fonts

@@ -111,6 +111,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 //		);
 		
 		JuryManager.getInstance().initRender(this);
+            JuryManager.getInstance().startRateJury(this);
+            
 		
 		// Moderator
 //		setupMafiosis(625f, 250f, 
