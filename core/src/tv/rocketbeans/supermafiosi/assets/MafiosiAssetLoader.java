@@ -29,12 +29,13 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.AVATAR_01, Texture.class);
             assets.put(Asset.Textures.KRANKENBETT, Texture.class);
 
+            
+            
             assets.put(Asset.Textures.OLDDON, Texture.class);
             assets.put(Asset.Textures.KAPPO, Texture.class);
 
             assets.put(Asset.Textures.DUMMY, Texture.class);
-            
-            
+            assets.put(Asset.Textures.AVATAR_MODERATOR, Texture.class);
             
             assets.put(Asset.Textures.JURY_BACKGROUND, Texture.class);
             assets.put(Asset.Textures.JURY_TABLE, Texture.class);
@@ -56,7 +57,8 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             *  Music tralalalaa
             */
             assets.put(Asset.Music.DYING_DON, Music.class);
-            assets.put(Asset.Music.MENU_CHAR_SELECT, Music.class);
+            assets.put(Asset.Music.MENU_CHAR_SELECT_INTRO, Music.class);
+            assets.put(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
             assets.put(Asset.Music.TENSION, Music.class);
             
             
