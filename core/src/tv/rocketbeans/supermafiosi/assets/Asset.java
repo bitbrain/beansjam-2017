@@ -37,7 +37,7 @@ public interface Asset
 
       String LABEL_9PATCH = "textures/panel_top_right.9.png";
       String PANEL_9PATCH = "textures/panel_right.9.png";
-
+      String AVATAR_MODERATOR = "textures/mod.png";
       /**
        * Intro
        */
