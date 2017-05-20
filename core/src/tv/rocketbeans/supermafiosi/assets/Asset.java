@@ -14,7 +14,8 @@ public interface Asset {
              * Intro
              */
             String KRANKENBETT = "textures/krankenbett.png";
-            
+            String OLDDON = "textures/OldDon.png";
+            String KAPPO = "textures/Kappo.png";
 	}
 	
 	public interface Sounds {
