@@ -136,6 +136,7 @@ public class DialogBox extends Actor {
 			this.dialog = dialog;
 			this.text = new Label(dialog.getText(), Styles.LABEL_DIALOG);
 			this.title = new Label(dialog.getTitle(), Styles.LABEL_DIALOG_TITLE);
+			text.setColor(dialog.getColor());
 			text.setWrap(true);
 			text.setWidth(getWidth() - getHeight() -  MARGIN * 2f);
 			text.setAlignment(Align.top | Align.left);

@@ -24,6 +24,11 @@ public class RoastPool {
 		}
 		return null;
 	}
+
+	public Roast getRandomRoast() {
+		Roast.Type type = Roast.Type.values()[(int) (Math.random() * Roast.Type.values().length)];
+		return getRandomRoast(type);
+	}
 	
 	private void initialiseRoasts() {
 		// SCISSORS
