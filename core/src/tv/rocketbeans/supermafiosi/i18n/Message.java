@@ -13,6 +13,13 @@ public interface Message {
       /**
        * Intro
        */
+      
+     String INTRO_SPEAKER_1 = "intro.speaker.dialog1";
+     String INTRO_SPEAKER_2 = "intro.speaker.dialog2";
+     String INTRO_SPEAKER_3 = "intro.speaker.dialog3";
+     String INTRO_SPEAKER_4 = "intro.speaker.dialog4";
+     String INTRO_SPEAKER_5 = "intro.speaker.dialog5";
+      
      String INTRO_DON_1 = "intro.don.dialog1";
      String INTRO_DON_2 = "intro.don.dialog2";
      String INTRO_DON_3 = "intro.don.dialog3";
