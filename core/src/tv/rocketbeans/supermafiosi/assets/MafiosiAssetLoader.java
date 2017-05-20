@@ -69,7 +69,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Music.MENU_CHAR_SELECT_INTRO, Music.class);
             assets.put(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
             assets.put(Asset.Music.TENSION, Music.class);
-            
+            assets.put(Asset.Music.AUDIANCE_HAPPY, Music.class);
             
             /*
             * Sounds

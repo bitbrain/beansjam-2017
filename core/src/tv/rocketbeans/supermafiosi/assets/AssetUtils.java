@@ -17,6 +17,8 @@ import de.bitbrain.braingdx.assets.SharedAssetManager;
  */
 public class AssetUtils
 {
+   
+   
    public static Vector2 getDimensionOfTexture(String path)
    {
           Texture texture = SharedAssetManager.getInstance().get(path);
@@ -30,10 +32,23 @@ public class AssetUtils
           return dimension;
    }
    
-   public static void playSound(String path)
+   public static void playSound(String path, boolean loop)
    {
       final Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
-      sound.play();
+      if(loop)
+      {
+          sound.loop();
+      }
+      else
+      {
+         sound.play();
+      }
    }
+   
+    public static void stopSound(String path, float duration)
+    {
+       final Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
+
+    }
    
 }

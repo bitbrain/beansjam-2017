@@ -11,20 +11,15 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.world.GameObject;
-import java.awt.Dimension;
-import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
 import tv.rocketbeans.supermafiosi.core.JuryMember;
-import tv.rocketbeans.supermafiosi.core.Mafiosi;
-import tv.rocketbeans.supermafiosi.i18n.Message;
 
 /**
  *
@@ -68,8 +63,8 @@ public class JuryManager
 
    private void setupJury()
    {
-      potenzialJuryMembers.add(new JuryMember("Keidi Hlumm", Asset.Textures.JURY_RICK, Asset.Textures.JURY_RICK_ARM, Asset.Textures.AVATAR_01));
-      potenzialJuryMembers.add(new JuryMember("Kimmy Jimmel", Asset.Textures.JURY_LASER, Asset.Textures.JURY_LASER_ARM, Asset.Textures.AVATAR_01));
+      potenzialJuryMembers.add(new JuryMember("Rick Sanchez", Asset.Textures.JURY_RICK, Asset.Textures.JURY_RICK_ARM, Asset.Textures.AVATAR_01));
+      potenzialJuryMembers.add(new JuryMember("Eduard Laser", Asset.Textures.JURY_LASER, Asset.Textures.JURY_LASER_ARM, Asset.Textures.AVATAR_01));
       potenzialJuryMembers.add(new JuryMember("Blobby", Asset.Textures.JURY_BLOB, Asset.Textures.JURY_BLOB_ARM, Asset.Textures.AVATAR_01));
 
       findJury();
@@ -212,9 +207,7 @@ public class JuryManager
       {
          for (GameObject juryObject : juryObjects)
          {
-           
             juryObject.getColor().a = 0f;
-             System.out.println("Object: " + juryObject);
          }
       }
    }
@@ -264,6 +257,7 @@ public class JuryManager
          Vector2 dimension_jurymember = AssetUtils.getDimensionOfTexture(jurymember.getHeadSprite());
          o_jury.setDimensions(dimension_jurymember.x * ratio.x, dimension_jurymember.y * ratio.y);
          o_jury.setPosition(jurymembers_startpoint.x + i * next_Jury_Width, jurymembers_startpoint.y);
+      
          screen.getRenderManager().register(jurymember.getName(), new SpriteRenderer(jurymember.getHeadSprite()));
 
          juryObjects.add(o_jury);

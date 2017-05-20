@@ -72,6 +72,10 @@ public interface Asset
       String MENU_CHAR_SELECT_MAIN = "music/opener_char-select_Main.ogg";
 
       String TENSION = "music/tension_1_Main.ogg";
+      
+      
+      
+      String AUDIANCE_HAPPY = "music/audience_happy.ogg";
    }
 
    public interface Fonts
