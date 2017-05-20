@@ -23,6 +23,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
              */
 		assets.put(Asset.Textures.BUTTON_9PATCH, Texture.class);
 		assets.put(Asset.Textures.LOGO, Texture.class);
+            assets.put(Asset.Textures.AVATAR_01, Texture.class);
             assets.put(Asset.Textures.KRANKENBETT, Texture.class);
             
             /*
@@ -30,6 +31,6 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             */
             assets.put(Asset.Music.DYING_DON, Music.class);
             assets.put(Asset.Music.MENU_CHAR_SELECT, Music.class);
-            
+          
 	}
 }

@@ -97,20 +97,21 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		
 		stage.addActor(layout);
 	}
-	
+
 	private void setupShaders() {
-	      Bloom bloom = new Bloom(Math.round(Gdx.graphics.getWidth() * 0.9f), Math.round(Gdx.graphics.getHeight() * 0.9f));
-	      bloom.setBaseIntesity(1.1f);
-	      bloom.setBaseSaturation(1.0f);
-	      bloom.setBlurType(BlurType.Gaussian5x5b);
-	      bloom.setBlurAmount(0.5f);
-	      bloom.setBloomSaturation(0.9f);
-	      bloom.setBloomIntesity(0.9f);
-	      bloom.setBlurPasses(5);
-	      Vignette vignette = new Vignette(Math.round(Gdx.graphics.getWidth() / 2f),
-	            Math.round(Gdx.graphics.getHeight() / 2f), false);
-	      vignette.setIntensity(0.35f);
-	      RenderPipe uiPipe = getRenderPipeline().getPipe(RenderPipeIds.UI);
-	      uiPipe.addEffects(vignette, bloom);
-	   }
+		Bloom bloom = new Bloom(Math.round(Gdx.graphics.getWidth() * 0.9f),
+				Math.round(Gdx.graphics.getHeight() * 0.9f));
+		bloom.setBaseIntesity(1.1f);
+		bloom.setBaseSaturation(1.0f);
+		bloom.setBlurType(BlurType.Gaussian5x5b);
+		bloom.setBlurAmount(0.5f);
+		bloom.setBloomSaturation(0.9f);
+		bloom.setBloomIntesity(0.9f);
+		bloom.setBlurPasses(5);
+		Vignette vignette = new Vignette(Math.round(Gdx.graphics.getWidth() / 2f),
+				Math.round(Gdx.graphics.getHeight() / 2f), false);
+		vignette.setIntensity(0.35f);
+		RenderPipe uiPipe = getRenderPipeline().getPipe(RenderPipeIds.UI);
+		uiPipe.addEffects(vignette, bloom);
+	}
 }
