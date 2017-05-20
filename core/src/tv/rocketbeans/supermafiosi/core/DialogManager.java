@@ -19,6 +19,10 @@ public class DialogManager extends InputAdapter {
 	
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return nextDialog();
+	}
+	
+	public boolean nextDialog() {
 		if (dialogs.size() > 0) {
 			currentDialog = dialogs.remove(0);
 			return true;
