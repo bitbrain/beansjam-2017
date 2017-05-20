@@ -8,8 +8,6 @@ import java.util.Set;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
 
-import tv.rocketbeans.supermafiosi.i18n.Bundle;
-
 public class DialogManager extends InputAdapter {
 	
 	public static interface DialogManagerListener {
@@ -27,7 +25,7 @@ public class DialogManager extends InputAdapter {
 	}
 	
 	public void addDialog(String title, String dialogKey, String avatarKey, Color color) {
-		dialogs.add(new Dialog(title, Bundle.translations.get(dialogKey), avatarKey, color));
+		dialogs.add(new Dialog(title, dialogKey, avatarKey, color));
 	}
 	
 	@Override

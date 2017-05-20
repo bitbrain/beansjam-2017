@@ -5,16 +5,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import de.bitbrain.braingdx.assets.SharedAssetManager;
+import tv.rocketbeans.supermafiosi.i18n.Bundle;
 
 public class Dialog {
 	
 	private final Sprite picture;
-	private final String text;
+	private final String textId;
 	private final String title;
 	private final Color color;
 	
-	public Dialog(String title, String text, String pictureId, Color color) {
-		this.text = text;
+	public Dialog(String title, String textId, String pictureId, Color color) {
+		this.textId = textId;
 		this.title = title;
 		this.picture = new Sprite(SharedAssetManager.getInstance().get(pictureId, Texture.class));
 		this.color = color;
@@ -31,8 +32,12 @@ public class Dialog {
 	public Sprite getPicture() {
 		return picture;
 	}
+	
+	public String getTextId() {
+		return textId;
+	}
 
 	public String getText() {
-		return text;
+		return Bundle.translations.get(textId);
 	}
 }
