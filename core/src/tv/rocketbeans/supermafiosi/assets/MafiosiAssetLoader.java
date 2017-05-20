@@ -17,13 +17,14 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             /**
              * Fonts
              */
-		assets.put(Asset.Fonts.EIGHT_BIT_WONDER, FreeTypeFontGenerator.class);
+		assets.put(Asset.Fonts.UPHEAVTT, FreeTypeFontGenerator.class);
             
             /**
              * Textures
              */
 		assets.put(Asset.Textures.BUTTON_9PATCH, Texture.class);
 		assets.put(Asset.Textures.LABEL_9PATCH, Texture.class);
+		assets.put(Asset.Textures.PANEL_9PATCH, Texture.class);
 		assets.put(Asset.Textures.LOGO, Texture.class);
 		assets.put(Asset.Textures.STAGE, Texture.class);
             assets.put(Asset.Textures.AVATAR_01, Texture.class);

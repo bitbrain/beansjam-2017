@@ -35,7 +35,8 @@ public interface Asset
       String DUMMY = "textures/dummy.png";
       String STAGE = "textures/stage.png";
       String AVATAR_01 = "textures/avatar_01.png";
-      String LABEL_9PATCH = "textures/label.9.png";
+      String LABEL_9PATCH = "textures/panel_top_right.9.png";
+      String PANEL_9PATCH = "textures/panel_right.9.png";
       /**
        * Intro
        */
@@ -63,7 +64,6 @@ public interface Asset
 
    public interface Fonts
    {
-
-      String EIGHT_BIT_WONDER = "fonts/8bitwonder.ttf";
+      String UPHEAVTT = "fonts/upheavtt.ttf";
    }
 }

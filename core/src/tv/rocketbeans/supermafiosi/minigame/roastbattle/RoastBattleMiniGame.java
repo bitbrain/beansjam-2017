@@ -115,7 +115,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 	
 	private void fireRoast(Mafiosi player, Roast roast) {
 		firedRoasts.put(player, roast);
-		mafiosiGameContext.getDialogManager().addDialog(player.getName(), roast.getMessageKey(), player.getAvatarId(), ROAST_COLORS.get(roast.getType()));
+		mafiosiGameContext.getDialogManager().addDialog(player.getName(), roast.getMessageKey(), player.getAvatarId());
 	}
 
 }
