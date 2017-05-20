@@ -212,7 +212,9 @@ public class JuryManager
       {
          for (GameObject juryObject : juryObjects)
          {
+           
             juryObject.getColor().a = 0f;
+             System.out.println("Object: " + juryObject);
          }
       }
    }

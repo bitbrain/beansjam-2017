@@ -72,7 +72,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       setupShaders();
       setupMiniGameFramework();
       JuryManager.getInstance().initRender(this);
-
+      JuryManager.getInstance().setJurySceneVisible(false);
+      
       AssetUtils.playSound(Asset.Sounds.AUDIANCE_HAPPY);
       dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
