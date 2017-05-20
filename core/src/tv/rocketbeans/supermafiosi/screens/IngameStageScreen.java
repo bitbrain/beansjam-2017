@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
@@ -15,6 +16,7 @@ import de.bitbrain.braingdx.postprocessing.effects.Vignette;
 import de.bitbrain.braingdx.postprocessing.filters.Blur.BlurType;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.world.GameObject;
+import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
@@ -34,8 +36,22 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	@Override
 	protected void onCreateStage(Stage stage, int width, int height) {
 		dialogManager = new DialogManager();
+		setBackgroundColor(Colors.BACKGROUND);
 		getInput().addProcessor(dialogManager);
-		
+		setupAllMafiosis();
+		setupUI(stage);
+		setupLighting();
+		setupShaders();
+		dialogManager.nextDialog();
+	}
+	
+	private void setupLighting() {
+		getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
+		getLightingManager().addConeLight("leftLight", 0f, Gdx.graphics.getHeight(), 1600f, 10f, 60f, Color.RED);
+		getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1600f, 40f - 180f, 20f, Color.BLUE);
+	}
+	
+	private void setupAllMafiosis() {
 		// Contestants
 		setupMafiosis(300f, 400f, 
 				new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
@@ -53,10 +69,6 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 		// Moderator
 		setupMafiosis(625f, 350f, 
 				new Mafiosi("Heinrich Walters", Message.DIALOG_HEINRICH_GREETING, 35, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01));
-		
-		setupUI(stage);
-		setupShaders();
-		dialogManager.nextDialog();
 	}
 	
 	private void setupMafiosis(float startX, float startY, Mafiosi ... mafiosis) {
