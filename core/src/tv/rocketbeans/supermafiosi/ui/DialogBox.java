@@ -1,6 +1,8 @@
 package tv.rocketbeans.supermafiosi.ui;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,27 +13,35 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import aurelienribon.tweenengine.TweenManager;
+import de.bitbrain.braingdx.assets.SharedAssetManager;
+import de.bitbrain.braingdx.graphics.GraphicsFactory;
 import de.bitbrain.braingdx.tweens.ActorTween;
 import de.bitbrain.braingdx.tweens.SharedTweenManager;
 import de.bitbrain.braingdx.tweens.ValueTween;
 import de.bitbrain.braingdx.util.ValueProvider;
+import tv.rocketbeans.supermafiosi.Colors;
+import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 
 public class DialogBox extends Actor {
 	
-	private static final float INNER_PADDING_X = 30f;
-	private static final float INNER_PADDING_Y = 10f;
-	private static final float MARGIN = 30f;
+	private static final float INNER_PADDING_Y = 40f;
+	private static final float MARGIN = 10f;
+	private static final float AVATAR_PADDING = 11f;
+	private static final float TITLE_PADDING = 20f;
 	
 	private Dialog dialog;
 	
 	private final DialogManager dialogManager;
 	private final TweenManager tweenManager = SharedTweenManager.getInstance();
 	
-	private Label label;	
+	private Label text;
+	private Label title;
 	private ValueProvider offsetProvider = new ValueProvider();
 	private boolean currentlyClosing;
+	private final NinePatch dialogBackground;
+	private final NinePatch titleBackground;
 	
 	static {
 		Tween.registerAccessor(ValueProvider.class, new ValueTween());
@@ -39,6 +49,11 @@ public class DialogBox extends Actor {
 	
 	public DialogBox(DialogManager dialogManager) {
 		this.dialogManager = dialogManager;
+		// Create a nice background so font is readable
+		Texture buttonNinePatchTexture = SharedAssetManager.getInstance().get(Asset.Textures.BUTTON_9PATCH, Texture.class);
+		Texture labelNinePatchTexture = SharedAssetManager.getInstance().get(Asset.Textures.LABEL_9PATCH, Texture.class);
+		dialogBackground = GraphicsFactory.createNinePatch(buttonNinePatchTexture, 20, Colors.FOREGROUND);
+		titleBackground =  GraphicsFactory.createNinePatch(labelNinePatchTexture, 15, Colors.FOREGROUND);
 	}
 	
 	@Override
@@ -54,24 +69,45 @@ public class DialogBox extends Actor {
 	}
 	
 	@Override
+	public float getX() {
+		return MARGIN;
+	}
+	
+	@Override
+	public float getY() {
+		return MARGIN + offsetProvider.getValue();
+	}
+	
+	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		parentAlpha *= getColor().a;
+		
+		dialogBackground.draw(batch, getX(), getY(), getWidth() - MARGIN * 2f, getHeight());
+		
 		if (dialog != null) {
 			Sprite avatar = dialog.getPicture();
-			avatar.setPosition(MARGIN, MARGIN + offsetProvider.getValue());
-			avatar.setSize(getHeight(), getHeight());
+			avatar.setPosition(getX() + AVATAR_PADDING, getY() + AVATAR_PADDING);
+			avatar.setSize(getHeight() - AVATAR_PADDING * 2f, getHeight() - AVATAR_PADDING * 2f);
 			dialog.getPicture().draw(batch, parentAlpha);
 		}
-		if (label != null) {
-			label.setPosition(MARGIN + getHeight() + INNER_PADDING_X, MARGIN + getHeight() - label.getHeight() + offsetProvider.getValue() - INNER_PADDING_Y);
-			label.draw(batch, parentAlpha);
+		if (text != null) {
+			text.setPosition(getX() + getHeight(), getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
+			text.draw(batch, parentAlpha);
 		}
+		
+		title.setPosition(getX() + TITLE_PADDING + 10f, getY() + getHeight() + TITLE_PADDING);
+		titleBackground.draw(batch, title.getX() - TITLE_PADDING, title.getY() - TITLE_PADDING, title.getPrefWidth() + TITLE_PADDING * 2f, title.getPrefHeight() + TITLE_PADDING * 2f);
+		title.draw(batch, parentAlpha);
 	}
 	
 	private void unsetDialog(Dialog dialog, TweenCallback finishCallback) {
 		if (dialog != null) {
 			currentlyClosing = true;
-			Tween.to(label, ActorTween.ALPHA, 0.5f)
+			Tween.to(text, ActorTween.ALPHA, 0.5f)
+		     .target(0f)
+		     .ease(TweenEquations.easeInCubic)
+		     .start(tweenManager);
+			Tween.to(title, ActorTween.ALPHA, 0.5f)
 		     .target(0f)
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
@@ -81,7 +117,7 @@ public class DialogBox extends Actor {
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
 			Tween.to(offsetProvider, ValueTween.VALUE, 0.5f)
-		     .target(-getHeight() - MARGIN)
+		     .target(getFadeOutYPosition())
 		     .ease(TweenEquations.easeInCubic)
 		     .setCallbackTriggers(TweenCallback.COMPLETE)
 		     .setCallback(finishCallback)
@@ -95,23 +131,29 @@ public class DialogBox extends Actor {
 		currentlyClosing = false;
 		if (dialog != null) {
 			this.dialog = dialog;
-			this.label = new Label(dialog.getText(), Styles.LABEL_DIALOG);
-			label.setWrap(true);
-			label.setWidth(getWidth() - getHeight() -  MARGIN * 2f);
-			label.setAlignment(Align.top | Align.left);
-			label.setHeight(getHeight() -  MARGIN);
+			this.text = new Label(dialog.getText(), Styles.LABEL_DIALOG);
+			this.title = new Label("This is a title", Styles.LABEL_DIALOG_TITLE);
+			text.setWrap(true);
+			text.setWidth(getWidth() - getHeight() -  MARGIN * 2f);
+			text.setAlignment(Align.top | Align.left);
+			text.setHeight(getHeight() -  MARGIN);
 			getColor().a = 0f;
 			Tween.to(this, ActorTween.ALPHA, 0.8f)
 			     .target(1f)
 			     .ease(TweenEquations.easeInCubic)
 			     .start(tweenManager);
-			label.getColor().a = 0f;
-			Tween.to(label, ActorTween.ALPHA, 0.4f)
+			text.getColor().a = 0f;
+			Tween.to(text, ActorTween.ALPHA, 0.4f)
 			 .delay(0.3f)
 		     .target(1f)
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
-			offsetProvider.setValue(-getHeight() - MARGIN);
+			Tween.to(title, ActorTween.ALPHA, 0.4f)
+			 .delay(0.3f)
+		     .target(1f)
+		     .ease(TweenEquations.easeInCubic)
+		     .start(tweenManager);
+			offsetProvider.setValue(getFadeOutYPosition());
 			Tween.to(offsetProvider, ValueTween.VALUE, 0.5f)
 		     .target(0f)
 		     .ease(TweenEquations.easeInCubic)
@@ -119,5 +161,8 @@ public class DialogBox extends Actor {
 		}
 	}
 	
+	private float getFadeOutYPosition() {
+		return -getHeight() - MARGIN - TITLE_PADDING * 4f;
+	}
 	
 }

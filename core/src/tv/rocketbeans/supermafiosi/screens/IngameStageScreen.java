@@ -79,11 +79,11 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	
 	private void setupLighting() {
 		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(false).diffuseLighting(false));
-		getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
+		getLightingManager().setAmbientLight(new Color(0.3f, 0.3f, 0.4f, 0.4f));
 		float lightingOffset = 50f;
 		ConeLight left = getLightingManager().addConeLight("leftLight", -lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -45f, 20f, Color.RED);
 		ConeLight right = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() + lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -135f, 20f, Color.BLUE);
-		ConeLight top = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 500f, -110f, 30f, Color.LIME);
+		ConeLight top = getLightingManager().addConeLight("topLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 500f, -110f, 30f, Color.LIME);
 		Tween.to(left, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
 		     .target(10f)
 		     .ease(TweenEquations.easeNone)
@@ -99,7 +99,6 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	     .ease(TweenEquations.easeNone)
 	     .repeatYoyo(Tween.INFINITY, 0f)
 	     .start(getTweenManager());
-		
 	}
 	
 	private void setupAllMafiosis() {
@@ -150,7 +149,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 		Bloom bloom = new Bloom(Math.round(Gdx.graphics.getWidth() * 0.9f),
 				Math.round(Gdx.graphics.getHeight() * 0.9f));
 		bloom.setBaseIntesity(1.1f);
-		bloom.setBaseSaturation(1.0f);
+		bloom.setBaseSaturation(1.5f);
 		bloom.setBlurType(BlurType.Gaussian5x5b);
 		bloom.setBlurAmount(0.5f);
 		bloom.setBloomSaturation(0.9f);
