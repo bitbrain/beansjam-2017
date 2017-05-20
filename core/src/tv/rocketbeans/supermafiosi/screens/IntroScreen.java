@@ -55,7 +55,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       //showDonImage(stage);
       Tween.call(new TweenCallback()
       {
-         private int tick = 0;
+         private int tick = 80;
          private Label introlabel1 = null;
          private Label introlabel2 = null;
          private Label introlabel3 = null;
@@ -190,6 +190,10 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
                textFadeOut(introlabel5);
                bounceTitle(stage);
             }
+            
+            if (tick == 108) {
+            	changeToMenue();
+            }
 
             tick++;
          }
@@ -202,6 +206,10 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       {
          public boolean keyDown(InputEvent event, int keycode)
          {
+             Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+             menu_music_main.setLooping(true);
+             AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
+             AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
             changeToMenue();
             return false;
          }
@@ -211,15 +219,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
    public void changeToMenue()
    {
-
-      Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-      menu_music_main.setLooping(true);
-      if (!menu_music_main.isPlaying())
-      {
-         AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
-         AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
-      }
-      getScreenTransitions().out(new MenuScreen(getGame()), 1);
+      getScreenTransitions().out(new MenuScreen(getGame()), 5f);
    }
 
    private Label showIntroText(final Stage stage, String text)
@@ -246,7 +246,10 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
       getRenderManager().register(IMAGE_LOGO, new SpriteRenderer(Asset.Textures.LOGO));
       Tween.to(logoGameObject, GameObjectTween.POS_Y, 5f).target(Gdx.graphics.getHeight() / 2 - logotexture.getHeight() / 2).ease(TweenEquations.easeOutBounce).start(getTweenManager());
-
+      Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+      menu_music_main.setLooping(true);
+      AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
+      AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
    }
 
    private GameObject showDonImage(final Stage stage, DialogManager dialogManager)
