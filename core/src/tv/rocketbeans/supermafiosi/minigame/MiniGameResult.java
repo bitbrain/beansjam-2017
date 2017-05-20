@@ -8,7 +8,7 @@ public class MiniGameResult {
 	private final Map<String, Integer> playerResults;
 	private final int maximumPoints;
 	
-	MiniGameResult(int maximumPoints, Map<String, Integer> playerResults) {
+	public MiniGameResult(int maximumPoints, Map<String, Integer> playerResults) {
 		this.maximumPoints = maximumPoints;
 		this.playerResults = playerResults;
 	}

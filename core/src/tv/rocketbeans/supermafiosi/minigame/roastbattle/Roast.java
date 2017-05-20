@@ -1,7 +1,5 @@
 package tv.rocketbeans.supermafiosi.minigame.roastbattle;
 
-import tv.rocketbeans.supermafiosi.i18n.Bundle;
-
 /**
  * A "roast" is a punch line to tell someone how bad he is.
  * In the Mafia world this is mandatory to demonstrate dominance!
@@ -43,8 +41,8 @@ public class Roast implements Comparable<Roast> {
 		return type;
 	}
 	
-	public String getMessage() {
-		return Bundle.translations.get(messageKey);
+	public String getMessageKey() {
+		return messageKey;
 	}
 
 	@Override
@@ -63,4 +61,11 @@ public class Roast implements Comparable<Roast> {
 		}
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "Roast [type=" + type + "]";
+	}
+	
+	
 }

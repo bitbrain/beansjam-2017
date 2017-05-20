@@ -1,6 +1,8 @@
 package tv.rocketbeans.supermafiosi.screens;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.badlogic.gdx.Gdx;
@@ -28,14 +30,20 @@ import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
+import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 import tv.rocketbeans.supermafiosi.core.jury.JuryManager;
 import tv.rocketbeans.supermafiosi.i18n.Message;
+import tv.rocketbeans.supermafiosi.minigame.MiniGame;
+import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
+import tv.rocketbeans.supermafiosi.minigame.roastbattle.RoastBattleMiniGame;
 import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 
 public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	
 	private DialogManager dialogManager;
+	private MafiosiGameContext context;
+	private Mafiosi player;
 	private Map<String, Mafiosi> mafiosiMap = new HashMap<String, Mafiosi>();
 	
 	static {
@@ -56,9 +64,10 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 		setupUI(stage);
 		setupLighting();
 		setupShaders();
+		//setupMiniGameFramework();
 		dialogManager.nextDialog();
 	}
-	
+
 	private void setupBackground() {
 		getRenderPipeline().set(RenderPipeIds.BACKGROUND, new RenderLayer() {
 			
@@ -132,7 +141,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 			o.setDimensions(mafiosiWidth, mafiosiWidth * 2f);
 			o.setPosition(startPosition.x + i * (mafiosiWidth + mafiosiGap), startPosition.y);
 			getRenderManager().register(m.getName(), new SpriteRenderer(m.getSpriteId()));
-			dialogManager.addDialog(m.getName(), m.getBioId(), m.getAvatarId());
+			//dialogManager.addDialog(m.getName(), m.getBioId(), m.getAvatarId());
 		}
 	}
 	
@@ -144,20 +153,25 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	}
 	
 	private void setupShaders() {
-		Bloom bloom = new Bloom(Math.round(Gdx.graphics.getWidth() * 0.9f),
-				Math.round(Gdx.graphics.getHeight() * 0.9f));
-		bloom.setBaseIntesity(1.1f);
-		bloom.setBaseSaturation(1.5f);
-		bloom.setBlurType(BlurType.Gaussian5x5b);
-		bloom.setBlurAmount(0.5f);
-		bloom.setBloomSaturation(0.9f);
-		bloom.setBloomIntesity(0.9f);
-		bloom.setBlurPasses(5);
 		Vignette vignette = new Vignette(Math.round(Gdx.graphics.getWidth() / 2f),
 				Math.round(Gdx.graphics.getHeight() / 2f), false);
-		vignette.setIntensity(0.35f);
-		RenderPipe uiPipe = getRenderPipeline().getPipe(RenderPipeIds.UI);
-		uiPipe.addEffects(vignette, bloom);
+		vignette.setIntensity(0.45f);
+		getRenderPipeline().getPipe(RenderPipeIds.WORLD).addEffects(vignette);
+	}
+	
+	private void setupMiniGameFramework() {
+		player = new Mafiosi("Eduard Laser", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01);
+		setupMafiosis(300f, 300f, 
+			new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
+			player,
+			new Mafiosi("Stephano Caprese", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
+		);
+		context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), player, dialogManager);
+		
+		List<MiniGame> games = new ArrayList<MiniGame>();
+		games.add(new RoastBattleMiniGame(this, context));
+		MiniGameManager miniGameManager = new MiniGameManager(games);
+		miniGameManager.triggerNextMiniGame();
 	}
 
 }
