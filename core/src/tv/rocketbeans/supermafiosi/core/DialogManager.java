@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
@@ -16,7 +17,7 @@ public class DialogManager extends InputAdapter {
 	}
 	
 	private List<Dialog> dialogs = new ArrayList<Dialog>();
-	private Set<DialogManagerListener> dialogManagerListeners = new HashSet<DialogManagerListener>();
+	private List<DialogManagerListener> dialogManagerListeners = new CopyOnWriteArrayList<DialogManagerListener>();
 	
 	private Dialog currentDialog;
 
