@@ -16,6 +16,7 @@ import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.DialogManager.DialogManagerListener;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
+import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.minigame.AbstractMiniGame;
 import tv.rocketbeans.supermafiosi.minigame.MiniGameResult;
 import tv.rocketbeans.supermafiosi.minigame.roastbattle.Roast.Type;
@@ -87,7 +88,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 				// Paper
 				Roast randomPaper = roastPool.getRandomRoast(Type.PAPER);
 				selectData.put(randomPaper, Bundle.translations.get(randomPaper.getMessageKey()));
-				select = new MultiSelect<Roast>(multiSelectListener, selectData, new RoastIconProvider());
+				select = new MultiSelect<Roast>(Bundle.translations.get(Message.MINIGAME_ROAST_TITLE), multiSelectListener, selectData, new RoastIconProvider());
 				select.setFillParent(true);
 				gameContext.getStage().addActor(select);
 			}

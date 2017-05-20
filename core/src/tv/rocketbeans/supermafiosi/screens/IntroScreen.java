@@ -5,10 +5,10 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -23,7 +23,6 @@ import de.bitbrain.braingdx.tweens.GameObjectTween;
 import de.bitbrain.braingdx.world.GameObject;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
-import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.graphics.BitmapFontBaker;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
@@ -44,7 +43,9 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    @Override
    protected void onCreateStage(final Stage stage, int width, int height)
    {
-
+	  getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
+	  getLightingManager().addPointLight("left", new Vector2(350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
+	  getLightingManager().addPointLight("right", new Vector2(Gdx.graphics.getWidth() - 350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
       Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
       dying_don_music.setLooping(true);
       AudioManager.getInstance().fadeInMusic(dying_don_music, 1f);

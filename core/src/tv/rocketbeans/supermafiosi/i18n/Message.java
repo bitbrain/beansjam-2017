@@ -46,6 +46,8 @@ public interface Message {
 	/**
 	 * Mini Games
 	 */
+	
+	String MINIGAME_ROAST_TITLE = "minigame.roast.title";
 
 	String MINIGAME_ROAST_SCISSOR_1 = "minigame.roast.scissor.1";
 	String MINIGAME_ROAST_SCISSOR_2 = "minigame.roast.scissor.2";

@@ -36,6 +36,8 @@ import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
 import tv.rocketbeans.supermafiosi.minigame.roastbattle.RoastBattleMiniGame;
 import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
+import tv.rocketbeans.supermafiosi.ui.Toast;
+
 
 public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 {
@@ -58,6 +60,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    @Override
    protected void onCreateStage(Stage stage, int width, int height)
    {
+      Toast.getInstance().init(stage);
+   
       dialogManager = new DialogManager();
       setBackgroundColor(Colors.BACKGROUND);
       getInput().addProcessor(dialogManager);
@@ -145,6 +149,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
    private void setupAllMafiosis()
    {
+
 		// Contestants
 //		setupMafiosis(300f, 300f, 
 //				new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
