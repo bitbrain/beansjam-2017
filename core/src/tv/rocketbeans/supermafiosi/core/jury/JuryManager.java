@@ -9,6 +9,7 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import de.bitbrain.braingdx.audio.AudioManager;
@@ -69,7 +70,7 @@ public class JuryManager
    {
       potenzialJuryMembers.add(new JuryMember("Keidi Hlumm", Asset.Textures.JURY_RICK, Asset.Textures.JURY_RICK_ARM, Asset.Textures.AVATAR_01));
       potenzialJuryMembers.add(new JuryMember("Kimmy Jimmel", Asset.Textures.JURY_LASER, Asset.Textures.JURY_LASER_ARM, Asset.Textures.AVATAR_01));
-      potenzialJuryMembers.add(new JuryMember("Pedro Aldente", Asset.Textures.JURY_BLOB, Asset.Textures.JURY_BLOB_ARM, Asset.Textures.AVATAR_01));
+      potenzialJuryMembers.add(new JuryMember("Blobby", Asset.Textures.JURY_BLOB, Asset.Textures.JURY_BLOB_ARM, Asset.Textures.AVATAR_01));
 
       findJury();
    }
@@ -88,31 +89,105 @@ public class JuryManager
    {
       AudioManager.getInstance().fadeInMusic(Asset.Music.TENSION);
 
-      Tween.call(new TweenCallback()
-      {
+      final Sound drum = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_DRUMROLL));
+      drum.loop();
 
-         @Override
-         public void onEvent(int i, BaseTween<?> bt)
-         {
-             setJuryResult(screen, 1, false);
-         }
-      }).delay(1).start(screen.getTweenManager());
+      final Sound clap1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_CLAPPING1));
+      final Sound boo = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_BOO));
+            
+            Tween.call(new TweenCallback()
+            {
+               private int tick = 0;
+               @Override
+               public void onEvent(int i, BaseTween<?> bt)
+               {
+                  
+                    
+                    if(tick == 3)
+                    {
+                       drum.stop();
+                       setJuryResult(screen, 1, false);
+                       clap1.play();
+                    }
+                    
+                    if(tick == 13)
+                    {
+                       drum.loop();
+                    }
+                    
+                    if(tick == 15)
+                    {
+                       drum.stop();
+                       setJuryResult(screen, 2, true);
+                       boo.play();
+                    }
+                    
+                    if(tick == 25)
+                    {
+                       drum.loop();
+                    }
+                    
+                    
+                    if(tick == 27)
+                    {
+                       drum.stop();
+                       setJuryResult(screen, 3, true);
+                       boo.play();
+                    }
+                    
+                    tick++;
+                    
+                    
+                    
+               }
+            }).repeat(Tween.INFINITY, 1f).start(screen.getTweenManager());
 
    }
 
    private void setJuryResult(AbstractScreen<SuperMafiosiGame> screen, Integer jurymember, boolean hasBullet)
    {
-      
-      Vector2 resultStartPoint = new Vector2(320,113);
-      
-      GameObject juryResultNonBullet = screen.getGameWorld().addObject();
+
+      Vector2 resultStartPoint_1 = new Vector2(320, 113);
+      Vector2 resultStartPoint_2 = new Vector2(570, 113);
+      Vector2 resultStartPoint_3 = new Vector2(850, 113);
+
+      GameObject juryResult = screen.getGameWorld().addObject();
       Vector2 ratio = calcRatio();
       Vector2 dimesion_nonbullet = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_NONBULLET);
-      juryResultNonBullet.setType(TYPE_JURYNONBULLET);
-      
-      juryResultNonBullet.setDimensions(dimesion_nonbullet.x * ratio.x, dimesion_nonbullet.y * ratio.y  );
-      juryResultNonBullet.setPosition(resultStartPoint.x, resultStartPoint.y);
-      screen.getRenderManager().register(TYPE_JURYNONBULLET, new SpriteRenderer(Asset.Textures.JURY_NONBULLET));
+
+      if (hasBullet)
+      {
+         juryResult.setType(TYPE_JURYBULLET);
+      }
+      else
+      {
+         juryResult.setType(TYPE_JURYNONBULLET);
+      }
+
+      juryResult.setDimensions(dimesion_nonbullet.x * ratio.x, dimesion_nonbullet.y * ratio.y);
+
+      if (jurymember == 1)
+      {
+         juryResult.setPosition(resultStartPoint_1.x, resultStartPoint_1.y);
+      }
+      else if (jurymember == 2)
+      {
+         juryResult.setPosition(resultStartPoint_2.x, resultStartPoint_2.y);
+      }
+      else
+      {
+         juryResult.setPosition(resultStartPoint_3.x, resultStartPoint_3.y);
+      }
+
+      if (hasBullet)
+      {
+         screen.getRenderManager().register(TYPE_JURYBULLET, new SpriteRenderer(Asset.Textures.JURY_BULLET));
+      }
+      else
+      {
+         screen.getRenderManager().register(TYPE_JURYNONBULLET, new SpriteRenderer(Asset.Textures.JURY_NONBULLET));
+      }
+
    }
 
    private Vector2 calcRatio()
@@ -120,10 +195,10 @@ public class JuryManager
       Vector2 dimensionBackground = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_BACKGROUND);
       float ratio_width = Gdx.graphics.getWidth() / dimensionBackground.x;
       float ratio_height = Gdx.graphics.getHeight() / dimensionBackground.y;
-      
+
       return new Vector2(ratio_width, ratio_height);
    }
-   
+
    public void setJurySceneVisible(boolean visible)
    {
       if (visible)
@@ -173,8 +248,8 @@ public class JuryManager
       /**
        * JuryMembers
        */
-      Vector2 jurymembers_startpoint = new Vector2(280, 280);
-      final int next_Jury_Width = 260;
+      Vector2 jurymembers_startpoint = new Vector2(280, 290);
+      final int next_Jury_Width = 230;
 
       Vector2 jurymembers_hands_startpoint = new Vector2(310, 220);
 
@@ -193,8 +268,20 @@ public class JuryManager
          o_jury_hands.setType(jurymember.getNameHands());
 
          Vector2 dimension_jurymember_hands = AssetUtils.getDimensionOfTexture(jurymember.getHandsSprite());
+         /**
+          * Special Case for blob
+          */
+         if ("Blobby".equalsIgnoreCase(jurymember.getName()))
+         {
+            o_jury_hands.setPosition(jurymembers_hands_startpoint.x + i * next_Jury_Width, jurymembers_hands_startpoint.y + 20);
+         }
+         else
+         {
+            o_jury_hands.setPosition(jurymembers_hands_startpoint.x + i * next_Jury_Width, jurymembers_hands_startpoint.y);
+         }
+
          o_jury_hands.setDimensions(dimension_jurymember_hands.x * ratio.x, dimension_jurymember_hands.y * ratio.y);
-         o_jury_hands.setPosition(jurymembers_hands_startpoint.x + i * next_Jury_Width, jurymembers_hands_startpoint.y);
+
          screen.getRenderManager().register(jurymember.getNameHands(), new SpriteRenderer(jurymember.getHandsSprite()));
 
          i++;
