@@ -142,17 +142,17 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 	      ConeLight top = getLightingManager().addConeLight("topLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 500f, -110f, 30f, Color.LIME);
 	      Tween.to(left, ConeLightTween.DIRECTION, 1.5f + (float) Math.random())
 	              .target(10f)
-	              .ease(TweenEquations.easeNone)
+	              .ease(TweenEquations.easeInOutCubic)
 	              .repeatYoyo(Tween.INFINITY, 0f)
 	              .start(getTweenManager());
 	      Tween.to(right, ConeLightTween.DIRECTION, 1.5f + (float) Math.random())
 	              .target(-170f)
-	              .ease(TweenEquations.easeNone)
+	              .ease(TweenEquations.easeInOutCubic)
 	              .repeatYoyo(Tween.INFINITY, 0f)
 	              .start(getTweenManager());
 	      Tween.to(top, ConeLightTween.DIRECTION, 1.5f + (float) Math.random())
 	              .target(-80f)
-	              .ease(TweenEquations.easeNone)
+	              .ease(TweenEquations.easeInOutCubic)
 	              .repeatYoyo(Tween.INFINITY, 0f)
 	              .start(getTweenManager());
 	   }
