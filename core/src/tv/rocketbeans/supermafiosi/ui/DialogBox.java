@@ -94,10 +94,11 @@ public class DialogBox extends Actor {
 			text.setPosition(getX() + getHeight(), getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
 			text.draw(batch, parentAlpha);
 		}
-		
-		title.setPosition(getX() + TITLE_PADDING + 10f, getY() + getHeight() + TITLE_PADDING);
-		titleBackground.draw(batch, title.getX() - TITLE_PADDING, title.getY() - TITLE_PADDING, title.getPrefWidth() + TITLE_PADDING * 2f, title.getPrefHeight() + TITLE_PADDING * 2f);
-		title.draw(batch, parentAlpha);
+		title.setX(getTitleX());
+		title.setY(getTitleY());
+		titleBackground.getColor().a = title.getColor().a;
+		titleBackground.draw(batch, getTitleBackgroundX(), getTitleBackgroundY(), getTitleBackgroundWidth(), getTitleBackgroundHeight());
+		title.draw(batch, 1f);
 	}
 	
 	private void unsetDialog(Dialog dialog, TweenCallback finishCallback) {
@@ -130,26 +131,27 @@ public class DialogBox extends Actor {
 	private void setDialog(Dialog dialog) {
 		currentlyClosing = false;
 		if (dialog != null) {
+			
 			this.dialog = dialog;
 			this.text = new Label(dialog.getText(), Styles.LABEL_DIALOG);
-			this.title = new Label("This is a title", Styles.LABEL_DIALOG_TITLE);
+			this.title = new Label(dialog.getTitle(), Styles.LABEL_DIALOG_TITLE);
 			text.setWrap(true);
 			text.setWidth(getWidth() - getHeight() -  MARGIN * 2f);
 			text.setAlignment(Align.top | Align.left);
 			text.setHeight(getHeight() -  MARGIN);
 			getColor().a = 0f;
 			Tween.to(this, ActorTween.ALPHA, 0.8f)
+				 .delay(0.3f)
 			     .target(1f)
 			     .ease(TweenEquations.easeInCubic)
 			     .start(tweenManager);
 			text.getColor().a = 0f;
 			Tween.to(text, ActorTween.ALPHA, 0.4f)
-			 .delay(0.3f)
+			 .delay(0.6f)
 		     .target(1f)
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
-			Tween.to(title, ActorTween.ALPHA, 0.4f)
-			 .delay(0.3f)
+			Tween.to(title, ActorTween.ALPHA, 0.6f)
 		     .target(1f)
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
@@ -159,6 +161,30 @@ public class DialogBox extends Actor {
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
 		}
+	}
+	
+	private float getTitleBackgroundX() {
+		return title.getX() - TITLE_PADDING;
+	}
+	
+	private float getTitleBackgroundY() {
+		return title.getY() - TITLE_PADDING;
+	}
+	
+	private float getTitleBackgroundWidth() {
+		return title.getPrefWidth() + TITLE_PADDING * 2f;
+	}
+	
+	private float getTitleBackgroundHeight() {
+		return title.getPrefHeight() + TITLE_PADDING * 2f;
+	}
+	
+	private float getTitleY() {
+		return  getY() + getHeight() + TITLE_PADDING;
+	}
+	
+	private float getTitleX() {
+		return getX() + TITLE_PADDING + 10f;
 	}
 	
 	private float getFadeOutYPosition() {

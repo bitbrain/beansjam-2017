@@ -13,8 +13,8 @@ public class DialogManager extends InputAdapter {
 	
 	private Dialog currentDialog;
 
-	public void addDialog(String dialogKey, String avatarKey) {
-		dialogs.add(new Dialog(Bundle.translations.get(dialogKey), avatarKey));
+	public void addDialog(String title, String dialogKey, String avatarKey) {
+		dialogs.add(new Dialog(title, Bundle.translations.get(dialogKey), avatarKey));
 	}
 	
 	@Override
