@@ -4,16 +4,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
-import de.bitbrain.braingdx.assets.SharedAssetManager;
 
 public class MultiSelect<T> extends Table {
 	
@@ -27,11 +22,13 @@ public class MultiSelect<T> extends Table {
 		String getIconPath(T type);
 	}
 	
-	public MultiSelect(final MultiSelectListener<T> listener, Map<T, String> values) {
-		this(listener, values, null);
+	public MultiSelect(String title, final MultiSelectListener<T> listener, Map<T, String> values) {
+		this(title, listener, values, null);
 	}
 	
-	public MultiSelect(final MultiSelectListener<T> listener, Map<T, String> values,IconProvider<T> iconProvider) {
+	public MultiSelect(String title, final MultiSelectListener<T> listener, Map<T, String> values,IconProvider<T> iconProvider) {
+		Label titleLabel = new Label(title, Styles.LABEL_MULTISELECT_TITLE);
+		add(titleLabel).padBottom(40f).row();
 		for (final Entry<T, String> entry : values.entrySet()) {
 			TextButton option = null;
 			if (iconProvider != null) {

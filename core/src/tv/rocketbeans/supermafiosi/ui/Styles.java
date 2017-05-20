@@ -22,6 +22,7 @@ public final class Styles {
 	public static final LabelStyle LABEL_CREDITS = new LabelStyle();
 	public static final LabelStyle LABEL_DIALOG = new LabelStyle();
 	public static final LabelStyle LABEL_DIALOG_TITLE = new LabelStyle();
+	public static final LabelStyle LABEL_MULTISELECT_TITLE = new LabelStyle();
 
 	public static void init() {
 		TEXT_BUTTON_MAIN_MENU.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 30);
@@ -47,6 +48,9 @@ public final class Styles {
 		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 22);
 		LABEL_DIALOG_TITLE.fontColor =  Colors.FONT_COLOR;
 		LABEL_DIALOG_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 28);
+		
+		LABEL_MULTISELECT_TITLE.fontColor = Colors.lighten(Colors.FONT_COLOR, 1.5f);
+		LABEL_MULTISELECT_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 48);
 	}
 	
 	private static Drawable createNinePatchDrawable(String assetId, int borderRadius, Color color) {
