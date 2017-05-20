@@ -174,19 +174,16 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
             if (tick == 95)
             {
             	Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
-                AudioManager.getInstance().fadeOutMusic(dying_don_music, 7f);               
+                AudioManager.getInstance().fadeOutMusic(dying_don_music, 4f);               
                textFadeOut(introlabel4);
                introlabel5 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_5));
             }
             
-            if(tick == 105)
+            if(tick == 100)
             {
-              
-               textFadeOut(introlabel5);
-               bounceTitle(stage);
-            }
-            
-            if (tick == 108) {
+            	Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+                menu_music_main.setLooping(true);
+                AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 4f);
             	changeToMenue();
             }
 
@@ -214,7 +211,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
    public void changeToMenue()
    {
-      getScreenTransitions().out(new MenuScreen(getGame()), 5f);
+      getScreenTransitions().out(new MenuScreen(getGame()), 8f);
    }
 
    private Label showIntroText(final Stage stage, String text)
@@ -229,21 +226,6 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    private void setLabelToCenter(Label label)
    {
       label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-   }
-
-   private void bounceTitle(final Stage stage)
-   {
-      final GameObject logoGameObject = getGameWorld().addObject();
-      logoGameObject.setType(IMAGE_LOGO);
-      Texture logotexture = SharedAssetManager.getInstance().get(Asset.Textures.LOGO);
-      logoGameObject.setDimensions(logotexture.getWidth(), logotexture.getHeight());
-      logoGameObject.setPosition(Gdx.graphics.getWidth() / 2 - logoGameObject.getWidth() / 2, Gdx.graphics.getWidth());
-
-      getRenderManager().register(IMAGE_LOGO, new SpriteRenderer(Asset.Textures.LOGO));
-      Tween.to(logoGameObject, GameObjectTween.POS_Y, 5f).target(Gdx.graphics.getHeight() / 2 - logotexture.getHeight() / 2).ease(TweenEquations.easeOutBounce).start(getTweenManager());
-      Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-      menu_music_main.setLooping(true);
-      AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
    }
 
    private GameObject showDonImage(final Stage stage, DialogManager dialogManager)
