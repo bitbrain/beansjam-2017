@@ -26,9 +26,9 @@ public final class Styles {
 		TEXT_BUTTON_MAIN_MENU.fontColor = Colors.FONT_COLOR;
 		TEXT_BUTTON_MAIN_MENU.up = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.FOREGROUND);
 		TEXT_BUTTON_MAIN_MENU.overFontColor = Colors.lighten(Colors.FOREGROUND, 5.5f);
-		TEXT_BUTTON_MAIN_MENU.over = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 5.5f));
+		TEXT_BUTTON_MAIN_MENU.over = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 1.1f));
 		TEXT_BUTTON_MAIN_MENU.downFontColor = Colors.lighten(Colors.FOREGROUND, 0.6f);
-		TEXT_BUTTON_MAIN_MENU.down = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 0.6f));
+		TEXT_BUTTON_MAIN_MENU.down = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 0.9f));
 		
 		LABEL_CREDITS.fontColor = Colors.FONT_COLOR.cpy();
 		LABEL_CREDITS.fontColor.a = 0.5f;
