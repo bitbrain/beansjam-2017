@@ -88,25 +88,25 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	}
 	
 	private void setupLighting() {
-		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(false).diffuseLighting(false));
+		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(true).diffuseLighting(false));
 		getLightingManager().setAmbientLight(new Color(0.3f, 0.3f, 0.4f, 0.4f));
 		float lightingOffset = 50f;
-		ConeLight left = getLightingManager().addConeLight("leftLight", -lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -45f, 20f, Color.RED);
-		ConeLight right = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() + lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -135f, 20f, Color.BLUE);
-		ConeLight top = getLightingManager().addConeLight("topLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 500f, -110f, 30f, Color.LIME);
+		ConeLight left = getLightingManager().addConeLight("leftLight", -lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1600f, -45f, 20f, Color.RED);
+		ConeLight right = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() + lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1600f, -135f, 20f, Color.BLUE);
+		ConeLight top = getLightingManager().addConeLight("topLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 900f, -110f, 30f, Color.LIME);
 		Tween.to(left, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
 		     .target(10f)
-		     .ease(TweenEquations.easeNone)
+		     .ease(TweenEquations.easeInOutQuad)
 		     .repeatYoyo(Tween.INFINITY, 0f)
 		     .start(getTweenManager());
 		Tween.to(right, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
 	     .target(-170f)
-	     .ease(TweenEquations.easeNone)
+	     .ease(TweenEquations.easeInOutQuad)
 	     .repeatYoyo(Tween.INFINITY, 0f)
 	     .start(getTweenManager());
 		Tween.to(top, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
 	     .target(-80f)
-	     .ease(TweenEquations.easeNone)
+	     .ease(TweenEquations.easeInOutQuad)
 	     .repeatYoyo(Tween.INFINITY, 0f)
 	     .start(getTweenManager());
 	}
