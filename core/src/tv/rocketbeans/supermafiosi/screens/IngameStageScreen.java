@@ -78,7 +78,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	}
 	
 	private void setupLighting() {
-		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(false));
+		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(false).diffuseLighting(false));
 		getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
 		float lightingOffset = 50f;
 		ConeLight left = getLightingManager().addConeLight("leftLight", -lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -45f, 20f, Color.RED);
