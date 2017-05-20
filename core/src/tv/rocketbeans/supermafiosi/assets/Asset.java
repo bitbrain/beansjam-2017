@@ -56,9 +56,9 @@ public interface Asset
    public interface Music
    {
 
-      String DYING_DON = "music/dying_don.ogg";
-      String MENU_CHAR_SELECT = "music/opener_char-select.ogg";
-      String TENSION = "music/tension_1.ogg";
+      String DYING_DON = "music/dying_don_Main.ogg";
+      String MENU_CHAR_SELECT = "music/opener_char-select_Intro.ogg";
+      String TENSION = "music/tension_1_Main.ogg";
    }
 
    public interface Fonts

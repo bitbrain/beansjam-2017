@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 
 public abstract class Colors {
 
-	public static final Color BACKGROUND = Color.valueOf("194d4e");
-	public static final Color FOREGROUND = Color.valueOf("33cdc8");
+	public static final Color BACKGROUND = Color.valueOf("2b3a57");
+	public static final Color FOREGROUND = Color.valueOf("7185a9");
 	public static final Color FONT_COLOR = Color.valueOf("ffe3bb");
 	
 	public static final Color SCISSORS_COLOR = Color.valueOf("ff0096");	
