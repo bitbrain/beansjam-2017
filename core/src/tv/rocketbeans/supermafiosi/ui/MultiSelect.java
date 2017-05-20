@@ -33,10 +33,10 @@ public class MultiSelect<T> extends Table {
 			TextButton option = null;
 			if (iconProvider != null) {
 				String iconPath = iconProvider.getIconPath(entry.getKey());
-				option = new IconTextButton(entry.getValue(), iconPath, Styles.BUTTON_MULTIPLE_CHOICE_OPTION);
+				option = new IconTextButton(entry.getValue(), iconPath, Styles.TEXT_BUTTON_MULTIPLE_CHOICE_OPTION);
 				((IconTextButton)option).setIconPadding(15f);
 			} else {
-				option = new TextButton(entry.getValue(), Styles.BUTTON_MULTIPLE_CHOICE_OPTION);
+				option = new TextButton(entry.getValue(), Styles.TEXT_BUTTON_MULTIPLE_CHOICE_OPTION);
 			}
 			option.addListener(new ClickListener() {
 				@Override
