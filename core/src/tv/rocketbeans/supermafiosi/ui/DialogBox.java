@@ -28,7 +28,7 @@ public class DialogBox extends Actor {
 	
 	private static final float INNER_PADDING_Y = 40f;
 	private static final float MARGIN = 10f;
-	private static final float AVATAR_PADDING = 3f;
+	private static final float AVATAR_PADDING = 5f;
 	private static final float TITLE_PADDING = 20f;
 	
 	private Dialog dialog;

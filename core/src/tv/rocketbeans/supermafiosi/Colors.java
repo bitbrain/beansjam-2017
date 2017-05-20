@@ -6,7 +6,7 @@ public abstract class Colors {
 
 	public static final Color BACKGROUND = Color.valueOf("050b16");
 	public static final Color FOREGROUND = Color.valueOf("1a1a61");
-	public static final Color FONT_COLOR = Color.valueOf("4040ff");
+	public static final Color FONT_COLOR = Color.valueOf("5bacff");
 	
 	public static final Color SCISSORS_COLOR = Color.valueOf("ff0096");	
 	public static final Color ROCK_COLOR = Color.valueOf("9cff00");

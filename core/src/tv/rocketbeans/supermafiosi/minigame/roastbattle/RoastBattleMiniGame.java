@@ -6,14 +6,21 @@ import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Color;
 
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
 import de.bitbrain.braingdx.GameContext;
 import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.Config;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.DialogManager.DialogManagerListener;
+import tv.rocketbeans.supermafiosi.i18n.Bundle;
 import tv.rocketbeans.supermafiosi.minigame.AbstractMiniGame;
 import tv.rocketbeans.supermafiosi.minigame.MiniGameResult;
+import tv.rocketbeans.supermafiosi.minigame.roastbattle.Roast.Type;
+import tv.rocketbeans.supermafiosi.ui.MultiSelect;
+import tv.rocketbeans.supermafiosi.ui.MultiSelect.MultiSelectListener;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 
@@ -32,25 +39,57 @@ public class RoastBattleMiniGame extends AbstractMiniGame {
 	
 	private boolean playersTurn;
 	
+	private MultiSelect<Roast> select;
+	
 	private RoastPool roastPool = new RoastPool();
 	
 	private Map<Mafiosi, Roast> firedRoasts = new HashMap<Mafiosi, Roast>();
 	
+	private final MultiSelectListener<Roast> multiSelectListener = new MultiSelectListener<Roast>() {
+
+		@Override
+		public void onSelect(Roast roast) {			
+			if (playersTurn) {
+				System.out.println("Player has selected: " + roast);
+				Mafiosi player = mafiosiGameContext.getPlayerMafiosi();
+				fireRoast(player, roast);
+				mafiosiGameContext.getDialogManager().nextDialog();
+				if (select != null) {
+					gameContext.getStage().getActors().removeValue(select, true);
+				}
+				Tween.call(new TweenCallback() {
+					@Override
+					public void onEvent(int arg0, BaseTween<?> arg1) {
+						mafiosiGameContext.getDialogManager().nextDialog();
+						notifyComplete(evaluateResult());
+					}
+				}).delay(3).start(gameContext.getTweenManager());
+			}
+		}
+		
+	};
+	
 	private final DialogManagerListener afterAllDialogsListener = new DialogManagerListener() {
+		
 		@Override
 		public void afterLastDialog() {
 			if (!playersTurn) {
+				System.out.println("Players turn!");
 				playersTurn = true;
 				// 2. add UI for selection
-				// 3. after all punch lines have been said the player can choose an own punchline
-				// 4. player tells the punchline
-				// Fake it for now
-				Mafiosi player = mafiosiGameContext.getPlayerMafiosi();
-				Roast randomRoast = roastPool.getRandomRoast();
-				fireRoast(player, randomRoast);
-				
-			} else {
-				notifyComplete(evaluateResult());
+				Map<Roast, String> selectData = new HashMap<Roast, String>();
+				// Scissor
+				Roast randomScissor = roastPool.getRandomRoast(Type.SCISSORS);
+				selectData.put(randomScissor, Bundle.translations.get(randomScissor.getMessageKey()));
+				// Rock
+				Roast randomRock = roastPool.getRandomRoast(Type.ROCK);
+				selectData.put(randomRock, Bundle.translations.get(randomRock.getMessageKey()));
+				// Paper
+				Roast randomPaper = roastPool.getRandomRoast(Type.PAPER);
+				selectData.put(randomPaper, Bundle.translations.get(randomPaper.getMessageKey()));
+				select = new MultiSelect<Roast>(multiSelectListener, selectData);
+				select.setFillParent(true);
+				gameContext.getStage().addActor(select);
 			}
 		}
 		@Override
