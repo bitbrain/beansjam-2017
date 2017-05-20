@@ -28,7 +28,7 @@ public class DialogBox extends Actor {
 	
 	private static final float INNER_PADDING_Y = 40f;
 	private static final float MARGIN = 10f;
-	private static final float AVATAR_PADDING = 5f;
+	private static final float AVATAR_PADDING = -10f;
 	private static final float TITLE_PADDING = 20f;
 	
 	private Dialog dialog;
@@ -39,6 +39,7 @@ public class DialogBox extends Actor {
 	private Label text;
 	private Label title;
 	private ValueProvider offsetProvider = new ValueProvider();
+	private ValueProvider avatarBouncing = new ValueProvider();
 	private boolean currentlyClosing;
 	private final NinePatch dialogBackground;
 	private final NinePatch titleBackground;
@@ -81,24 +82,23 @@ public class DialogBox extends Actor {
 	@Override
 	public void draw(Batch batch, float parentAlpha) {
 		parentAlpha *= getColor().a;
-		
-		if (dialog != null) {
-			dialogBackground.draw(batch, getX(), getY(), getWidth() - MARGIN * 2f, getHeight());
-			Sprite avatar = dialog.getPicture();
-			avatar.setPosition(getX() + AVATAR_PADDING, getY() + AVATAR_PADDING);
-			avatar.setSize(getHeight() - AVATAR_PADDING * 2f, getHeight() - AVATAR_PADDING * 2f);
-			dialog.getPicture().draw(batch, parentAlpha);
-		}
-		if (text != null) {
-			text.setPosition(getX() + getHeight() + 10f, getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
-			text.draw(batch, parentAlpha);
-		}
 		if (title != null) {
 			title.setX(getTitleX());
 			title.setY(getTitleY());
 			titleBackground.getColor().a = title.getColor().a;
 			titleBackground.draw(batch, getTitleBackgroundX(), getTitleBackgroundY(), getTitleBackgroundWidth(), getTitleBackgroundHeight());
 			title.draw(batch, 1f);
+		}
+		if (dialog != null) {
+			dialogBackground.draw(batch, getX(), getY(), getWidth() - MARGIN * 2f, getHeight());
+			Sprite avatar = dialog.getPicture();
+			avatar.setPosition(getX() + AVATAR_PADDING + 20f, getY() + AVATAR_PADDING + avatarBouncing.getValue());
+			avatar.setSize(getHeight() - AVATAR_PADDING * 2f, getHeight() - AVATAR_PADDING * 2f);
+			dialog.getPicture().draw(batch, parentAlpha);
+		}
+		if (text != null) {
+			text.setPosition(getX() + getHeight() + 50f, getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
+			text.draw(batch, parentAlpha);
 		}
 	}
 	
@@ -124,6 +124,7 @@ public class DialogBox extends Actor {
 		     .setCallbackTriggers(TweenCallback.COMPLETE)
 		     .setCallback(finishCallback)
 		     .start(tweenManager);
+			tweenManager.killTarget(avatarBouncing);
 		} else {
 			finishCallback.onEvent(0, null);
 		}
@@ -138,7 +139,7 @@ public class DialogBox extends Actor {
 			this.title = new Label(dialog.getTitle(), Styles.LABEL_DIALOG_TITLE);
 			text.setColor(dialog.getColor());
 			text.setWrap(true);
-			text.setWidth(getWidth() - getHeight() -  MARGIN * 2f);
+			text.setWidth(getWidth() - getHeight() -  MARGIN * 2f - 50f);
 			text.setAlignment(Align.top | Align.left);
 			text.setHeight(getHeight() -  MARGIN);
 			getColor().a = 0f;
@@ -161,6 +162,11 @@ public class DialogBox extends Actor {
 			Tween.to(offsetProvider, ValueTween.VALUE, 0.5f)
 		     .target(0f)
 		     .ease(TweenEquations.easeInCubic)
+		     .start(tweenManager);
+			Tween.to(avatarBouncing, ValueTween.VALUE, 0.5f)
+		     .target(10f)
+		     .ease(TweenEquations.easeInCubic)
+		     .repeatYoyo(Tween.INFINITY, 0f)
 		     .start(tweenManager);
 		}
 	}

@@ -48,7 +48,7 @@ public final class Styles {
 		LABEL_CREDITS.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 16);
 		
 		LABEL_DIALOG.fontColor = Colors.FONT_COLOR.cpy();
-		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 22);
+		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 28);
 		LABEL_DIALOG_TITLE.fontColor =  Colors.FONT_COLOR.cpy();
 		LABEL_DIALOG_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 28);
 		
