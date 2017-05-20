@@ -164,7 +164,7 @@ public class DialogBox extends Actor {
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
 			Tween.to(avatarBouncing, ValueTween.VALUE, 0.5f)
-		     .target(10f)
+		     .target(15f)
 		     .ease(TweenEquations.easeInCubic)
 		     .repeatYoyo(Tween.INFINITY, 0f)
 		     .start(tweenManager);
