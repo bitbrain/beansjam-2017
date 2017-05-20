@@ -28,7 +28,7 @@ public class DialogBox extends Actor {
 	
 	private static final float INNER_PADDING_Y = 40f;
 	private static final float MARGIN = 10f;
-	private static final float AVATAR_PADDING = 11f;
+	private static final float AVATAR_PADDING = 3f;
 	private static final float TITLE_PADDING = 20f;
 	
 	private Dialog dialog;
@@ -50,7 +50,7 @@ public class DialogBox extends Actor {
 	public DialogBox(DialogManager dialogManager) {
 		this.dialogManager = dialogManager;
 		// Create a nice background so font is readable
-		Texture buttonNinePatchTexture = SharedAssetManager.getInstance().get(Asset.Textures.BUTTON_9PATCH, Texture.class);
+		Texture buttonNinePatchTexture = SharedAssetManager.getInstance().get(Asset.Textures.PANEL_9PATCH, Texture.class);
 		Texture labelNinePatchTexture = SharedAssetManager.getInstance().get(Asset.Textures.LABEL_9PATCH, Texture.class);
 		dialogBackground = GraphicsFactory.createNinePatch(buttonNinePatchTexture, 20, Colors.FOREGROUND);
 		titleBackground =  GraphicsFactory.createNinePatch(labelNinePatchTexture, 15, Colors.FOREGROUND);
@@ -90,7 +90,7 @@ public class DialogBox extends Actor {
 			dialog.getPicture().draw(batch, parentAlpha);
 		}
 		if (text != null) {
-			text.setPosition(getX() + getHeight(), getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
+			text.setPosition(getX() + getHeight() + 10f, getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
 			text.draw(batch, parentAlpha);
 		}
 		if (title != null) {
@@ -182,11 +182,11 @@ public class DialogBox extends Actor {
 	}
 	
 	private float getTitleY() {
-		return  getY() + getHeight() + TITLE_PADDING;
+		return  getY() + getHeight() + TITLE_PADDING - 2f;
 	}
 	
 	private float getTitleX() {
-		return getX() + TITLE_PADDING + 10f;
+		return getX() + TITLE_PADDING;
 	}
 	
 	private float getFadeOutYPosition() {

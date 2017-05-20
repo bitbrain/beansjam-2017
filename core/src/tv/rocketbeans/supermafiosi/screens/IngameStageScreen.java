@@ -64,7 +64,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 		setupUI(stage);
 		setupLighting();
 		setupShaders();
-		//setupMiniGameFramework();
+		setupMiniGameFramework();
 		dialogManager.nextDialog();
 	}
 

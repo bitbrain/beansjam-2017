@@ -22,22 +22,22 @@ public final class Styles {
 	public static final LabelStyle LABEL_DIALOG_TITLE = new LabelStyle();
 
 	public static void init() {
-		TEXT_BUTTON_MAIN_MENU.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 30);
-		TEXT_BUTTON_MAIN_MENU.fontColor = Colors.FOREGROUND;
+		TEXT_BUTTON_MAIN_MENU.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 30);
+		TEXT_BUTTON_MAIN_MENU.fontColor = Colors.FONT_COLOR;
 		TEXT_BUTTON_MAIN_MENU.up = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.FOREGROUND);
 		TEXT_BUTTON_MAIN_MENU.overFontColor = Colors.lighten(Colors.FOREGROUND, 5.5f);
 		TEXT_BUTTON_MAIN_MENU.over = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 5.5f));
 		TEXT_BUTTON_MAIN_MENU.downFontColor = Colors.lighten(Colors.FOREGROUND, 0.6f);
 		TEXT_BUTTON_MAIN_MENU.down = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.lighten(Colors.FOREGROUND, 0.6f));
 		
-		LABEL_CREDITS.fontColor = Colors.FOREGROUND.cpy();
+		LABEL_CREDITS.fontColor = Colors.FONT_COLOR.cpy();
 		LABEL_CREDITS.fontColor.a = 0.5f;
-		LABEL_CREDITS.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 16);
+		LABEL_CREDITS.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 16);
 		
-		LABEL_DIALOG.fontColor = Colors.FOREGROUND;
-		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 22);
-		LABEL_DIALOG_TITLE.fontColor =  Colors.BACKGROUND;
-		LABEL_DIALOG_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 28);
+		LABEL_DIALOG.fontColor = Colors.FONT_COLOR;
+		LABEL_DIALOG.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 22);
+		LABEL_DIALOG_TITLE.fontColor =  Colors.FONT_COLOR;
+		LABEL_DIALOG_TITLE.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 28);
 	}
 	
 	private static Drawable createNinePatchDrawable(String assetId, int borderRadius, Color color) {

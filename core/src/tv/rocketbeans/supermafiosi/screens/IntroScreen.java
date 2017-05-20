@@ -304,7 +304,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    private Label createLabel(String text)
    {
       Label.LabelStyle defaultlabelstyle = new Label.LabelStyle();
-      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.EIGHT_BIT_WONDER, 18);
+      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 18);
       defaultlabelstyle.fontColor = Color.WHITE;
       defaultlabelstyle.fontColor.a = 1f;
 
