@@ -25,6 +25,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
 		assets.put(Asset.Textures.LOGO, Texture.class);
             assets.put(Asset.Textures.AVATAR_01, Texture.class);
             assets.put(Asset.Textures.KRANKENBETT, Texture.class);
+            assets.put(Asset.Textures.DUMMY, Texture.class);
             
             /*
             *  Music tralalalaa
