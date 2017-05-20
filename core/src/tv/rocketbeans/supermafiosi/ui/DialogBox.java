@@ -82,9 +82,8 @@ public class DialogBox extends Actor {
 	public void draw(Batch batch, float parentAlpha) {
 		parentAlpha *= getColor().a;
 		
-		dialogBackground.draw(batch, getX(), getY(), getWidth() - MARGIN * 2f, getHeight());
-		
 		if (dialog != null) {
+			dialogBackground.draw(batch, getX(), getY(), getWidth() - MARGIN * 2f, getHeight());
 			Sprite avatar = dialog.getPicture();
 			avatar.setPosition(getX() + AVATAR_PADDING, getY() + AVATAR_PADDING);
 			avatar.setSize(getHeight() - AVATAR_PADDING * 2f, getHeight() - AVATAR_PADDING * 2f);
@@ -94,11 +93,13 @@ public class DialogBox extends Actor {
 			text.setPosition(getX() + getHeight(), getY() + getHeight() - text.getHeight() + - INNER_PADDING_Y);
 			text.draw(batch, parentAlpha);
 		}
-		title.setX(getTitleX());
-		title.setY(getTitleY());
-		titleBackground.getColor().a = title.getColor().a;
-		titleBackground.draw(batch, getTitleBackgroundX(), getTitleBackgroundY(), getTitleBackgroundWidth(), getTitleBackgroundHeight());
-		title.draw(batch, 1f);
+		if (title != null) {
+			title.setX(getTitleX());
+			title.setY(getTitleY());
+			titleBackground.getColor().a = title.getColor().a;
+			titleBackground.draw(batch, getTitleBackgroundX(), getTitleBackgroundY(), getTitleBackgroundWidth(), getTitleBackgroundHeight());
+			title.draw(batch, 1f);
+		}
 	}
 	
 	private void unsetDialog(Dialog dialog, TweenCallback finishCallback) {
