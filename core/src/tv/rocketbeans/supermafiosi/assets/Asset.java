@@ -6,7 +6,14 @@ public interface Asset {
 	public interface Textures {
 		String BUTTON_9PATCH = "textures/button.9.png";
 		String LOGO = "textures/logo.png";
-		String AVATAR_01 = "textures/avatar_01.png";
+            String AVATAR_01 = "textures/avatar_01.png";
+
+            
+            /**
+             * Intro
+             */
+            String KRANKENBETT = "textures/krankenbett.png";
+            
 	}
 	
 	public interface Sounds {
@@ -14,7 +21,8 @@ public interface Asset {
 	}
 	
 	public interface Music {
-		// TODO
+		String DYING_DON = "music/dying_don.ogg";
+            String MENU_CHAR_SELECT = "music/opener_char-select.ogg";
 	}
 	
 	public interface Fonts {
