@@ -48,7 +48,9 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    private MafiosiGameContext context;
    private Mafiosi player;
    private Map<String, Mafiosi> mafiosiMap = new HashMap<String, Mafiosi>();
-
+   private MiniGameManager miniGameManager = null;
+   
+   
    static
    {
       Tween.registerAccessor(ConeLight.class, new ConeLightTween());
@@ -146,7 +148,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          @Override
          public void afterLastDialog()
          {
-             AudioManager.getInstance().fadeInMusic(audiance_happy, 4f);
+//             AudioManager.getInstance().fadeInMusic(audiance_happy, 4f);
+             miniGameManager.triggerNextMiniGame();
          }
 
          @Override
@@ -271,8 +274,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
       List<MiniGame> games = new ArrayList<MiniGame>();
       games.add(new RoastBattleMiniGame(this, context));
-      MiniGameManager miniGameManager = new MiniGameManager(games);
-      //miniGameManager.triggerNextMiniGame();
+       miniGameManager = new MiniGameManager(games);
+      
    }
 
 }
