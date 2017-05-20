@@ -1,5 +1,8 @@
 package tv.rocketbeans.supermafiosi.minigame.roulette;
 
+import java.util.List;
+
+import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 import tv.rocketbeans.supermafiosi.minigame.AbstractMiniGame;
 
@@ -17,7 +20,7 @@ public class RouletteMiniGame extends AbstractMiniGame {
 
 	@Override
 	public void initialise() {
-		
+		List<Mafiosi> candidates = context.getCandidates();
 	}
 
 	@Override
