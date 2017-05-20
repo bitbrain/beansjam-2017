@@ -17,6 +17,9 @@ import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.Dialog;
+import tv.rocketbeans.supermafiosi.core.DialogManager;
+import tv.rocketbeans.supermafiosi.i18n.Bundle;
+import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 
 public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
@@ -28,12 +31,14 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	@Override
 	protected void onCreateStage(Stage stage, int width, int height) {
 		setupShaders();
-		Dialog dialog = new Dialog("Hello, my friend how are you tonight? I hope you are alright. Beansjam is amazing, isn't it?!", Asset.Textures.AVATAR_01);
-		DialogBox dialogBox = new DialogBox();
+		DialogManager dialogManager = new DialogManager();
+		getInput().addProcessor(dialogManager);
+		DialogBox dialogBox = new DialogBox(dialogManager);
 		dialogBox.setHeight(150f);
 		dialogBox.setWidth(Gdx.graphics.getWidth());
-		dialogBox.setDialog(dialog);
 		stage.addActor(dialogBox);
+		dialogManager.addDialog(Message.DIALOG_TEST_GREETINGS, Asset.Textures.AVATAR_01);
+		dialogManager.addDialog(Message.DIALOG_TEST_GREETINGS_ALTERNATIVE, Asset.Textures.AVATAR_01);
 	}
 	
 	private void setupShaders() {
