@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 import de.bitbrain.braingdx.assets.GameAssetLoader;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class MafiosiAssetLoader implements GameAssetLoader {
 
@@ -32,13 +33,41 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.KAPPO, Texture.class);
 
             assets.put(Asset.Textures.DUMMY, Texture.class);
+            
+            
+            
+            assets.put(Asset.Textures.JURY_BACKGROUND, Texture.class);
             assets.put(Asset.Textures.JURY_TABLE, Texture.class);
+            assets.put(Asset.Textures.JURY_UNDECIDED, Texture.class);
+            assets.put(Asset.Textures.JURY_NONBULLET, Texture.class);
+            assets.put(Asset.Textures.JURY_BULLET, Texture.class);
+            
+            assets.put(Asset.Textures.JURY_RICK, Texture.class);
+            assets.put(Asset.Textures.JURY_RICK_ARM, Texture.class);
+            
+            
+            assets.put(Asset.Textures.JURY_BLOB, Texture.class);
+            assets.put(Asset.Textures.JURY_BLOB_ARM, Texture.class);
+            
+            assets.put(Asset.Textures.JURY_LASER, Texture.class);
+            assets.put(Asset.Textures.JURY_LASER_ARM, Texture.class);
             
             /*
             *  Music tralalalaa
             */
             assets.put(Asset.Music.DYING_DON, Music.class);
             assets.put(Asset.Music.MENU_CHAR_SELECT, Music.class);
-          
+            assets.put(Asset.Music.TENSION, Music.class);
+            
+            
+            /*
+            * Sounds
+            */
+       
+            assets.put(Asset.Sounds.AUDIANCE_BOO, Sound.class);
+            assets.put(Asset.Sounds.AUDIANCE_CLAPPING1, Sound.class);
+            assets.put(Asset.Sounds.AUDIANCE_CLAPPING2, Sound.class);
+            assets.put(Asset.Sounds.AUDIANCE_CLAPPING3, Sound.class);
+            assets.put(Asset.Sounds.AUDIANCE_DRUMROLL, Sound.class);
 	}
 }
