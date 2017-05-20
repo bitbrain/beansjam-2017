@@ -234,7 +234,7 @@ public class JuryManager
       juryBackgroundObject.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
       juryBackgroundObject.setPosition(0, 0);
       screen.getRenderManager().register(TYPE_JURYBACKGROUND, new SpriteRenderer(Asset.Textures.JURY_BACKGROUND));
-
+      juryObjects.add(juryBackgroundObject);
       /**
        * JuryTable
        */
@@ -244,7 +244,7 @@ public class JuryManager
       juryTableObject.setDimensions(dimensionTable.x * ratio.x, dimensionTable.y * ratio.y);
       juryTableObject.setPosition(80, 60);
       screen.getRenderManager().register(TYPE_JURYTABLE, new SpriteRenderer(Asset.Textures.JURY_TABLE));
-
+      juryObjects.add(juryTableObject);
       /**
        * JuryMembers
        */
@@ -264,9 +264,13 @@ public class JuryManager
          o_jury.setPosition(jurymembers_startpoint.x + i * next_Jury_Width, jurymembers_startpoint.y);
          screen.getRenderManager().register(jurymember.getName(), new SpriteRenderer(jurymember.getHeadSprite()));
 
+         juryObjects.add(o_jury);
+         
          GameObject o_jury_hands = screen.getGameWorld().addObject();
          o_jury_hands.setType(jurymember.getNameHands());
-
+         
+         juryObjects.add(o_jury_hands);
+         
          Vector2 dimension_jurymember_hands = AssetUtils.getDimensionOfTexture(jurymember.getHandsSprite());
          /**
           * Special Case for blob

@@ -43,6 +43,7 @@ public interface Asset
       String MINIGAME_ROASTBATTLE_ICON_HEART = "textures/heart.png";
 
       String AVATAR_MODERATOR = "textures/mod.png";
+      String AVATAR_EDUARD_LASER = "textures/avatar_eduard_laser.png";
       /**
        * Intro
        */
@@ -59,6 +60,8 @@ public interface Asset
       String AUDIANCE_CLAPPING2 = "sounds/audience_clapping_2.ogg";
       String AUDIANCE_CLAPPING3 = "sounds/audience_clapping_3.ogg";
       String AUDIANCE_DRUMROLL = "sounds/drum_roll.ogg";
+      String AUDIANCE_HAPPY = "sounds/audience_happy.ogg";
+      
    }
 
    public interface Music

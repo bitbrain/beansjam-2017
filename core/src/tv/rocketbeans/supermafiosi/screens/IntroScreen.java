@@ -54,7 +54,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       //showDonImage(stage);
       Tween.call(new TweenCallback()
       {
-         private int tick = 80;
+         private int tick = 0;
          private Label introlabel1 = null;
          private Label introlabel2 = null;
          private Label introlabel3 = null;
@@ -208,7 +208,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
    }
 
-   private void changeToMenue()
+   public void changeToMenue()
    {
 
       Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);

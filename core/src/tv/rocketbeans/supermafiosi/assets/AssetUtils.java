@@ -5,6 +5,8 @@
  */
 package tv.rocketbeans.supermafiosi.assets;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
@@ -26,6 +28,12 @@ public class AssetUtils
           
           Vector2 dimension = new Vector2(texture.getWidth(), texture.getHeight());
           return dimension;
+   }
+   
+   public static void playSound(String path)
+   {
+      final Sound sound = Gdx.audio.newSound(Gdx.files.internal(path));
+      sound.play();
    }
    
 }
