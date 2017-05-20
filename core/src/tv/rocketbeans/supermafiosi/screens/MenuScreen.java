@@ -48,6 +48,7 @@ public class MenuScreen extends AbstractScreen<SuperMafiosiGame>{
 		setupUI(stage);
 		setupShaders();
 		setupLighting();
+		getScreenTransitions().in();
 	}
 	
 	// Defining general UI
