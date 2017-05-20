@@ -8,6 +8,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenEquations;
+import box2dLight.ConeLight;
 import de.bitbrain.braingdx.graphics.pipeline.RenderPipe;
 import de.bitbrain.braingdx.graphics.pipeline.layers.RenderPipeIds;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
@@ -22,12 +25,17 @@ import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.i18n.Message;
+import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 
 public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	
 	private DialogManager dialogManager;
 	private Map<String, Mafiosi> mafiosiMap = new HashMap<String, Mafiosi>();
+	
+	static {
+		Tween.registerAccessor(ConeLight.class, new ConeLightTween());
+	}
 
 	public IngameStageScreen(SuperMafiosiGame game) {
 		super(game);
@@ -46,9 +54,28 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	}
 	
 	private void setupLighting() {
+		getLightingManager().setConfig(getLightingManager().new LightingConfig().blur(false));
 		getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
-		getLightingManager().addConeLight("leftLight", 0f, Gdx.graphics.getHeight(), 1600f, 10f, 60f, Color.RED);
-		getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 1600f, 40f - 180f, 20f, Color.BLUE);
+		float lightingOffset = 50f;
+		ConeLight left = getLightingManager().addConeLight("leftLight", -lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -45f, 20f, Color.RED);
+		ConeLight right = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() + lightingOffset, Gdx.graphics.getHeight() + lightingOffset, 1000f, -135f, 20f, Color.BLUE);
+		ConeLight top = getLightingManager().addConeLight("rightLight", Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() + lightingOffset, 500f, -110f, 30f, Color.LIME);
+		Tween.to(left, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
+		     .target(10f)
+		     .ease(TweenEquations.easeNone)
+		     .repeatYoyo(Tween.INFINITY, 0f)
+		     .start(getTweenManager());
+		Tween.to(right, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
+	     .target(-170f)
+	     .ease(TweenEquations.easeNone)
+	     .repeatYoyo(Tween.INFINITY, 0f)
+	     .start(getTweenManager());
+		Tween.to(top, ConeLightTween.DIRECTION, 1.5f + (float)Math.random())
+	     .target(-80f)
+	     .ease(TweenEquations.easeNone)
+	     .repeatYoyo(Tween.INFINITY, 0f)
+	     .start(getTweenManager());
+		
 	}
 	
 	private void setupAllMafiosis() {
