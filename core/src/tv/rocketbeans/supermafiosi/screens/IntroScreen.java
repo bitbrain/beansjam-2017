@@ -54,37 +54,146 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       //showDonImage(stage);
       Tween.call(new TweenCallback()
       {
-         private int tick = 0;
+         private int tick = 80;
          private Label introlabel1 = null;
          private Label introlabel2 = null;
          private Label introlabel3 = null;
+         private Label introlabel4 = null;
+         private Label introlabel5 = null;
+         private DialogManager dialogManager = new DialogManager();
+         private GameObject donImageObject = null;
 
          @Override
          public void onEvent(int i, BaseTween<?> bt)
          {
-           
-            
+
             if (tick == 1)
             {
-                introlabel1 = showIntroText1(stage);
+               introlabel1 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_1));
             }
-            
-            if(tick == 10)
+
+            if (tick == 10)
             {
                textFadeOut(introlabel1);
-              introlabel2 = showIntoText2(stage);
+               introlabel2 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_2));
             }
-            
-            if(tick == 15)
+
+            if (tick == 20)
             {
                textFadeOut(introlabel2);
+
+               dialogManager.addDialog("Don", Message.INTRO_DON_1, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_2, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_3, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_4, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_5, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_6, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_7, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_8, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Don", Message.INTRO_DON_9, Asset.Textures.OLDDON);
+               dialogManager.addDialog("Cappo", Message.INTRO_KAPPO_1, Asset.Textures.KAPPO);
+               dialogManager.addDialog("Cappo", Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
+               donImageObject = showDonImage(stage, dialogManager);
+            }
+
+            if (tick == 20)
+            {
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 25)
+            {
+
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 30)
+            {
+
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 35)
+            {
+
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 40)
+            {
+
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 45)
+            {
+
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 50)
+            {
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 55)
+            {
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 60)
+            {
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 65)
+            {
+               ImageFadeOut(donImageObject);
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 70)
+            {
+               dialogManager.nextDialog();
+            }
+
+            if (tick == 75)
+            {
+               dialogManager.nextDialog();
+               introlabel3 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_3));
+            }
+
+            if (tick == 85)
+            {
+                Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
+               AudioManager.getInstance().fadeOutMusic(dying_don_music, 5f);
+            
+               
+               textFadeOut(introlabel3);
+               introlabel4 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_4));
+                Music menu_music = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_INTRO, Music.class);
+               menu_music.setLooping(true);
+               AudioManager.getInstance().fadeInMusic(menu_music, 1f);
+            }
+
+            if (tick == 95)
+            {
+              
+               textFadeOut(introlabel4);
+               introlabel5 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_5));
+            }
+            
+            if(tick == 105)
+            {
+              
+               textFadeOut(introlabel5);
+               bounceTitle(stage);
             }
 
             tick++;
          }
       }).repeat(Tween.INFINITY, 1f).start(getTweenManager());
 
-     
       /**
        * Skip Intro by mr. anykey
        */
@@ -112,119 +221,18 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       getScreenTransitions().out(new MenuScreen(getGame()), 1);
    }
 
-   private Label showIntroText1(final Stage stage)
+   private Label showIntroText(final Stage stage, String text)
    {
-      final Label introLabel1 = createLabel(Bundle.translations.get(Message.INTRO_SPEAKER_1));
+      final Label introLabel1 = createLabel(text);
       setLabelToCenter(introLabel1);
-
       stage.addActor(introLabel1);
-
       textFadeIn(introLabel1);
-
-  
       return introLabel1;
-   }
-
-   private Label showIntoText2(final Stage stage)
-   {
-    
-            final Label introLabel2 = createLabel(Bundle.translations.get(Message.INTRO_SPEAKER_2));
-            setLabelToCenter(introLabel2);
-            textFadeIn(introLabel2);
-            stage.addActor(introLabel2);
-
-            Tween.call(new TweenCallback()
-            {
-
-               @Override
-               public void onEvent(int i, BaseTween<?> bt)
-               {
-                  textFadeOut(introLabel2);
-                  showDonImage(stage);
-
-               }
-            }).delay(7).start(getTweenManager());
-            return introLabel2;
    }
 
    private void setLabelToCenter(Label label)
    {
       label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() / 2, Gdx.graphics.getHeight() / 2);
-   }
-
-   private void showIntoText3(final Stage stage)
-   {
-
-      Tween.call(new TweenCallback()
-      {
-
-         @Override
-         public void onEvent(int i, BaseTween<?> bt)
-         {
-            final Label introLabel3 = createLabel(Bundle.translations.get(Message.INTRO_SPEAKER_3));
-            setLabelToCenter(introLabel3);
-            textFadeIn(introLabel3);
-            stage.addActor(introLabel3);
-
-            Tween.call(new TweenCallback()
-            {
-
-               @Override
-               public void onEvent(int i, BaseTween<?> bt)
-               {
-                  textFadeOut(introLabel3);
-                  showIntoText4(stage);
-
-                  Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
-                  AudioManager.getInstance().fadeOutMusic(dying_don_music, 5f);
-
-               }
-            }).delay(7).start(getTweenManager());
-         }
-      }
-      ).delay(5).start(getTweenManager());
-   }
-
-   private void showIntoText4(final Stage stage)
-   {
-      final Label introLabel4 = createLabel(Bundle.translations.get(Message.INTRO_SPEAKER_4));
-      setLabelToCenter(introLabel4);
-      textFadeIn(introLabel4);
-      stage.addActor(introLabel4);
-
-      Tween.call(new TweenCallback()
-      {
-
-         @Override
-         public void onEvent(int i, BaseTween<?> bt)
-         {
-            textFadeOut(introLabel4);
-            showIntoText5(stage);
-
-            Music menu_music = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_INTRO, Music.class);
-            menu_music.setLooping(true);
-            AudioManager.getInstance().fadeInMusic(menu_music, 1f);
-
-         }
-      }).delay(7).start(getTweenManager());
-   }
-
-   private void showIntoText5(final Stage stage)
-   {
-      final Label introLabel5 = createLabel(Bundle.translations.get(Message.INTRO_SPEAKER_5));
-      setLabelToCenter(introLabel5);
-      textFadeIn(introLabel5);
-      stage.addActor(introLabel5);
-      Tween.call(new TweenCallback()
-      {
-
-         @Override
-         public void onEvent(int i, BaseTween<?> bt)
-         {
-            textFadeOut(introLabel5);
-            bounceTitle(stage);
-         }
-      }).delay(7).start(getTweenManager());
    }
 
    private void bounceTitle(final Stage stage)
@@ -240,7 +248,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
    }
 
-   private void showDonImage(final Stage stage)
+   private GameObject showDonImage(final Stage stage, DialogManager dialogManager)
    {
 
       final GameObject donImageObject = getGameWorld().addObject();
@@ -252,59 +260,18 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
       ImageFadeIn(donImageObject);
 
-      final DialogManager dialogManager = new DialogManager();
-
       DialogBox dialogBox = new DialogBox(dialogManager);
       dialogBox.setHeight(150f);
       dialogBox.setWidth(Gdx.graphics.getWidth());
       stage.addActor(dialogBox);
-      dialogManager.addDialog("Title", Message.INTRO_DON_1, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_2, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_3, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_4, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_5, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_6, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_7, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_8, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_DON_9, Asset.Textures.OLDDON);
-      dialogManager.addDialog("Title", Message.INTRO_KAPPO_1, Asset.Textures.KAPPO);
-      dialogManager.addDialog("Title", Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
 
-      Tween.call(new TweenCallback()
-      {
-         private int counter = 1;
-
-         @Override
-         public void onEvent(int i, BaseTween<?> bt)
-         {
-            dialogManager.nextDialog();
-
-            counter++;
-
-            if (counter == 10)
-            {
-               ImageFadeOut(donImageObject);
-            }
-
-            if (counter == 12)
-            {
-               showIntoText3(stage);
-            }
-
-            if (counter == 24)
-            {
-               changeToMenue();
-            }
-
-         }
-      }).repeat(13, 4).start(getTweenManager());
-
+      return donImageObject;
    }
 
    private Label createLabel(String text)
    {
       Label.LabelStyle defaultlabelstyle = new Label.LabelStyle();
-      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 18);
+      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 22);
       defaultlabelstyle.fontColor = Color.WHITE;
       defaultlabelstyle.fontColor.a = 1f;
 

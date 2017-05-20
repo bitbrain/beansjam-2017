@@ -42,6 +42,7 @@ public interface Asset
       String MINIGAME_ROASTBATTLE_ICON_SKULL = "textures/skull.png";
       String MINIGAME_ROASTBATTLE_ICON_HEART = "textures/heart.png";
 
+      String AVATAR_MODERATOR = "textures/mod.png";
       /**
        * Intro
        */
