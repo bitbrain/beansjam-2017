@@ -14,5 +14,6 @@ public class MafiosiAssetLoader implements GameAssetLoader {
 		assets.put(Asset.Fonts.EIGHT_BIT_WONDER, FreeTypeFontGenerator.class);
 		assets.put(Asset.Textures.BUTTON_9PATCH, Texture.class);
 		assets.put(Asset.Textures.LOGO, Texture.class);
+		assets.put(Asset.Textures.AVATAR_01, Texture.class);
 	}
 }

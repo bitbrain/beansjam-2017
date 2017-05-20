@@ -6,6 +6,7 @@ public interface Asset {
 	public interface Textures {
 		String BUTTON_9PATCH = "textures/button.9.png";
 		String LOGO = "textures/logo.png";
+		String AVATAR_01 = "textures/avatar_01.png";
 	}
 	
 	public interface Sounds {
