@@ -1,5 +1,6 @@
 package tv.rocketbeans.supermafiosi.assets;
 
+<<<<<<< HEAD
 public interface Asset
 {
 
