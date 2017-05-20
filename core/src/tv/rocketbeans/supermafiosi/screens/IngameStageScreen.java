@@ -28,6 +28,7 @@ import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
+import tv.rocketbeans.supermafiosi.core.jury.JuryManager;
 import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
@@ -104,22 +105,17 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame> {
 	
 	private void setupAllMafiosis() {
 		// Contestants
-		setupMafiosis(300f, 300f, 
-				new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
-				new Mafiosi("Eduard Laser", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
-				new Mafiosi("Stephano Caprese", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
-		);
+//		setupMafiosis(300f, 300f, 
+//				new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
+//				new Mafiosi("Eduard Laser", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
+//				new Mafiosi("Stephano Caprese", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
+//		);
 		
-		// Jury
-		setupMafiosis(800f, 300f, 
-				new Mafiosi("Keidi Hlumm", Message.DIALOG_KEIDIHLUMM_GREETING, 49, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
-				new Mafiosi("Kimmy Jimmel", Message.DIALOG_KIMMYJIMMEL_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
-				new Mafiosi("Pedro Aldente", Message.DIALOG_PEDRO_GREETING, 67, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
-		);
+		JuryManager.getInstance().initRender(this);
 		
 		// Moderator
-		setupMafiosis(625f, 250f, 
-				new Mafiosi("Heinrich Walters", Message.DIALOG_HEINRICH_GREETING, 35, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01));
+//		setupMafiosis(625f, 250f, 
+//				new Mafiosi("Heinrich Walters", Message.DIALOG_HEINRICH_GREETING, 35, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01));
 	}
 	
 	private void setupMafiosis(float startX, float startY, Mafiosi ... mafiosis) {
