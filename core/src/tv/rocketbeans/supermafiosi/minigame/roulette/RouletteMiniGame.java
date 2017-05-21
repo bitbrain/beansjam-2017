@@ -40,14 +40,15 @@ import tv.rocketbeans.supermafiosi.ui.Toast;
  */
 public class RouletteMiniGame extends AbstractMiniGame
 {
-	
-  private static final String[] DEATH_WISHES = {
-	Message.MINIGAME_ROULETTE_DEATHWISH_1,
-	Message.MINIGAME_ROULETTE_DEATHWISH_2,
-	Message.MINIGAME_ROULETTE_DEATHWISH_3,
-	Message.MINIGAME_ROULETTE_DEATHWISH_4,
-	Message.MINIGAME_ROULETTE_DEATHWISH_5
-  };
+
+   private static final String[] DEATH_WISHES =
+   {
+      Message.MINIGAME_ROULETTE_DEATHWISH_1,
+      Message.MINIGAME_ROULETTE_DEATHWISH_2,
+      Message.MINIGAME_ROULETTE_DEATHWISH_3,
+      Message.MINIGAME_ROULETTE_DEATHWISH_4,
+      Message.MINIGAME_ROULETTE_DEATHWISH_5
+   };
 
    private final MafiosiGameContext context;
 
@@ -82,6 +83,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          System.out.println("After last dialog!");
          if (waitingForPlayerConfirmation)
          {
+            System.out.println("waiting for player confirmation...");
             return;
          }
          Tween.call(new TweenCallback()
@@ -126,17 +128,17 @@ public class RouletteMiniGame extends AbstractMiniGame
 
    public void setBoom()
    {
-      
-      if(boom == null)
+
+      if (boom == null)
       {
-           boom = gameContext.getGameWorld().addObject();
+         boom = gameContext.getGameWorld().addObject();
          boom.setType("boom");
          boom.setPosition(0, 0);
          boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          boom.getColor().a = 0f;
          gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
       }
-      
+
       boom.getColor().a = 1f;
 
       Tween.call(new TweenCallback()
@@ -152,7 +154,7 @@ public class RouletteMiniGame extends AbstractMiniGame
 
    public void setRouletteAnimation(Mafiosi mafiosi)
    {
-	  this.mafiosi.setActive(mafiosi == null);
+      this.mafiosi.setActive(mafiosi == null);
 
       System.out.println("mafiosi: " + mafiosi);
       if (rouletteBackground == null)
@@ -163,8 +165,6 @@ public class RouletteMiniGame extends AbstractMiniGame
          rouletteBackground.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          rouletteBackground.getColor().a = 0f;
          gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
-
-       
 
          ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
          tronroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "LerryRoulette");
@@ -283,14 +283,14 @@ public class RouletteMiniGame extends AbstractMiniGame
    {
       System.out.println("=== NEW ROUND!!! ===");
       // Initialise first candidate to pull the trigger
-      if (mafiosi != null) {
-    	  mafiosi.setActive(false);
+      if (mafiosi != null)
+      {
+         mafiosi.setActive(false);
       }
       mafiosi = remainingCandidates.remove(0);
       mafiosi.setActive(true);
 
       //setRouletteAnimation(mafiosi);
-
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {
          Tween.call(new TweenCallback()
@@ -337,42 +337,41 @@ public class RouletteMiniGame extends AbstractMiniGame
 
          if (mafiosi != null)
          {
-            if (mafiosi.getName().contains("Trumpf"))
-            {
-               System.out.println("dead trumpf");
-               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRUMPF_DEAD_STAGE));
-            }
-            if (mafiosi.getName().contains("Jawolta"))
-            {
-                System.out.println("dead Jawolta");
-               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRON_DEAD_STAGE));
-            }
-
-            if (mafiosi.getName().contains("Sanchez"))
-            {
-                System.out.println("dead Sanchez");
-               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.SANCHEZ_DEAD_STAGE));
-            }
+//            if (mafiosi.getName().contains("Trumpf"))
+//            {
+//               System.out.println("dead trumpf");
+//               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRUMPF_DEAD_STAGE));
+//            }
+//            if (mafiosi.getName().contains("Jawolta"))
+//            {
+//                System.out.println("dead Jawolta");
+//               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRON_DEAD_STAGE));
+//            }
+//
+//            if (mafiosi.getName().contains("Sanchez"))
+//            {
+//                System.out.println("dead Sanchez");
+//               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.SANCHEZ_DEAD_STAGE));
+//            }
 
             shootCurrentPlayer();
             SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
 
          }
-         else
-         {
-            SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
-            Toast.getInstance().doToast("MISS!");
-            System.out.println("MISS!");
-            remainingCandidates.add(mafiosi);
-            context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
-            nextPlayer();
-            setRouletteAnimation(null);
-         }
-      }
-   }
-   
 
-   
+      }
+      else
+      {
+         SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
+         Toast.getInstance().doToast("MISS!");
+         System.out.println("MISS!");
+         remainingCandidates.add(mafiosi);
+         context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
+         nextPlayer();
+         setRouletteAnimation(null);
+      }
+
+   }
 
    private void shootCurrentPlayer()
    {
@@ -398,8 +397,9 @@ public class RouletteMiniGame extends AbstractMiniGame
          }
       }
    }
-   
-   private String getRandomDeathWish() {
-	   return DEATH_WISHES[(int) (DEATH_WISHES.length * Math.random())];
+
+   private String getRandomDeathWish()
+   {
+      return DEATH_WISHES[(int) (DEATH_WISHES.length * Math.random())];
    }
 }
