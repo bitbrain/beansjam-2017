@@ -48,7 +48,7 @@ public interface Asset
       String AVATAR_RICK = "textures/avatar_rick_sanchez.png";
       
       
-      String AVATAR_RONALD_TRUMPF = "textures/avatar_tron_jawolta.png";
+      String AVATAR_RONALD_TRUMPF = "textures/avatar_ronald_trumpf.png";
       String AVATAR_TRON_JAWOLTA = "textures/avatar_tron_jawolta.png";
       
       String LERRY_SANCHEZ_STAGE = "textures/lerry_sanchez.png";
@@ -73,6 +73,8 @@ public interface Asset
       String AUDIANCE_DRUMROLL = "sounds/drum_roll.ogg";
       String AUDIANCE_HAPPY = "sounds/audience_happy.ogg";
       
+      String SQUEEKY_1 = "sounds/squeeky_sign_1.ogg";
+      String SQUEEKY_2 = "sounds/squeeky_sign_2.ogg";
    }
 
    public interface Music

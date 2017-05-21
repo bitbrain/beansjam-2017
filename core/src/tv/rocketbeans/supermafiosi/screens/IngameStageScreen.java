@@ -169,7 +169,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
       dialogManager.nextDialog();
       
-      miniGameManager.triggerNextMiniGame();
+  //    miniGameManager.triggerNextMiniGame();
    }
 
    private void setupBackground()
@@ -288,8 +288,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), games, player, dialogManager);
 
 
-  //    games.add(new RoastBattleMiniGame(this, context));
- 
+      games.add(new RoastBattleMiniGame(this, context));
       games.add(new RouletteMiniGame(getGame(), context, this));
       miniGameManager = new MiniGameManager(games);
    }

@@ -94,7 +94,8 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Sounds.AUDIANCE_DRUMROLL, Sound.class);
             assets.put(Asset.Sounds.AUDIANCE_HAPPY, Sound.class);
             
-            
+            assets.put(Asset.Sounds.SQUEEKY_1, Sound.class);
+            assets.put(Asset.Sounds.SQUEEKY_2, Sound.class);
           
             
 	}

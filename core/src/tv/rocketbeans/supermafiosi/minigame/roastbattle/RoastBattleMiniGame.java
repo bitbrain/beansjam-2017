@@ -12,6 +12,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
 import de.bitbrain.braingdx.GameContext;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
@@ -155,15 +156,35 @@ public class RoastBattleMiniGame extends AbstractMiniGame
 
       GameObject minigameLogoObject = this.gameContext.getGameWorld().addObject();
       minigameLogoObject.setType("RoastMeTitle");
-    
+
       minigameLogoObject.setDimensions(700, 500);
       minigameLogoObject.setPosition(Gdx.graphics.getWidth() / 2 - minigameLogoObject.getWidth() / 2, Gdx.graphics.getHeight());
 
       this.gameContext.getRenderManager().register("RoastMeTitle", new SpriteRenderer(Asset.Textures.LOGO));
 
+      final Sound SQUEEKY_1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_1));
+      SQUEEKY_1.play();
+      
+ 
+      
+      final Sound SQUEEKY_2 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_2));
+      SQUEEKY_1.play();
+      
       Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 10f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
       Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 12f).delay(10f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
 
+      
+      Tween.call(new TweenCallback()
+      {
+
+         @Override
+         public void onEvent(int i, BaseTween<?> bt)
+         {
+            SQUEEKY_2.play();
+         }
+      }).delay(10f).start(this.gameContext.getTweenManager());
+      
+      
       Tween.call(new TweenCallback()
       {
          @Override
@@ -173,11 +194,11 @@ public class RoastBattleMiniGame extends AbstractMiniGame
             mafiosiGameContext.getDialogManager().addListener(afterAllDialogsListener);
             // 1. for each player, add a dialog with a special roast punch line
             initialiseOtherMafiosis();
-            
+
          }
       }).delay(22f).start(this.gameContext.getTweenManager());
 
-      this.addListener( new MiniGameListener()
+      this.addListener(new MiniGameListener()
       {
 
          @Override
@@ -185,14 +206,13 @@ public class RoastBattleMiniGame extends AbstractMiniGame
          {
             final Music minigamemusic_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_MAIN, Music.class);
             AudioManager.getInstance().fadeOutMusic(minigamemusic_main, 3f);
-            
+
             JuryManager.getInstance().setJurySceneVisible(true);
             JuryManager.getInstance().startRateJury(gameContext, result, mafiosiGameContext);
-            
-             
+
          }
-      } );
-      
+      });
+
    }
 
    @Override
