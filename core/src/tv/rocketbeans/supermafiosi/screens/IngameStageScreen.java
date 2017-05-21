@@ -29,7 +29,6 @@ import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
-import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
@@ -41,6 +40,7 @@ import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
 import tv.rocketbeans.supermafiosi.minigame.roastbattle.RoastBattleMiniGame;
 import tv.rocketbeans.supermafiosi.minigame.roulette.RouletteMiniGame;
 import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
+import tv.rocketbeans.supermafiosi.ui.ActiveMafiosiArrow;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 import tv.rocketbeans.supermafiosi.ui.Toast;
 
@@ -51,6 +51,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    private MafiosiGameContext context;
    private Mafiosi player;
    private Map<String, Mafiosi> mafiosiMap = new HashMap<String, Mafiosi>();
+   Map<Mafiosi, GameObject> candidateMapping = new HashMap<Mafiosi, GameObject>();
    private MiniGameManager miniGameManager = null;
 
    static
@@ -80,6 +81,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       JuryManager.getInstance().initRender(this);
       JuryManager.getInstance().setMinigameManager(miniGameManager);
       JuryManager.getInstance().setJurySceneVisible(false);
+      
+      stage.addActor(new ActiveMafiosiArrow(candidateMapping));
 
       GameObject moderator_stage = this.getGameWorld().addObject();
       moderator_stage.setType("Moderator_Stage");
@@ -260,7 +263,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          GameObject o = getGameWorld().addObject();
          o.setType(m.getName());
          o.setDimensions(mafiosiWidth, mafiosiWidth * 2f);
-
+         candidateMapping.put(m, o);
          Point2D.Double position = new Point2D.Double(startPosition.x + i * (mafiosiWidth + mafiosiGap) , startPosition.y - 200);
          Point2D.Double isometric_point = UtilIsometric.convertCartesisToIsoMorph(position);
 
