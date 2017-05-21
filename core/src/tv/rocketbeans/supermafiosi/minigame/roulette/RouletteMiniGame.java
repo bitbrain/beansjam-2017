@@ -133,6 +133,7 @@ public class RouletteMiniGame extends AbstractMiniGame
 
    public void setRouletteAnimation(Mafiosi mafiosi)
    {
+	  this.mafiosi.setActive(mafiosi == null);
 
       System.out.println("mafiosi: " + mafiosi);
       if (rouletteBackground == null)
@@ -268,7 +269,11 @@ public class RouletteMiniGame extends AbstractMiniGame
    {
       System.out.println("=== NEW ROUND!!! ===");
       // Initialise first candidate to pull the trigger
+      if (mafiosi != null) {
+    	  mafiosi.setActive(false);
+      }
       mafiosi = remainingCandidates.remove(0);
+      mafiosi.setActive(true);
 
       setRouletteAnimation(mafiosi);
 

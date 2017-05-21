@@ -169,14 +169,14 @@ public class RoastBattleMiniGame extends AbstractMiniGame
       gameContext.getStage().addActor(image);
 
       final Sound SQUEEKY_1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_1));
-      SQUEEKY_1.play();
+      SQUEEKY_1.play(0.5f);
 
       final Sound SQUEEKY_2 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_2));
 
       
       
       Tween.to(image, ActorTween.POPUP, 4f).target(Gdx.graphics.getHeight() / 2 - image.getHeight() / 2 + 300).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
-      Tween.to(image, ActorTween.POPUP, 4f).delay(6f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+      Tween.to(image, ActorTween.POPUP, 6f).delay(12f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
 
       Tween.call(new TweenCallback()
       {
@@ -193,7 +193,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
 
             if (ticks == 12)
             {
-               SQUEEKY_2.play();
+               SQUEEKY_2.play(0.5f);
             }
             
             if (ticks == 19)
