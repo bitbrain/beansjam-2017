@@ -27,6 +27,7 @@ import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 import tv.rocketbeans.supermafiosi.core.jury.jurymember.Blobby;
 import tv.rocketbeans.supermafiosi.core.jury.jurymember.Eduard;
 import tv.rocketbeans.supermafiosi.core.jury.jurymember.Rick;
+import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
 import tv.rocketbeans.supermafiosi.minigame.MiniGameResult;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 
@@ -55,6 +56,8 @@ public class JuryManager
    private ArrayList<JuryMember> juryMembers = new ArrayList<JuryMember>();
 
    private ArrayList<GameObject> juryObjects = new ArrayList<GameObject>();
+
+   private MiniGameManager minigameManager = null;
 
    private JuryManager()
    {
@@ -119,6 +122,8 @@ public class JuryManager
             final Sound clap1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_CLAPPING1));
             final Sound boo = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_BOO));
 
+            final DialogManager.DialogManagerListener this_ = this;
+
             Tween.call(new TweenCallback()
             {
                private int tick = 0;
@@ -143,11 +148,17 @@ public class JuryManager
                         mafiosigamecontext.addBullet(mafiosigamecontext.getPlayerMafiosi().getName());
                         dialogManager.addDialog("Moderator", "dialog.moderator.judgebullet", Asset.Textures.AVATAR_MODERATOR);
                         boo.play();
+                        dialogManager.removeListener(this_);
+                        AudioManager.getInstance().fadeOutMusic(Asset.Music.TENSION);
+                        minigameManager.triggerNextMiniGame();
                      }
                      else
                      {
                         dialogManager.addDialog("Moderator", "dialog.moderator.judgenobullet", Asset.Textures.AVATAR_MODERATOR);
                         clap1.play();
+                        dialogManager.removeListener(this_);
+                        AudioManager.getInstance().fadeOutMusic(Asset.Music.TENSION);
+                        minigameManager.triggerNextMiniGame();
                      }
                      drum.stop();
 
@@ -322,6 +333,14 @@ public class JuryManager
          i++;
       }
 
+   }
+
+   /**
+    * @param minigameManager the minigameManager to set
+    */
+   public void setMinigameManager(MiniGameManager minigameManager)
+   {
+      this.minigameManager = minigameManager;
    }
 
 }

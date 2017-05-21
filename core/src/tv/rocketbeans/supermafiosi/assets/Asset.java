@@ -46,6 +46,15 @@ public interface Asset
       String AVATAR_EDUARD_LASER = "textures/avatar_eduard_laser.png";
       String AVATAR_BLOBBY = "textures/avatar_blobby.png";
       String AVATAR_RICK = "textures/avatar_rick_sanchez.png";
+      
+      
+      String AVATAR_RONALD_TRUMPF = "textures/avatar_tron_jawolta.png";
+      String AVATAR_TRON_JAWOLTA = "textures/avatar_tron_jawolta.png";
+      
+      String LERRY_SANCHEZ_STAGE = "textures/lerry_sanchez.png";
+      String TRON_JAWOLTA_STAGE = "textures/tron_jawolta.png";
+      String RONALD_TRUMPF_STAGE = "textures/ronald_trumpf.png";
+      
       /**
        * Intro
        */

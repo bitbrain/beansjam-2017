@@ -64,6 +64,13 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.AVATAR_BLOBBY, Texture.class);
               
             
+            assets.put(Asset.Textures.AVATAR_RONALD_TRUMPF, Texture.class);
+            assets.put(Asset.Textures.AVATAR_TRON_JAWOLTA, Texture.class);
+            assets.put(Asset.Textures.RONALD_TRUMPF_STAGE, Texture.class);
+            assets.put(Asset.Textures.TRON_JAWOLTA_STAGE, Texture.class);
+            assets.put(Asset.Textures.LERRY_SANCHEZ_STAGE, Texture.class);
+            
+            
             /*
             *  Music tralalalaa
             */
