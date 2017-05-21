@@ -40,13 +40,13 @@ public class SuperMafiosiGame extends BrainGdxGame
       if (Config.DEBUG)
       {
 
-         Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-         menu_music_main.setLooping(true);
-         if (!menu_music_main.isPlaying())
-         {
-            AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
-            AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
-         }
+//         Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+//         menu_music_main.setLooping(true);
+//         if (!menu_music_main.isPlaying())
+//         {
+//            AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
+//            AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
+//         }
          return new IngameStageScreen(this);
       }
       return new IntroScreen(this);

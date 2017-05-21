@@ -21,14 +21,32 @@ public class Blobby extends JuryMember
    }
 
    @Override
-   public String getJudgeText(MiniGameResult minigameresult)
+   public String getJudgeText(MiniGameResult minigameresult, String playername)
    {
-     return "dialog.blobby.jury_bad";
+      float result = minigameresult.getPlayerScore(playername) / minigameresult.getMaximumPoints();
+      
+      if(result >= 0.8)
+      {
+         return "dialog.blobby.jury_good";
+      }
+      else if(result>=0.4)
+      {
+         return "dialog.blobby.jury_medium";
+      }
+      else
+      {
+         return "dialog.blobby.jury_bad";
+      }
    }
 
    @Override
-   public boolean getIsGettingBullet(MiniGameResult minigameresult)
+   public boolean getIsGettingBullet(MiniGameResult minigameresult, String playername)
    {
-      return false;
+      float result = minigameresult.getPlayerScore(playername) / minigameresult.getMaximumPoints();
+      if(result >= 0.3)
+      {
+         return false;
+      }
+      return true;
    }
 }

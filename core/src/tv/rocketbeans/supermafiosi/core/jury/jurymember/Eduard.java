@@ -21,14 +21,32 @@ public class Eduard extends JuryMember
    }
 
    @Override
-   public String getJudgeText(MiniGameResult minigameresult)
+   public String getJudgeText(MiniGameResult minigameresult, String playername)
    {
-      return "dialog.eduardlaser.jury_bad";
+      float result = minigameresult.getPlayerScore(playername) / minigameresult.getMaximumPoints();
+      
+      if(result >= 0.8)
+      {
+         return "dialog.eduardlaser.jury_good";
+      }
+      else if(result>=0.4)
+      {
+         return "dialog.eduardlaser.jury_medium";
+      }
+      else
+      {
+         return "dialog.eduardlaser.jury_bad";
+      }
    }
 
    @Override
-   public boolean getIsGettingBullet(MiniGameResult minigameresult)
+   public boolean getIsGettingBullet(MiniGameResult minigameresult, String playername)
    {
+      float result = minigameresult.getPlayerScore(playername) / minigameresult.getMaximumPoints();
+      if(result >= 0.8)
+      {
+         return false;
+      }
       return true;
    }
 }

@@ -54,6 +54,9 @@ public interface Asset
       String LERRY_SANCHEZ_STAGE = "textures/lerry_sanchez.png";
       String TRON_JAWOLTA_STAGE = "textures/tron_jawolta.png";
       String RONALD_TRUMPF_STAGE = "textures/ronald_trumpf.png";
+      String MODERATOR_STAGE  = "textures/moderator_stage.png";
+      
+      
       
       /**
        * Intro
@@ -79,6 +82,9 @@ public interface Asset
 
       String TRIGGER_NO_BULLET = "sounds/trigger_nobullet.ogg";
       String TRIGGER_BULLET = "sounds/trigger_bullet.ogg";
+      
+      String EKG_BEEP = "sounds/ekg_beep.ogg";
+      String EKG_STALL = "sounds/ekg_stall.ogg";
 
    }
 
@@ -103,6 +109,8 @@ public interface Asset
       String GAME_WIN_INTRO = "music/gameover_win_Intro.ogg";
       String GAME_OVER_MAIN = "music/gameover_fail_Main.ogg";
       String GAME_OVER_INTRO = "music/gameover_fail_Main.ogg";
+      
+      String STINGER = "music/stinger.ogg";
    }
 
    public interface Fonts

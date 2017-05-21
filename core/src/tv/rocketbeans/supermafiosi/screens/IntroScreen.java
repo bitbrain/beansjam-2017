@@ -6,6 +6,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
@@ -45,9 +46,9 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    @Override
    protected void onCreateStage(final Stage stage, int width, int height)
    {
-	  getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
-	  getLightingManager().addPointLight("left", new Vector2(350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
-	  getLightingManager().addPointLight("right", new Vector2(Gdx.graphics.getWidth() - 350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
+      getLightingManager().setAmbientLight(new Color(0.1f, 0.1f, 0.2f, 0.2f));
+      getLightingManager().addPointLight("left", new Vector2(350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
+      getLightingManager().addPointLight("right", new Vector2(Gdx.graphics.getWidth() - 350f, Gdx.graphics.getHeight() - 50f), 1000f, new Color(1f, 0.6f, 0.4f, 1f));
       Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
       dying_don_music.setLooping(true);
       AudioManager.getInstance().fadeInMusic(dying_don_music, 1f);
@@ -65,6 +66,8 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
          private Label introlabel5 = null;
          private DialogManager dialogManager = new DialogManager();
          private GameObject donImageObject = null;
+         private Sound EKG_BEEP = null;
+         private Sound EKG_STALL = null;
 
          @Override
          public void onEvent(int i, BaseTween<?> bt)
@@ -97,6 +100,10 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
                dialogManager.addDialog("Cappo", Message.INTRO_KAPPO_1, Asset.Textures.KAPPO);
                dialogManager.addDialog("Cappo", Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
                donImageObject = showDonImage(stage, dialogManager);
+
+               EKG_BEEP = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.EKG_BEEP));
+               EKG_BEEP.loop();
+
             }
 
             if (tick == 20)
@@ -141,27 +148,34 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
             if (tick == 55)
             {
-               dialogManager.nextDialog();
+
             }
 
             if (tick == 60)
             {
+               EKG_BEEP.stop();
+               EKG_STALL = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.EKG_STALL));
+               EKG_STALL.loop();
+               dialogManager.nextDialog();
                dialogManager.nextDialog();
             }
 
             if (tick == 65)
             {
+
                ImageFadeOut(donImageObject);
                dialogManager.nextDialog();
             }
 
             if (tick == 70)
             {
+
                dialogManager.nextDialog();
             }
 
             if (tick == 75)
             {
+               EKG_STALL.stop();
                dialogManager.nextDialog();
                introlabel3 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_3));
             }
@@ -170,23 +184,23 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
             {
                textFadeOut(introlabel3);
                introlabel4 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_4));
-               
+
             }
 
             if (tick == 95)
             {
-            	Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
-                AudioManager.getInstance().fadeOutMusic(dying_don_music, 6f);
-            	Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-                menu_music_main.setLooping(true);
-                AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 6f);
+               Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
+               AudioManager.getInstance().fadeOutMusic(dying_don_music, 6f);
+               Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+               menu_music_main.setLooping(true);
+               AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 6f);
                textFadeOut(introlabel4);
                introlabel5 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_5));
             }
-            
-            if(tick == 98)
+
+            if (tick == 98)
             {
-            	changeToMenue();
+               changeToMenue();
             }
 
             tick++;
@@ -200,11 +214,11 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       {
          public boolean keyDown(InputEvent event, int keycode)
          {
-             Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-             menu_music_main.setLooping(true);
-             AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
-             AudioManager.getInstance().playMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
-             getGame().setScreen(new MenuScreen(getGame()));
+            Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+            menu_music_main.setLooping(true);
+            AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
+            AudioManager.getInstance().playMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
+            getGame().setScreen(new MenuScreen(getGame()));
             return false;
          }
       });

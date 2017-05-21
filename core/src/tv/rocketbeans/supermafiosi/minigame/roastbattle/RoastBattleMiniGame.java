@@ -164,27 +164,41 @@ public class RoastBattleMiniGame extends AbstractMiniGame
 
       final Sound SQUEEKY_1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_1));
       SQUEEKY_1.play();
-      
- 
-      
+
       final Sound SQUEEKY_2 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_2));
-      SQUEEKY_1.play();
-      
-      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 10f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
-      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 12f).delay(10f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
 
       
+      
+      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 4f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 7f).delay(12f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+
       Tween.call(new TweenCallback()
       {
+         private int ticks = 0;
 
          @Override
          public void onEvent(int i, BaseTween<?> bt)
          {
-            SQUEEKY_2.play();
+            if (ticks == 4)
+            {
+               SQUEEKY_1.stop();
+             //  AudioManager.getInstance().fadeInMusic(Asset.Music.STINGER);
+            }
+
+            if (ticks == 12)
+            {
+               SQUEEKY_2.play();
+            }
+            
+            if (ticks == 19)
+            {
+               SQUEEKY_2.stop();
+            }
+
+            ticks++;
          }
-      }).delay(10f).start(this.gameContext.getTweenManager());
-      
-      
+      }).repeat(Tween.INFINITY, 1).start(this.gameContext.getTweenManager());
+
       Tween.call(new TweenCallback()
       {
          @Override
@@ -196,7 +210,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
             initialiseOtherMafiosis();
 
          }
-      }).delay(22f).start(this.gameContext.getTweenManager());
+      }).delay(19f).start(this.gameContext.getTweenManager());
 
       this.addListener(new MiniGameListener()
       {

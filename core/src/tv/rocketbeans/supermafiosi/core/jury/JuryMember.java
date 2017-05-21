@@ -37,8 +37,8 @@ public abstract class JuryMember
       this.judgeBadKey = judgebadkey;
    }
    
-   public abstract String getJudgeText(MiniGameResult minigameresult);
-   public abstract boolean getIsGettingBullet(MiniGameResult minigameresult);
+   public abstract String getJudgeText(MiniGameResult minigameresult, String playername);
+   public abstract boolean getIsGettingBullet(MiniGameResult minigameresult, String playername);
 
    /**
     * @return the Name

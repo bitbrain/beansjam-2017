@@ -69,6 +69,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.RONALD_TRUMPF_STAGE, Texture.class);
             assets.put(Asset.Textures.TRON_JAWOLTA_STAGE, Texture.class);
             assets.put(Asset.Textures.LERRY_SANCHEZ_STAGE, Texture.class);
+            assets.put(Asset.Textures.MODERATOR_STAGE, Texture.class);
             
             
             /*
@@ -89,6 +90,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Music.GAME_OVER_INTRO, Music.class);
             assets.put(Asset.Music.GAME_WIN_MAIN, Music.class);
             assets.put(Asset.Music.GAME_WIN_INTRO, Music.class);
+            assets.put(Asset.Music.STINGER, Music.class);
             
             /*
             * Sounds
@@ -105,6 +107,9 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             
             assets.put(Asset.Sounds.SQUEEKY_1, Sound.class);
             assets.put(Asset.Sounds.SQUEEKY_2, Sound.class);
+            
+            assets.put(Asset.Sounds.EKG_BEEP, Sound.class);
+            assets.put(Asset.Sounds.EKG_STALL, Sound.class);
           
             
 	}

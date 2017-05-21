@@ -23,6 +23,7 @@ import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
+import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 import tv.rocketbeans.supermafiosi.core.jury.jurymember.Blobby;
 import tv.rocketbeans.supermafiosi.core.jury.jurymember.Eduard;
@@ -107,7 +108,31 @@ public class JuryManager
 
       for (JuryMember jurymember : juryMembers)
       {
-         dialogManager.addDialog(jurymember.getName(), jurymember.getJudgeText(minigameresult), jurymember.getAvatarSprite());
+         dialogManager.addDialog(jurymember.getName(), jurymember.getJudgeText(minigameresult, mafiosigamecontext.getPlayerMafiosi().getName()), jurymember.getAvatarSprite());
+      }
+
+      /**
+       * get Bullets to the cpu players!
+       */
+      for (Mafiosi mafiosi : mafiosigamecontext.getCandidates())
+      {
+         if (!mafiosi.getName().equals(mafiosigamecontext.getPlayerMafiosi().getName()))
+         {
+
+            int counterNegative = 0;
+            for (JuryMember jurymember : juryMembers)
+            {
+               if (jurymember.getIsGettingBullet(minigameresult, mafiosigamecontext.getPlayerMafiosi().getName()))
+               {
+                  counterNegative++;
+               }
+            }
+            if (counterNegative >= 2)
+            {
+               mafiosigamecontext.addBullet(mafiosi.getName());
+            }
+
+         }
       }
 
       dialogManager.addListener(new DialogManager.DialogManagerListener()
@@ -136,8 +161,8 @@ public class JuryManager
                      int counterNegative = 0;
                      for (JuryMember jurymember : juryMembers)
                      {
-                        setJuryResult(gamecontext, jurymember.getTableposition(), jurymember.getIsGettingBullet(minigameresult));
-                        if (jurymember.getIsGettingBullet(minigameresult))
+                        setJuryResult(gamecontext, jurymember.getTableposition(), jurymember.getIsGettingBullet(minigameresult, mafiosigamecontext.getPlayerMafiosi().getName()));
+                        if (jurymember.getIsGettingBullet(minigameresult, mafiosigamecontext.getPlayerMafiosi().getName()))
                         {
                            counterNegative++;
                         }
