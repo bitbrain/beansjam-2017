@@ -40,6 +40,14 @@ import tv.rocketbeans.supermafiosi.ui.Toast;
  */
 public class RouletteMiniGame extends AbstractMiniGame
 {
+	
+  private static final String[] DEATH_WISHES = {
+	Message.MINIGAME_ROULETTE_DEATHWISH_1,
+	Message.MINIGAME_ROULETTE_DEATHWISH_2,
+	Message.MINIGAME_ROULETTE_DEATHWISH_3,
+	Message.MINIGAME_ROULETTE_DEATHWISH_4,
+	Message.MINIGAME_ROULETTE_DEATHWISH_5
+  };
 
    private final MafiosiGameContext context;
 
@@ -259,7 +267,7 @@ public class RouletteMiniGame extends AbstractMiniGame
             waitingForPlayerConfirmation = false;
             gameContext.getTweenManager().killTarget(confirmationLabel);
             gameContext.getStage().getActors().removeValue(confirmationLabel, true);
-            context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_NEWGAME, mafiosi.getAvatarId());
+            context.getDialogManager().addDialog(mafiosi.getName(), getRandomDeathWish(), mafiosi.getAvatarId());
             context.getDialogManager().nextDialog();
          }
       }
@@ -304,7 +312,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       else
       {
          System.out.println(mafiosi.getName() + " turn");
-         context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_NEWGAME, mafiosi.getAvatarId());
+         context.getDialogManager().addDialog(mafiosi.getName(), getRandomDeathWish(), mafiosi.getAvatarId());
          context.getDialogManager().nextDialog();
       }
    }
@@ -331,7 +339,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          Toast.getInstance().doToast("MISS!");
          System.out.println("MISS!");
          remainingCandidates.add(mafiosi);
-         context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
+         context.getDialogManager().addDialog(mafiosi.getName(), getRandomDeathWish(), mafiosi.getAvatarId());
          nextPlayer();
          setRouletteAnimation(null);
       }
@@ -360,5 +368,9 @@ public class RouletteMiniGame extends AbstractMiniGame
             nextPlayer();
          }
       }
+   }
+   
+   private String getRandomDeathWish() {
+	   return DEATH_WISHES[(int) (DEATH_WISHES.length * Math.random())];
    }
 }
