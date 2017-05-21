@@ -20,6 +20,8 @@ public class DialogManager extends InputAdapter {
 	private List<DialogManagerListener> dialogManagerListeners = new CopyOnWriteArrayList<DialogManagerListener>();
 	
 	private Dialog currentDialog;
+	
+	private int lastSize;
 
 	public void addDialog(String title, String dialogKey, String avatarKey) {
 		addDialog(title, dialogKey, avatarKey, Color.WHITE);
@@ -48,12 +50,14 @@ public class DialogManager extends InputAdapter {
 	
 	public boolean nextDialog() {
 		if (dialogs.size() > 0) {
+			lastSize = dialogs.size();
 			currentDialog = dialogs.remove(0);
 			for (DialogManagerListener listener : dialogManagerListeners) {
 				listener.onDialog(currentDialog);
 			}
 			return true;
-		} else {
+		} else if (lastSize > 0) {
+			lastSize = 0;
 			for (DialogManagerListener listener : dialogManagerListeners) {
 				listener.afterLastDialog();
 			}
