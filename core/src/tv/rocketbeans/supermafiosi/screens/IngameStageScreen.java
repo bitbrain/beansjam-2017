@@ -82,6 +82,9 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       audiance_happy.setLooping(true);
       AudioManager.getInstance().playMusic(Asset.Music.AUDIANCE_HAPPY);
 
+      
+      //miniGameManager.triggerNextMiniGame();
+      
       dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
@@ -149,6 +152,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          public void afterLastDialog()
          {
              AudioManager.getInstance().fadeOutMusic(audiance_happy, 4f);
+             System.out.println("stop executed");
+             audiance_happy.stop();
              miniGameManager.triggerNextMiniGame();
          }
 
