@@ -157,10 +157,11 @@ public class RoastBattleMiniGame extends AbstractMiniGame
       GameObject minigameLogoObject = this.gameContext.getGameWorld().addObject();
       minigameLogoObject.setType("RoastMeTitle");
 
-      minigameLogoObject.setDimensions(700, 500);
+      Vector2 roastBattleLogo = AssetUtils.getDimensionOfTexture(Asset.Textures.ROAST_BATTLE_LOGO);
+      minigameLogoObject.setDimensions(roastBattleLogo.x * 2, roastBattleLogo.y * 2);
       minigameLogoObject.setPosition(Gdx.graphics.getWidth() / 2 - minigameLogoObject.getWidth() / 2, Gdx.graphics.getHeight());
 
-      this.gameContext.getRenderManager().register("RoastMeTitle", new SpriteRenderer(Asset.Textures.LOGO));
+      this.gameContext.getRenderManager().register("RoastMeTitle", new SpriteRenderer(Asset.Textures.ROAST_BATTLE_LOGO));
 
       final Sound SQUEEKY_1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_1));
       SQUEEKY_1.play();
@@ -169,7 +170,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
 
       
       
-      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 4f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 4f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2 + 300).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
       Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 7f).delay(12f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
 
       Tween.call(new TweenCallback()

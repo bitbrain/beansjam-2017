@@ -56,7 +56,7 @@ public interface Asset
       String RONALD_TRUMPF_STAGE = "textures/ronald_trumpf.png";
       String MODERATOR_STAGE  = "textures/moderator_stage.png";
       
-      
+      String ROAST_BATTLE_LOGO = "textures/ROAST_BATTLE_LOGO.png";
       
       /**
        * Intro
