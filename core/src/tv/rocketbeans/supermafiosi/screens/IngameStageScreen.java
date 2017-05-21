@@ -303,7 +303,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
 
 
-   //   games.add(new RoastBattleMiniGame(this, context));
+      games.add(new RoastBattleMiniGame(this, context));
       games.add(new RouletteMiniGame(getGame(), context, this));
       miniGameManager = new MiniGameManager(games);
    }

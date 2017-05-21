@@ -19,6 +19,8 @@ import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.tweens.SharedTweenManager;
 import de.bitbrain.braingdx.world.GameObject;
 import java.util.ArrayList;
+import java.util.List;
+
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
@@ -235,7 +237,7 @@ public class JuryManager
       GameObject juryResult = gamecontext.getGameWorld().addObject();
       Vector2 ratio = calcRatio();
       Vector2 dimesion_nonbullet = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_NONBULLET);
-
+      juryObjects.add(juryResult);
       if (hasBullet)
       {
          juryResult.setType(TYPE_JURYBULLET);
