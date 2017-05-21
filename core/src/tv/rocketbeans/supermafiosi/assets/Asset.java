@@ -68,6 +68,8 @@ public interface Asset
       String RONALD_ROULETTE_WEAPON = "textures/trumpf_gun.png";
       String TRON_ROULETTE_WEAPON = "textures/scared-2-gun.png";
       
+      String BOOM = "textures/BOOM.png";
+      
       
       /**
        * Intro

@@ -62,6 +62,8 @@ public class RouletteMiniGame extends AbstractMiniGame
    private GameObject ronaldtrumpfwafferoulette;
    private GameObject tronwafferoulette;
    private GameObject sanchezwafferoulette;
+   
+   private GameObject boom;
 
    private DialogManagerListener dialogListener = new DialogManagerListener()
    {
@@ -113,6 +115,22 @@ public class RouletteMiniGame extends AbstractMiniGame
       nextPlayer();
 
    }
+   
+   
+   public void setBoom()
+   {
+      boom.getColor().a = 1f;
+      
+      Tween.call(new TweenCallback()
+      {
+
+         @Override
+         public void onEvent(int i, BaseTween<?> bt)
+         {
+            boom.getColor().a = 0f;
+         }
+      }).delay(2).start(gameContext.getTweenManager());
+   }
 
    public void setRouletteAnimation(Mafiosi mafiosi)
    {
@@ -124,6 +142,15 @@ public class RouletteMiniGame extends AbstractMiniGame
          rouletteBackground.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          rouletteBackground.getColor().a = 0f;
          gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
+         
+         
+         boom = gameContext.getGameWorld().addObject();
+         boom.setType("boom");
+         boom.setPosition(0, 0);
+         boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+         boom.getColor().a = 0f;
+         gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
+         
 
          ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
          tronroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "LerryRoulette");
@@ -285,9 +312,17 @@ public class RouletteMiniGame extends AbstractMiniGame
       if (mafiosiWillBeDeadForSure)
       {
          System.out.println("SHOOT!");
-         Toast.getInstance().doToast("SHOT!");
+         setBoom();
+         
+         
+         
+         
+         
+         
          shootCurrentPlayer();
          SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
+         setRouletteAnimation(null);
+
       }
       else
       {
@@ -297,6 +332,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          remainingCandidates.add(mafiosi);
          context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
          nextPlayer();
+         setRouletteAnimation(null);
       }
    }
 
