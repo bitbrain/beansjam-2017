@@ -87,6 +87,10 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             
             assets.put(Asset.Textures.BOOM, Texture.class);
             
+            assets.put(Asset.Textures.TRON_DEAD_STAGE, Texture.class);
+            assets.put(Asset.Textures.TRUMPF_DEAD_STAGE, Texture.class);
+            assets.put(Asset.Textures.SANCHEZ_DEAD_STAGE, Texture.class);
+            
             /*
             *  Music tralalalaa
             */
