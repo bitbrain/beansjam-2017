@@ -24,6 +24,7 @@ import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
 import de.bitbrain.braingdx.postprocessing.effects.Vignette;
 import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.world.GameObject;
+import java.awt.geom.Point2D;
 import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
@@ -33,6 +34,7 @@ import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
 import tv.rocketbeans.supermafiosi.core.jury.JuryManager;
+import tv.rocketbeans.supermafiosi.core.jury.UtilIsometric;
 import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.minigame.MiniGame;
 import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
@@ -49,8 +51,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    private Mafiosi player;
    private Map<String, Mafiosi> mafiosiMap = new HashMap<String, Mafiosi>();
    private MiniGameManager miniGameManager = null;
-   
-   
+
    static
    {
       Tween.registerAccessor(ConeLight.class, new ConeLightTween());
@@ -76,14 +77,13 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       setupShaders();
       setupMiniGameFramework();
       JuryManager.getInstance().initRender(this);
+      JuryManager.getInstance().setMinigameManager(miniGameManager);
       JuryManager.getInstance().setJurySceneVisible(false);
 
       final Music audiance_happy = SharedAssetManager.getInstance().get(Asset.Music.AUDIANCE_HAPPY, Music.class);
       audiance_happy.setLooping(true);
       AudioManager.getInstance().playMusic(Asset.Music.AUDIANCE_HAPPY);
 
-    
-   
       dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
@@ -92,10 +92,10 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
       dialogManager.addDialog("Moderator", "dialog.moderator.start5", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start6", Asset.Textures.AVATAR_MODERATOR);
-      dialogManager.addDialog("Tron Jawolta", "dialog.tron.greeting", Asset.Textures.KAPPO);
+      dialogManager.addDialog("Tron Jawolta", "dialog.tron.greeting", Asset.Textures.AVATAR_TRON_JAWOLTA);
       dialogManager.addDialog("Moderator", "dialog.moderator.start7", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start8", Asset.Textures.AVATAR_MODERATOR);
-      dialogManager.addDialog("Ronald Trumpf", "dialog.ronald.greeting", Asset.Textures.KAPPO);
+      dialogManager.addDialog("Ronald Trumpf", "dialog.ronald.greeting", Asset.Textures.AVATAR_RONALD_TRUMPF);
 
       dialogManager.addDialog("Moderator", "dialog.moderator.introgame1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addListener(new DialogManager.DialogManagerListener()
@@ -150,10 +150,10 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          @Override
          public void afterLastDialog()
          {
-             AudioManager.getInstance().fadeOutMusic(audiance_happy, 4f);
-             System.out.println("stop executed");
-             audiance_happy.stop();
-             miniGameManager.triggerNextMiniGame();
+            AudioManager.getInstance().fadeOutMusic(audiance_happy, 4f);
+            System.out.println("stop executed");
+            audiance_happy.stop();
+            miniGameManager.triggerNextMiniGame();
          }
 
          @Override
@@ -161,9 +161,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          {
          }
       });
-     
-      
-      
+
       dialogManager.nextDialog();
    }
 
@@ -218,7 +216,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    private void setupAllMafiosis()
    {
 
-		// Contestants
+      // Contestants
 //		setupMafiosis(300f, 300f, 
 //				new Mafiosi("Lerry Sanchez", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
 //				new Mafiosi("Eduard Laser", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
@@ -244,7 +242,12 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
          GameObject o = getGameWorld().addObject();
          o.setType(m.getName());
          o.setDimensions(mafiosiWidth, mafiosiWidth * 2f);
-         o.setPosition(startPosition.x + i * (mafiosiWidth + mafiosiGap), startPosition.y);
+
+         Point2D.Double position = new Point2D.Double(startPosition.x + i * (mafiosiWidth + mafiosiGap) , startPosition.y - 200);
+         Point2D.Double isometric_point = UtilIsometric.convertCartesisToIsoMorph(position);
+
+         o.setPosition((int) isometric_point.x, (int) isometric_point.y);
+
          getRenderManager().register(m.getName(), new SpriteRenderer(m.getSpriteId()));
          //dialogManager.addDialog(m.getName(), m.getBioId(), m.getAvatarId());
       }
@@ -268,18 +271,18 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
    private void setupMiniGameFramework()
    {
-      player = new Mafiosi("Lerry Sanchez", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01);
+      player = new Mafiosi("Lerry Sanchez", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.LERRY_SANCHEZ_STAGE, Asset.Textures.KAPPO);
       setupMafiosis(300f, 300f,
-              new Mafiosi("Tron Jawolta", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01),
+              new Mafiosi("Tron Jawolta", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.TRON_JAWOLTA_STAGE, Asset.Textures.AVATAR_TRON_JAWOLTA),
               player,
-              new Mafiosi("Ronald Trumpf", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
+              new Mafiosi("Ronald Trumpf", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.RONALD_TRUMPF_STAGE, Asset.Textures.AVATAR_RONALD_TRUMPF)
       );
       List<MiniGame> games = new ArrayList<MiniGame>();
       context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), games, player, dialogManager);
 
       games.add(new RoastBattleMiniGame(this, context));
-       miniGameManager = new MiniGameManager(games);
-      
+      miniGameManager = new MiniGameManager(games);
+
    }
 
 }
