@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
@@ -14,10 +16,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+
 import de.bitbrain.braingdx.GameContext;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
 import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
+import de.bitbrain.braingdx.tweens.ActorTween;
 import de.bitbrain.braingdx.tweens.GameObjectTween;
 import de.bitbrain.braingdx.world.GameObject;
 import tv.rocketbeans.supermafiosi.Colors;
@@ -154,14 +160,13 @@ public class RoastBattleMiniGame extends AbstractMiniGame
       });
       minigamemusic_intro.play();
 
-      GameObject minigameLogoObject = this.gameContext.getGameWorld().addObject();
-      minigameLogoObject.setType("RoastMeTitle");
+      Image image = new Image(new SpriteDrawable(new Sprite(SharedAssetManager.getInstance().get(Asset.Textures.ROAST_BATTLE_LOGO, Texture.class))));
 
       Vector2 roastBattleLogo = AssetUtils.getDimensionOfTexture(Asset.Textures.ROAST_BATTLE_LOGO);
-      minigameLogoObject.setDimensions(roastBattleLogo.x * 2, roastBattleLogo.y * 2);
-      minigameLogoObject.setPosition(Gdx.graphics.getWidth() / 2 - minigameLogoObject.getWidth() / 2, Gdx.graphics.getHeight());
-
-      this.gameContext.getRenderManager().register("RoastMeTitle", new SpriteRenderer(Asset.Textures.ROAST_BATTLE_LOGO));
+      image.setSize(roastBattleLogo.x * 2, roastBattleLogo.y * 2);
+      image.setPosition(Gdx.graphics.getWidth() / 2 - image.getWidth() / 2, Gdx.graphics.getHeight());
+      
+      gameContext.getStage().addActor(image);
 
       final Sound SQUEEKY_1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.SQUEEKY_1));
       SQUEEKY_1.play();
@@ -170,8 +175,8 @@ public class RoastBattleMiniGame extends AbstractMiniGame
 
       
       
-      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 4f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2 + 300).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
-      Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 7f).delay(12f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+      Tween.to(image, ActorTween.POPUP, 4f).target(Gdx.graphics.getHeight() / 2 - image.getHeight() / 2 + 300).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+      Tween.to(image, ActorTween.POPUP, 4f).delay(6f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
 
       Tween.call(new TweenCallback()
       {
