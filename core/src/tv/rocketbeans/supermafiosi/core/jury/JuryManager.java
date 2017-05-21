@@ -236,7 +236,7 @@ public class JuryManager
       Vector2 resultStartPoint_3 = new Vector2(850, 113);
 
       GameObject juryResult = gamecontext.getGameWorld().addObject();
-      juryResult.setZIndex(50f);
+      juryResult.setZIndex(101f);
       Vector2 ratio = calcRatio();
       Vector2 dimesion_nonbullet = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_NONBULLET);
       juryObjects.add(juryResult);
