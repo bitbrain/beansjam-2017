@@ -62,7 +62,7 @@ public class RouletteMiniGame extends AbstractMiniGame
    private GameObject ronaldtrumpfwafferoulette;
    private GameObject tronwafferoulette;
    private GameObject sanchezwafferoulette;
-   
+
    private GameObject boom;
 
    private DialogManagerListener dialogListener = new DialogManagerListener()
@@ -115,12 +115,11 @@ public class RouletteMiniGame extends AbstractMiniGame
       nextPlayer();
 
    }
-   
-   
+
    public void setBoom()
    {
       boom.getColor().a = 1f;
-      
+
       Tween.call(new TweenCallback()
       {
 
@@ -134,6 +133,8 @@ public class RouletteMiniGame extends AbstractMiniGame
 
    public void setRouletteAnimation(Mafiosi mafiosi)
    {
+
+      System.out.println("mafiosi: " + mafiosi);
       if (rouletteBackground == null)
       {
          rouletteBackground = gameContext.getGameWorld().addObject();
@@ -142,15 +143,13 @@ public class RouletteMiniGame extends AbstractMiniGame
          rouletteBackground.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          rouletteBackground.getColor().a = 0f;
          gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
-         
-         
+
          boom = gameContext.getGameWorld().addObject();
          boom.setType("boom");
          boom.setPosition(0, 0);
          boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          boom.getColor().a = 0f;
          gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
-         
 
          ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
          tronroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "LerryRoulette");
@@ -313,15 +312,11 @@ public class RouletteMiniGame extends AbstractMiniGame
       {
          System.out.println("SHOOT!");
          setBoom();
-         
-         
-         
-         
-         
-         
+
+         setRouletteAnimation(null);
+
          shootCurrentPlayer();
          SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
-         setRouletteAnimation(null);
 
       }
       else
