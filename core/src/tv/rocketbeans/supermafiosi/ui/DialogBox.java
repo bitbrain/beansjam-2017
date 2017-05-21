@@ -177,7 +177,7 @@ public class DialogBox extends Actor {
 	}
 	
 	private float getTitleBackgroundY() {
-		return title.getY() - TITLE_PADDING;
+		return title.getY() - (TITLE_PADDING / 2f);
 	}
 	
 	private float getTitleBackgroundWidth() {
@@ -185,11 +185,11 @@ public class DialogBox extends Actor {
 	}
 	
 	private float getTitleBackgroundHeight() {
-		return title.getPrefHeight() + TITLE_PADDING * 2f;
+		return title.getPrefHeight() + (TITLE_PADDING / 2f) * 2f;
 	}
 	
 	private float getTitleY() {
-		return  getY() + getHeight() + TITLE_PADDING - 2f;
+		return  getY() + getHeight() + (TITLE_PADDING / 2f) - 2f;
 	}
 	
 	private float getTitleX() {
