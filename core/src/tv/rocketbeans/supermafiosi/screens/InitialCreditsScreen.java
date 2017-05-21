@@ -36,18 +36,22 @@ public class InitialCreditsScreen extends AbstractScreen<SuperMafiosiGame>{
 		
 		getInput().addProcessor(new InputAdapter() {			
 			public boolean keyDown(int keycode) {
-				isFadingOut = true;
-				AudioManager.getInstance().fadeOutMusic(Asset.Music.GAME_WIN_MAIN);
-				AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_INTRO);
-				getScreenTransitions().out(new IntroScreen(getGame()), 2f);
-				return true;
+				if (!isFadingOut) {
+					isFadingOut = true;
+					getScreenTransitions().out(new IntroScreen(getGame()), 0.5f);
+					return true;
+				} else {
+					return false;
+				}
 			};
 		});
 		
 		Tween.call(new TweenCallback() {
 			@Override
 			public void onEvent(int arg0, BaseTween<?> arg1) {
-				getScreenTransitions().out(new IntroScreen(getGame()), 2f);
+				if (!isFadingOut) {
+					getScreenTransitions().out(new IntroScreen(getGame()), 2f);
+				}
 			}
 		}).delay(3f).start(SharedTweenManager.getInstance());
 		
@@ -66,7 +70,7 @@ public class InitialCreditsScreen extends AbstractScreen<SuperMafiosiGame>{
 	protected void onUpdate(float delta) {
 		if (Gdx.input.isTouched() && !isFadingOut) {
 			isFadingOut = true;
-			getScreenTransitions().out(new IntroScreen(getGame()), 2f);
+			getScreenTransitions().out(new IntroScreen(getGame()), 0.5f);
 		}
 	}
 }
