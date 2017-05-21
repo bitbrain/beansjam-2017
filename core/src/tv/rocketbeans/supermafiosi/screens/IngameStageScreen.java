@@ -168,8 +168,10 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       });
 
       dialogManager.nextDialog();
+
       
   //    miniGameManager.triggerNextMiniGame();
+
    }
 
    private void setupBackground()

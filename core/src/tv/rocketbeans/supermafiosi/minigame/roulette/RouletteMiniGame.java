@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 
@@ -13,9 +14,12 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import de.bitbrain.braingdx.GameContext;
+import de.bitbrain.braingdx.assets.SharedAssetManager;
+import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.tweens.ActorTween;
 import de.bitbrain.braingdx.tweens.SharedTweenManager;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
+import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager.DialogManagerListener;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
@@ -81,6 +85,9 @@ public class RouletteMiniGame extends AbstractMiniGame {
 		System.out.println("Initialise...");
 		context.getDialogManager().addListener(dialogListener);
 		remainingCandidates = new ArrayList<Mafiosi>(context.getCandidates());
+		AudioManager.getInstance().fadeOutMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 4f);
+		AudioManager.getInstance().fadeOutMusic(Asset.Music.AUDIANCE_HAPPY, 8f);
+		AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_MINIGAME_ROULETTE_MUSIC_MAIN);
 		nextPlayer();
 	}
 
@@ -141,7 +148,9 @@ public class RouletteMiniGame extends AbstractMiniGame {
 			System.out.println("SHOOT!");
 			Toast.getInstance().doToast("SHOT!");
 			shootCurrentPlayer();
+			SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float)(0.7f + Math.random() * 0.5f), 0f);
 		} else {
+			SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class).play(1f, (float)(0.7f + Math.random() * 0.5f), 0f);
 			Toast.getInstance().doToast("MISS!");
 			System.out.println("MISS!");
 			remainingCandidates.add(mafiosi);
@@ -153,11 +162,13 @@ public class RouletteMiniGame extends AbstractMiniGame {
 	private void shootCurrentPlayer() {
 		if (mafiosi.equals(context.getPlayerMafiosi())) {
 			System.out.println("Game over!");
+			AudioManager.getInstance().fadeOutMusic(Asset.Music.MENU_MINIGAME_ROULETTE_MUSIC_MAIN);
 			gameContext.getScreenTransitions().out(new GameOverScreen(game), 2.5f);
 		} else {
 			deadMafiosis.add(mafiosi);
 			System.out.println(mafiosi + " shot.");
 			if (deadMafiosis.size() >= context.getCandidates().size() - 1) {
+				AudioManager.getInstance().fadeOutMusic(Asset.Music.MENU_MINIGAME_ROULETTE_MUSIC_MAIN);
 				System.out.println("You won!");
 				gameContext.getScreenTransitions().out(new CongratulationsScreen(game), 1.0f);
 			} else {

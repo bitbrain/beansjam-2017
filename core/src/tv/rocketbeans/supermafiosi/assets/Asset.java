@@ -73,8 +73,13 @@ public interface Asset
       String AUDIANCE_DRUMROLL = "sounds/drum_roll.ogg";
       String AUDIANCE_HAPPY = "sounds/audience_happy.ogg";
       
+
       String SQUEEKY_1 = "sounds/squeeky_sign_1.ogg";
       String SQUEEKY_2 = "sounds/squeeky_sign_2.ogg";
+
+      String TRIGGER_NO_BULLET = "sounds/trigger_nobullet.ogg";
+      String TRIGGER_BULLET = "sounds/trigger_bullet.ogg";
+
    }
 
    public interface Music
@@ -90,9 +95,14 @@ public interface Asset
       
       String TENSION = "music/tension_1_Main.ogg";
       
-      
-      
       String AUDIANCE_HAPPY = "music/audience_happy.ogg";
+      
+      String MENU_MINIGAME_ROULETTE_MUSIC_MAIN = "music/roulette_main.ogg";
+      
+      String GAME_WIN_MAIN = "music/gameover_win_Main.ogg";
+      String GAME_WIN_INTRO = "music/gameover_win_Intro.ogg";
+      String GAME_OVER_MAIN = "music/gameover_fail_Main.ogg";
+      String GAME_OVER_INTRO = "music/gameover_fail_Main.ogg";
    }
 
    public interface Fonts

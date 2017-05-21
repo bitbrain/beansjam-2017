@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenEquations;
+import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.pipeline.RenderPipe;
 import de.bitbrain.braingdx.graphics.pipeline.layers.RenderPipeIds;
 import de.bitbrain.braingdx.postprocessing.effects.Bloom;
@@ -16,6 +17,7 @@ import de.bitbrain.braingdx.screens.AbstractScreen;
 import de.bitbrain.braingdx.tweens.ActorTween;
 import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
+import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.ui.Styles;
 
 public class GameOverScreen extends AbstractScreen<SuperMafiosiGame> {
@@ -29,6 +31,7 @@ public class GameOverScreen extends AbstractScreen<SuperMafiosiGame> {
 	@Override
 	protected void onCreateStage(Stage stage, int width, int height) {
 		super.onCreateStage(stage, width, height);
+		AudioManager.getInstance().fadeInMusic(Asset.Music.GAME_OVER_MAIN);
 		setBackgroundColor(Colors.BACKGROUND);
 		getScreenTransitions().in(1f);
 		Label congratulations = new Label("YOU DIED!", Styles.LABEL_TOAST);
@@ -55,6 +58,8 @@ public class GameOverScreen extends AbstractScreen<SuperMafiosiGame> {
 	protected void onUpdate(float delta) {
 		if (Gdx.input.isTouched() && !isFadingOut) {
 			isFadingOut = true;
+			AudioManager.getInstance().fadeOutMusic(Asset.Music.GAME_OVER_MAIN);
+			AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_INTRO);
 			getScreenTransitions().out(new MenuScreen(getGame()), 1f);
 		}
 	}

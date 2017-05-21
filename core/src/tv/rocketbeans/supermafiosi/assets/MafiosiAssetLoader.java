@@ -83,6 +83,13 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_INTRO, Music.class);
             assets.put(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_MAIN, Music.class);
             
+            assets.put(Asset.Music.MENU_MINIGAME_ROULETTE_MUSIC_MAIN, Music.class);
+            
+            assets.put(Asset.Music.GAME_OVER_MAIN, Music.class);
+            assets.put(Asset.Music.GAME_OVER_INTRO, Music.class);
+            assets.put(Asset.Music.GAME_WIN_MAIN, Music.class);
+            assets.put(Asset.Music.GAME_WIN_INTRO, Music.class);
+            
             /*
             * Sounds
             */
@@ -93,6 +100,8 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Sounds.AUDIANCE_CLAPPING3, Sound.class);
             assets.put(Asset.Sounds.AUDIANCE_DRUMROLL, Sound.class);
             assets.put(Asset.Sounds.AUDIANCE_HAPPY, Sound.class);
+            assets.put(Asset.Sounds.TRIGGER_BULLET, Sound.class);
+            assets.put(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class);
             
             assets.put(Asset.Sounds.SQUEEKY_1, Sound.class);
             assets.put(Asset.Sounds.SQUEEKY_2, Sound.class);
