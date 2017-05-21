@@ -26,9 +26,10 @@ public final class Styles {
 	public static final LabelStyle LABEL_DIALOG_TITLE = new LabelStyle();
 	public static final LabelStyle LABEL_MULTISELECT_TITLE = new LabelStyle();
 	public static final LabelStyle LABEL_TOAST = new LabelStyle();
+	public static final LabelStyle LABEL_PULL_THE_TRIGGER = new LabelStyle();
 
 	public static void init() {
-		TEXT_BUTTON_MAIN_MENU.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 30);
+		TEXT_BUTTON_MAIN_MENU.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 42);
 		TEXT_BUTTON_MAIN_MENU.fontColor = Colors.FONT_COLOR.cpy();
 		TEXT_BUTTON_MAIN_MENU.up = createNinePatchDrawable(Asset.Textures.BUTTON_9PATCH, 20, Colors.FOREGROUND.cpy());
 		TEXT_BUTTON_MAIN_MENU.overFontColor = Colors.lighten(Colors.FONT_COLOR, 1.4f);
@@ -57,6 +58,9 @@ public final class Styles {
 		
 		LABEL_TOAST.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 92);
 		LABEL_TOAST.fontColor = Colors.FONT_SPECIAL.cpy();
+		
+		LABEL_PULL_THE_TRIGGER.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 62);
+		LABEL_PULL_THE_TRIGGER.fontColor = Color.RED;
 	}
 	
 	private static Drawable createNinePatchDrawable(String assetId, int borderRadius, Color color) {

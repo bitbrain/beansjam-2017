@@ -275,9 +275,9 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
               player,
               new Mafiosi("Ronald Trumpf", Message.DIALOG_STEPHANO_GREETING, 28, Asset.Textures.DUMMY, Asset.Textures.AVATAR_01)
       );
-      context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), player, dialogManager);
-
       List<MiniGame> games = new ArrayList<MiniGame>();
+      context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), games, player, dialogManager);
+
       games.add(new RoastBattleMiniGame(this, context));
        miniGameManager = new MiniGameManager(games);
       

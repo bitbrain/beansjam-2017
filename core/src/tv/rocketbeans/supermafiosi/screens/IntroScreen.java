@@ -174,16 +174,16 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
             if (tick == 95)
             {
             	Music dying_don_music = SharedAssetManager.getInstance().get(Asset.Music.DYING_DON, Music.class);
-                AudioManager.getInstance().fadeOutMusic(dying_don_music, 4f);               
+                AudioManager.getInstance().fadeOutMusic(dying_don_music, 6f);
+            	Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
+                menu_music_main.setLooping(true);
+                AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 6f);
                textFadeOut(introlabel4);
                introlabel5 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_5));
             }
             
-            if(tick == 100)
+            if(tick == 98)
             {
-            	Music menu_music_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
-                menu_music_main.setLooping(true);
-                AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN, 4f);
             	changeToMenue();
             }
 
