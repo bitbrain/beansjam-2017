@@ -33,6 +33,10 @@ public class MiniGameManager extends BehaviorAdapter {
 	}
 	
 	public void triggerNextMiniGame() {
+		if (isMinigameActive) {
+			Gdx.app.log("WARN", "Unable to trigger next minigame! Currently one in progress.");
+			return;
+		}
 		Gdx.app.log("INFO", "Next minigame triggered!");
 		if (pool.hasMiniGamesLeft()) {
 			isMinigameActive = true;
