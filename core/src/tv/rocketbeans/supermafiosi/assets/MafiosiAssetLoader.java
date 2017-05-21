@@ -71,7 +71,7 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Textures.LERRY_SANCHEZ_STAGE, Texture.class);
             assets.put(Asset.Textures.MODERATOR_STAGE, Texture.class);
             assets.put(Asset.Textures.ROAST_BATTLE_LOGO, Texture.class);
-            
+            assets.put(Asset.Textures.ARROW, Texture.class);
             
             /*
             *  Music tralalalaa

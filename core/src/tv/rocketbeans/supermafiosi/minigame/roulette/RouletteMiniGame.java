@@ -142,7 +142,7 @@ public class RouletteMiniGame extends AbstractMiniGame {
 	
 	private void pullTrigger() {
 		System.out.println("Pull the trigger!");
-		int numberOfBullets = 1; //context.getNumberOfBullets(mafiosi.getName());
+		int numberOfBullets = context.getNumberOfBullets(mafiosi.getName());
 		boolean mafiosiWillBeDeadForSure = Math.random() > (float)numberOfBullets / (float)context.getNumberOfBulletSlots();
 		if (mafiosiWillBeDeadForSure) {
 			System.out.println("SHOOT!");

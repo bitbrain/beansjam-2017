@@ -58,6 +58,8 @@ public interface Asset
       
       String ROAST_BATTLE_LOGO = "textures/ROAST_BATTLE_LOGO.png";
       
+      String ARROW = "textures/arrow.png";
+      
       /**
        * Intro
        */

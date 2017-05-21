@@ -7,6 +7,7 @@ public class Mafiosi {
 	private final String bioId;	
 	private final int age;
 	private final String spriteId, avatarId;
+	private boolean isActive;
 	
 	public Mafiosi(String name, String bioId, int age, String spriteId, String avatarId) {
 		this.name = name;
@@ -14,6 +15,14 @@ public class Mafiosi {
 		this.age = age;
 		this.spriteId = spriteId;
 		this.avatarId = avatarId;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	
+	public void setActive(boolean active) {
+		this.isActive = active;
 	}
 
 	public String getName() {
