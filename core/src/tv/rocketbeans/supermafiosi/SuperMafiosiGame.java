@@ -47,9 +47,7 @@ public class SuperMafiosiGame extends BrainGdxGame
             AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
             AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
          }
-
-         IngameStageScreen screen = new IngameStageScreen(this);
-         return screen;
+         return new IngameStageScreen(this);
       }
       return new IntroScreen(this);
    }

@@ -37,6 +37,7 @@ import tv.rocketbeans.supermafiosi.i18n.Message;
 import tv.rocketbeans.supermafiosi.minigame.MiniGame;
 import tv.rocketbeans.supermafiosi.minigame.MiniGameManager;
 import tv.rocketbeans.supermafiosi.minigame.roastbattle.RoastBattleMiniGame;
+import tv.rocketbeans.supermafiosi.minigame.roulette.RouletteMiniGame;
 import tv.rocketbeans.supermafiosi.tweens.ConeLightTween;
 import tv.rocketbeans.supermafiosi.ui.DialogBox;
 import tv.rocketbeans.supermafiosi.ui.Toast;
@@ -81,10 +82,9 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       final Music audiance_happy = SharedAssetManager.getInstance().get(Asset.Music.AUDIANCE_HAPPY, Music.class);
       audiance_happy.setLooping(true);
       AudioManager.getInstance().playMusic(Asset.Music.AUDIANCE_HAPPY);
-
+      getBehaviorManager().apply(miniGameManager);
       
       //miniGameManager.triggerNextMiniGame();
-      
       dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
@@ -166,6 +166,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       
       
       dialogManager.nextDialog();
+      
+      miniGameManager.triggerNextMiniGame();
    }
 
    private void setupBackground()
@@ -278,9 +280,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       List<MiniGame> games = new ArrayList<MiniGame>();
       context = new MafiosiGameContext(new ArrayList<Mafiosi>(mafiosiMap.values()), games, player, dialogManager);
 
-      games.add(new RoastBattleMiniGame(this, context));
-       miniGameManager = new MiniGameManager(games);
-      
+      games.add(new RouletteMiniGame(getGame(), context, this));
+      miniGameManager = new MiniGameManager(games);
    }
 
 }

@@ -47,7 +47,7 @@ public class MafiosiGameContext {
 	}
 	
 	public int getNumberOfBulletSlots() {
-		return Math.max(miniGames.size() - 1, 0); // do not count the last game = roulette
+		return Math.max(miniGames.size() - 1, 2); // do not count the last game = roulette
 	}
 	
 	public void addBullet(String candidateName) {
