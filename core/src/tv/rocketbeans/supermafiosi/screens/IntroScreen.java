@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
+
 import de.bitbrain.braingdx.assets.SharedAssetManager;
 import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
@@ -55,7 +57,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
       //showDonImage(stage);
       Tween.call(new TweenCallback()
       {
-         private int tick = 80;
+         private int tick = 0;
          private Label introlabel1 = null;
          private Label introlabel2 = null;
          private Label introlabel3 = null;
@@ -217,15 +219,9 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    private Label showIntroText(final Stage stage, String text)
    {
       final Label introLabel1 = createLabel(text);
-      setLabelToCenter(introLabel1);
       stage.addActor(introLabel1);
       textFadeIn(introLabel1);
       return introLabel1;
-   }
-
-   private void setLabelToCenter(Label label)
-   {
-      label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() / 2, Gdx.graphics.getHeight() / 2);
    }
 
    private GameObject showDonImage(final Stage stage, DialogManager dialogManager)
@@ -251,12 +247,14 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
    private Label createLabel(String text)
    {
       Label.LabelStyle defaultlabelstyle = new Label.LabelStyle();
-      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 22);
+      defaultlabelstyle.font = BitmapFontBaker.bake(Asset.Fonts.UPHEAVTT, 42);
       defaultlabelstyle.fontColor = Color.WHITE;
       defaultlabelstyle.fontColor.a = 1f;
 
       final Label introLabel1 = new Label(text, defaultlabelstyle);
-      introLabel1.setPosition(20, Gdx.graphics.getHeight() / 2);
+      introLabel1.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+      introLabel1.setWrap(true);
+      introLabel1.setAlignment(Align.center);
       return introLabel1;
    }
 
