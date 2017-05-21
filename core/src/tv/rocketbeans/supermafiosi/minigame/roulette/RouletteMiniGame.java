@@ -118,6 +118,17 @@ public class RouletteMiniGame extends AbstractMiniGame
 
    public void setBoom()
    {
+      
+      if(boom == null)
+      {
+           boom = gameContext.getGameWorld().addObject();
+         boom.setType("boom");
+         boom.setPosition(0, 0);
+         boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+         boom.getColor().a = 0f;
+         gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
+      }
+      
       boom.getColor().a = 1f;
 
       Tween.call(new TweenCallback()
@@ -145,12 +156,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          rouletteBackground.getColor().a = 0f;
          gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
 
-         boom = gameContext.getGameWorld().addObject();
-         boom.setType("boom");
-         boom.setPosition(0, 0);
-         boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-         boom.getColor().a = 0f;
-         gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
+       
 
          ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
          tronroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "LerryRoulette");
@@ -275,7 +281,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       mafiosi = remainingCandidates.remove(0);
       mafiosi.setActive(true);
 
-      setRouletteAnimation(mafiosi);
+      //setRouletteAnimation(mafiosi);
 
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {
@@ -326,19 +332,19 @@ public class RouletteMiniGame extends AbstractMiniGame
             if (mafiosi.getName().contains("Trumpf"))
             {
                System.out.println("dead trumpf");
-               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.TRUMPF_DEAD_STAGE));
+               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRUMPF_DEAD_STAGE));
             }
 
             if (mafiosi.getName().contains("Jawolta"))
             {
                 System.out.println("dead Jawolta");
-               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.TRON_DEAD_STAGE));
+               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.TRON_DEAD_STAGE));
             }
 
             if (mafiosi.getName().contains("Sanchez"))
             {
                 System.out.println("dead Sanchez");
-               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.SANCHEZ_DEAD_STAGE));
+               gameContext.getRenderManager().register(mafiosi.getName(), new SpriteRenderer(Asset.Textures.SANCHEZ_DEAD_STAGE));
             }
 
             shootCurrentPlayer();
