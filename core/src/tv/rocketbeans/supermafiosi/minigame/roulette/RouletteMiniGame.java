@@ -360,5 +360,4 @@ public class RouletteMiniGame extends AbstractMiniGame
          }
       }
    }
-
 }

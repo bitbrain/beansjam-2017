@@ -58,6 +58,8 @@ public interface Asset
       
       String ROAST_BATTLE_LOGO = "textures/ROAST_BATTLE_LOGO.png";
       
+      String ARROW = "textures/arrow.png";
+
       String ROULETTE_BG = "textures/roulette_bg.png";
       
       String SANCHEZ_ROULETTE = "textures/scared-1.png";
@@ -68,9 +70,10 @@ public interface Asset
       String RONALD_ROULETTE_WEAPON = "textures/trumpf_gun.png";
       String TRON_ROULETTE_WEAPON = "textures/scared-2-gun.png";
       
+
       String BOOM = "textures/BOOM.png";
       
-      
+     
       /**
        * Intro
        */
