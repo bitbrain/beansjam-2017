@@ -29,6 +29,7 @@ import tv.rocketbeans.supermafiosi.Colors;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
+import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
@@ -99,87 +100,87 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
 
       getBehaviorManager().apply(miniGameManager);
       
-      miniGameManager.triggerNextMiniGame();
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start4", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Lerry Sanchez", "dialog.lerry.greeting", Asset.Textures.KAPPO);
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start5", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start6", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Tron Jawolta", "dialog.tron.greeting", Asset.Textures.AVATAR_TRON_JAWOLTA);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start7", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.start8", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Ronald Trumpf", "dialog.ronald.greeting", Asset.Textures.AVATAR_RONALD_TRUMPF);
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.introgame1", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addListener(new DialogManager.DialogManagerListener()
-//      {
-//
-//         @Override
-//         public void afterLastDialog()
-//         {
-//         }
-//
-//         @Override
-//         public void onDialog(Dialog dialog)
-//         {
-//            if (dialog.getTextId().equals("dialog.moderator.introgame2"))
-//            {
-//               JuryManager.getInstance().setJurySceneVisible(true);
-//            }
-//
-//         }
-//      });
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.introgame2", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Eduard Laser", "dialog.eduardlaser.introgame", Asset.Textures.AVATAR_EDUARD_LASER);
-//
-//      dialogManager.addListener(new DialogManager.DialogManagerListener()
-//      {
-//
-//         @Override
-//         public void afterLastDialog()
-//         {
-//         }
-//
-//         @Override
-//         public void onDialog(Dialog dialog)
-//         {
-//            if (dialog.getTextId().equals("dialog.moderator.introgame4"))
-//            {
-//               JuryManager.getInstance().setJurySceneVisible(false);
-//            }
-//
-//         }
-//      });
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.introgame4", Asset.Textures.AVATAR_MODERATOR);
-//      dialogManager.addDialog("Moderator", "dialog.moderator.introgame5", Asset.Textures.AVATAR_MODERATOR);
-//
-//      dialogManager.addDialog("Moderator", "dialog.moderator.introgame6", Asset.Textures.AVATAR_MODERATOR);
-//
-//      dialogManager.addListener(new DialogManager.DialogManagerListener()
-//      {
-//
-//         @Override
-//         public void afterLastDialog()
-//         {
-//            AudioManager.getInstance().fadeOutMusic(audiance_happy, 4f);
-//            System.out.println("stop executed");
-//            audiance_happy.stop();
-//            miniGameManager.triggerNextMiniGame();
-//         }
-//
-//         @Override
-//         public void onDialog(Dialog dialog)
-//         {
-//         }
-//      });
-//
-//      dialogManager.nextDialog();
+      
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start4", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Lerry Sanchez", "dialog.lerry.greeting", Asset.Textures.KAPPO);
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.start5", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start6", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Tron Jawolta", "dialog.tron.greeting", Asset.Textures.AVATAR_TRON_JAWOLTA);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start7", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.start8", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Ronald Trumpf", "dialog.ronald.greeting", Asset.Textures.AVATAR_RONALD_TRUMPF);
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.introgame1", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addListener(new DialogManager.DialogManagerListener()
+      {
+
+         @Override
+         public void afterLastDialog()
+         {
+         }
+
+         @Override
+         public void onDialog(Dialog dialog)
+         {
+            if (dialog.getTextId().equals("dialog.moderator.introgame2"))
+            {
+               JuryManager.getInstance().setJurySceneVisible(true);
+            }
+
+         }
+      });
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.introgame2", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Eduard Laser", "dialog.eduardlaser.introgame", Asset.Textures.AVATAR_EDUARD_LASER);
+
+      dialogManager.addListener(new DialogManager.DialogManagerListener()
+      {
+
+         @Override
+         public void afterLastDialog()
+         {
+         }
+
+         @Override
+         public void onDialog(Dialog dialog)
+         {
+            if (dialog.getTextId().equals("dialog.moderator.introgame4"))
+            {
+               JuryManager.getInstance().setJurySceneVisible(false);
+            }
+
+         }
+      });
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.introgame4", Asset.Textures.AVATAR_MODERATOR);
+      dialogManager.addDialog("Moderator", "dialog.moderator.introgame5", Asset.Textures.AVATAR_MODERATOR);
+
+      dialogManager.addDialog("Moderator", "dialog.moderator.introgame6", Asset.Textures.AVATAR_MODERATOR);
+
+      dialogManager.addListener(new DialogManager.DialogManagerListener()
+      {
+
+         @Override
+         public void afterLastDialog()
+         {
+            AudioManager.getInstance().fadeOutMusic(audiance_happy, 4f);
+            System.out.println("stop executed");
+            audiance_happy.stop();
+            miniGameManager.triggerNextMiniGame();
+         }
+
+         @Override
+         public void onDialog(Dialog dialog)
+         {
+         }
+      });
+
+      dialogManager.nextDialog();
 
       
 
