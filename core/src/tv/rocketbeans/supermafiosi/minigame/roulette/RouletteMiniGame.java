@@ -13,6 +13,11 @@ import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import de.bitbrain.braingdx.GameContext;
 import de.bitbrain.braingdx.assets.SharedAssetManager;
 import de.bitbrain.braingdx.audio.AudioManager;
@@ -23,6 +28,7 @@ import de.bitbrain.braingdx.tweens.SharedTweenManager;
 import de.bitbrain.braingdx.world.GameObject;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
+import tv.rocketbeans.supermafiosi.assets.AssetUtils;
 import tv.rocketbeans.supermafiosi.core.Dialog;
 import tv.rocketbeans.supermafiosi.core.DialogManager.DialogManagerListener;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
@@ -72,7 +78,7 @@ public class RouletteMiniGame extends AbstractMiniGame
    private GameObject tronwafferoulette;
    private GameObject sanchezwafferoulette;
 
-   private GameObject boom;
+   private Image boom;
 
    private DialogManagerListener dialogListener = new DialogManagerListener()
    {
@@ -131,15 +137,17 @@ public class RouletteMiniGame extends AbstractMiniGame
 
       if (boom == null)
       {
-         boom = gameContext.getGameWorld().addObject();
-         boom.setType("boom");
+
+         boom = new Image(new SpriteDrawable(new Sprite(SharedAssetManager.getInstance().get(Asset.Textures.BOOM, Texture.class))));
+
+         Vector2 boomdim = AssetUtils.getDimensionOfTexture(Asset.Textures.ROAST_BATTLE_LOGO);
+         boom.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
          boom.setPosition(0, 0);
-         boom.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-         boom.getColor().a = 0f;
-         gameContext.getRenderManager().register("boom", new SpriteRenderer(Asset.Textures.BOOM));
+
+         gameContext.getStage().addActor(boom);
       }
 
-      boom.getColor().a = 1f;
+      boom.setVisible(true);
 
       Tween.call(new TweenCallback()
       {
@@ -147,6 +155,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          @Override
          public void onEvent(int i, BaseTween<?> bt)
          {
+            boom.setVisible(false);
             boom.getColor().a = 0f;
          }
       }).delay(2).start(gameContext.getTweenManager());
@@ -237,6 +246,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       o.setPosition(600, 250);
       o.setDimensions(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight());
       o.getColor().a = 0f;
+      o.setZIndex(100);
       gameContext.getRenderManager().register(type, new SpriteRenderer(path));
       return o;
    }
