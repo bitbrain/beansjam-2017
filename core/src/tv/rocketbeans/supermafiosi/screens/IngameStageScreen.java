@@ -90,7 +90,7 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       moderator_stage.setDimensions(100, 100);
       Vector2 moderator_stage_dim = AssetUtils.getDimensionOfTexture(Asset.Textures.MODERATOR_STAGE);
       moderator_stage.setPosition(Gdx.graphics.getWidth() / 2 - moderator_stage_dim.x / 2, 200);
-       getRenderManager().register(moderator_stage.getType(), new SpriteRenderer(Asset.Textures.MODERATOR_STAGE));
+      getRenderManager().register(moderator_stage.getType(), new SpriteRenderer(Asset.Textures.MODERATOR_STAGE));
       
       
       

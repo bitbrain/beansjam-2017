@@ -382,6 +382,10 @@ public class JuryManager
 
          i++;
       }
+      
+      for (GameObject o : juryObjects) {
+    	  o.setZIndex(100);
+      }
 
    }
 
