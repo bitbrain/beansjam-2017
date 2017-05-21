@@ -44,6 +44,8 @@ public interface Asset
 
       String AVATAR_MODERATOR = "textures/mod.png";
       String AVATAR_EDUARD_LASER = "textures/avatar_eduard_laser.png";
+      String AVATAR_BLOBBY = "textures/avatar_blobby.png";
+      String AVATAR_RICK = "textures/avatar_rick_sanchez.png";
       /**
        * Intro
        */

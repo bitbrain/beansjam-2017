@@ -3,26 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tv.rocketbeans.supermafiosi.core;
+package tv.rocketbeans.supermafiosi.core.jury;
+
+import tv.rocketbeans.supermafiosi.minigame.MiniGameResult;
 
 /**
  *
  * @author Gterminator
  */
-public class JuryMember
+public abstract class JuryMember
 {
    private String Name;
    private String HeadSprite;
    private String HandsSprite;
    private String AvatarSprite;
    
-   public JuryMember(String name, String headSprite, String handsSprite, String avatarSprite)
+   private String judgeGoodKey;
+   private String judgeMediumKey;
+   private String judgeBadKey;
+   
+   private int tableposition = 1;
+   
+ 
+   
+   public JuryMember(String name, String headSprite, String handsSprite, String avatarSprite, String judgegoodkey, String judgemediumkey, String judgebadkey)
    {
       this.Name = name;
       this.HeadSprite = headSprite;
       this.HandsSprite = handsSprite;
       this.AvatarSprite = avatarSprite;
+      this.judgeGoodKey = judgegoodkey;
+      this.judgeMediumKey = judgemediumkey;
+      this.judgeBadKey = judgebadkey;
    }
+   
+   public abstract String getJudgeText(MiniGameResult minigameresult);
+   public abstract boolean getIsGettingBullet(MiniGameResult minigameresult);
 
    /**
     * @return the Name
@@ -59,5 +75,21 @@ public class JuryMember
    public String getAvatarSprite()
    {
       return AvatarSprite;
+   }
+
+   /**
+    * @return the tableposition
+    */
+   public int getTableposition()
+   {
+      return tableposition;
+   }
+
+   /**
+    * @param tableposition the tableposition to set
+    */
+   public void setTableposition(int tableposition)
+   {
+      this.tableposition = tableposition;
    }
 }

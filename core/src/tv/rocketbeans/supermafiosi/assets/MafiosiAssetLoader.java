@@ -60,6 +60,8 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             
             
             assets.put(Asset.Textures.AVATAR_EDUARD_LASER, Texture.class);
+            assets.put(Asset.Textures.AVATAR_RICK, Texture.class);
+            assets.put(Asset.Textures.AVATAR_BLOBBY, Texture.class);
               
             
             /*

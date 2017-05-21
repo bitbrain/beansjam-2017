@@ -35,34 +35,36 @@ import tv.rocketbeans.supermafiosi.ui.MultiSelect;
 import tv.rocketbeans.supermafiosi.ui.MultiSelect.MultiSelectListener;
 import tv.rocketbeans.supermafiosi.core.Mafiosi;
 import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
+import tv.rocketbeans.supermafiosi.core.jury.JuryManager;
+import tv.rocketbeans.supermafiosi.minigame.MiniGame;
 import static tv.rocketbeans.supermafiosi.screens.IntroScreen.IMAGE_OLD_DON;
 
 public class RoastBattleMiniGame extends AbstractMiniGame
 {
-   
+
    private static final Map<Roast.Type, Color> ROAST_COLORS = new HashMap<Roast.Type, Color>();
-   
+
    static
    {
       ROAST_COLORS.put(Roast.Type.PAPER, Colors.PAPER_COLOR);
       ROAST_COLORS.put(Roast.Type.ROCK, Colors.ROCK_COLOR);
       ROAST_COLORS.put(Roast.Type.SCISSORS, Colors.SCISSORS_COLOR);
    }
-   
+
    private final GameContext gameContext;
    private final MafiosiGameContext mafiosiGameContext;
-   
+
    private boolean playersTurn;
-   
+
    private MultiSelect<Roast> select;
-   
+
    private RoastPool roastPool = new RoastPool();
-   
+
    private Map<Mafiosi, Roast> firedRoasts = new HashMap<Mafiosi, Roast>();
-   
+
    private final MultiSelectListener<Roast> multiSelectListener = new MultiSelectListener<Roast>()
    {
-      
+
       @Override
       public void onSelect(Roast roast)
       {
@@ -87,12 +89,12 @@ public class RoastBattleMiniGame extends AbstractMiniGame
             }).delay(3).start(gameContext.getTweenManager());
          }
       }
-      
+
    };
-   
+
    private final DialogManagerListener afterAllDialogsListener = new DialogManagerListener()
    {
-      
+
       @Override
       public void afterLastDialog()
       {
@@ -116,31 +118,31 @@ public class RoastBattleMiniGame extends AbstractMiniGame
             gameContext.getStage().addActor(select);
          }
       }
-      
+
       @Override
       public void onDialog(Dialog dialog)
       {
-         
+
       }
    };
-   
+
    public RoastBattleMiniGame(GameContext gameContext, MafiosiGameContext mafiosiGameContext)
    {
       this.gameContext = gameContext;
       this.mafiosiGameContext = mafiosiGameContext;
    }
-   
+
    @Override
    public void initialise()
    {
       final Music select_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_CHAR_SELECT_MAIN, Music.class);
       AudioManager.getInstance().fadeOutMusic(select_main, 4f);
-      
+
       final Music minigamemusic_intro = SharedAssetManager.getInstance().get(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_INTRO, Music.class);
-      
+
       minigamemusic_intro.setOnCompletionListener(new Music.OnCompletionListener()
       {
-         
+
          @Override
          public void onCompletion(Music music)
          {
@@ -150,37 +152,59 @@ public class RoastBattleMiniGame extends AbstractMiniGame
          }
       });
       minigamemusic_intro.play();
-      
+
       GameObject minigameLogoObject = this.gameContext.getGameWorld().addObject();
       minigameLogoObject.setType("RoastMeTitle");
-      Vector2 logodimension = AssetUtils.getDimensionOfTexture(Asset.Textures.LOGO);
+    
       minigameLogoObject.setDimensions(700, 500);
       minigameLogoObject.setPosition(Gdx.graphics.getWidth() / 2 - minigameLogoObject.getWidth() / 2, Gdx.graphics.getHeight());
-      
+
       this.gameContext.getRenderManager().register("RoastMeTitle", new SpriteRenderer(Asset.Textures.LOGO));
-      
+
       Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 10f).target(Gdx.graphics.getHeight() / 2 - minigameLogoObject.getHeight() / 2).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
-      
-      
       Tween.to(minigameLogoObject, GameObjectTween.POS_Y, 12f).delay(10f).target(Gdx.graphics.getHeight()).ease(TweenEquations.easeNone).start(this.gameContext.getTweenManager());
+
+      Tween.call(new TweenCallback()
+      {
+         @Override
+         public void onEvent(int i, BaseTween<?> bt)
+         {
+            mafiosiGameContext.getDialogManager().nextDialog();
+            mafiosiGameContext.getDialogManager().addListener(afterAllDialogsListener);
+            // 1. for each player, add a dialog with a special roast punch line
+            initialiseOtherMafiosis();
+            
+         }
+      }).delay(22f).start(this.gameContext.getTweenManager());
+
+      this.addListener( new MiniGameListener()
+      {
+
+         @Override
+         public void onComplete(MiniGame miniGame, MiniGameResult result)
+         {
+            final Music minigamemusic_main = SharedAssetManager.getInstance().get(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_MAIN, Music.class);
+            AudioManager.getInstance().fadeOutMusic(minigamemusic_main, 3f);
+            
+            JuryManager.getInstance().setJurySceneVisible(true);
+            JuryManager.getInstance().startRateJury(gameContext, result, mafiosiGameContext);
+             
+         }
+      } );
       
-      
-      mafiosiGameContext.getDialogManager().addListener(afterAllDialogsListener);
-      // 1. for each player, add a dialog with a special roast punch line
-      initialiseOtherMafiosis();
    }
-   
+
    @Override
    public void cleanup()
    {
       mafiosiGameContext.getDialogManager().removeListener(afterAllDialogsListener);
       firedRoasts.clear();
    }
-   
+
    @Override
    public void update(float delta)
    {
-      
+
    }
 
    // Evaluate the game result by aggregating a mafiosis choice against other choices
@@ -208,7 +232,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
       System.out.println(firedRoasts);
       return new MiniGameResult(firedRoasts.size(), playerResults);
    }
-   
+
    private void initialiseOtherMafiosis()
    {
       for (Mafiosi mafiosi : mafiosiGameContext.getCandidates())
@@ -220,11 +244,11 @@ public class RoastBattleMiniGame extends AbstractMiniGame
          }
       }
    }
-   
+
    private void fireRoast(Mafiosi player, Roast roast)
    {
       firedRoasts.put(player, roast);
       mafiosiGameContext.getDialogManager().addDialog(player.getName(), roast.getMessageKey(), player.getAvatarId());
    }
-   
+
 }

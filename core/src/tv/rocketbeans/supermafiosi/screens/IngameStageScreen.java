@@ -82,9 +82,8 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
       audiance_happy.setLooping(true);
       AudioManager.getInstance().playMusic(Asset.Music.AUDIANCE_HAPPY);
 
-      
-      //miniGameManager.triggerNextMiniGame();
-      
+    
+   
       dialogManager.addDialog("Moderator", "dialog.moderator.start1", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start2", Asset.Textures.AVATAR_MODERATOR);
       dialogManager.addDialog("Moderator", "dialog.moderator.start3", Asset.Textures.AVATAR_MODERATOR);
