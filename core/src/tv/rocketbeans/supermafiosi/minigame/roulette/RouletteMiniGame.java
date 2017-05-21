@@ -112,25 +112,28 @@ public class RouletteMiniGame extends AbstractMiniGame
       AudioManager.getInstance().fadeInMusic(Asset.Music.MENU_MINIGAME_ROULETTE_MUSIC_MAIN);
       nextPlayer();
 
-      rouletteBackground = gameContext.getGameWorld().addObject();
-      rouletteBackground.setType("RouletteBG");
-      rouletteBackground.setPosition(0, 0);
-      rouletteBackground.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-      rouletteBackground.getColor().a = 0f;
-      gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
-
-      ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
-      tronroulette = createRouletteHeadAnimation(Asset.Textures.SANCHEZ_ROULETTE, "LerryRoulette");
-      sanchezroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "TronRoulette");
-
-      ronaldtrumpfwafferoulette = createRouletteWaffeAnimation(Asset.Textures.RONALD_ROULETTE_WEAPON, "Ronaldtrumpfwafferoulette");
-      tronwafferoulette = createRouletteWaffeAnimation(Asset.Textures.TRON_ROULETTE_WEAPON, "tronwafferoulette");
-      sanchezwafferoulette = createRouletteWaffeAnimation(Asset.Textures.SANCHEZ_ROULETTE_WEAPON, "sanchezwafferoulette");
-
    }
 
    public void setRouletteAnimation(Mafiosi mafiosi)
    {
+      if (rouletteBackground == null)
+      {
+         rouletteBackground = gameContext.getGameWorld().addObject();
+         rouletteBackground.setType("RouletteBG");
+         rouletteBackground.setPosition(0, 0);
+         rouletteBackground.setDimensions(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+         rouletteBackground.getColor().a = 0f;
+         gameContext.getRenderManager().register("RouletteBG", new SpriteRenderer(Asset.Textures.ROULETTE_BG));
+
+         ronaldtrumpfroulette = createRouletteHeadAnimation(Asset.Textures.RONALD_ROULETTE, "RonaldTrumpfRoulette");
+         tronroulette = createRouletteHeadAnimation(Asset.Textures.TRON_ROULETTE, "LerryRoulette");
+         sanchezroulette = createRouletteHeadAnimation(Asset.Textures.SANCHEZ_ROULETTE, "TronRoulette");
+
+         ronaldtrumpfwafferoulette = createRouletteWaffeAnimation(Asset.Textures.RONALD_ROULETTE_WEAPON, "Ronaldtrumpfwafferoulette");
+         tronwafferoulette = createRouletteWaffeAnimation(Asset.Textures.TRON_ROULETTE_WEAPON, "tronwafferoulette");
+         sanchezwafferoulette = createRouletteWaffeAnimation(Asset.Textures.SANCHEZ_ROULETTE_WEAPON, "sanchezwafferoulette");
+      }
+
       if (mafiosi == null)
       {
          rouletteBackground.getColor().a = 0;
@@ -144,8 +147,8 @@ public class RouletteMiniGame extends AbstractMiniGame
          sanchezwafferoulette.getColor().a = 0;
          return;
       }
-              
-      if(mafiosi.getName().contains("Trumpf"))
+
+      if (mafiosi.getName().contains("Trumpf"))
       {
          rouletteBackground.getColor().a = 1f;
 
@@ -157,8 +160,8 @@ public class RouletteMiniGame extends AbstractMiniGame
          tronwafferoulette.getColor().a = 0;
          sanchezwafferoulette.getColor().a = 0;
       }
-      
-      if(mafiosi.getName().contains("Jawolta"))
+
+      if (mafiosi.getName().contains("Jawolta"))
       {
          rouletteBackground.getColor().a = 1f;
 
@@ -170,8 +173,8 @@ public class RouletteMiniGame extends AbstractMiniGame
          tronwafferoulette.getColor().a = 1f;
          sanchezwafferoulette.getColor().a = 0;
       }
-      
-      if(mafiosi.getName().contains("Sanchez"))
+
+      if (mafiosi.getName().contains("Sanchez"))
       {
          rouletteBackground.getColor().a = 1f;
 
@@ -183,8 +186,6 @@ public class RouletteMiniGame extends AbstractMiniGame
          tronwafferoulette.getColor().a = 0;
          sanchezwafferoulette.getColor().a = 1f;
       }
-     
-      
 
    }
 
@@ -211,12 +212,6 @@ public class RouletteMiniGame extends AbstractMiniGame
       Tween.to(o, GameObjectTween.POS_Y, 0.75f).target(220).repeatYoyo(Tween.INFINITY, 0.75f).ease(TweenEquations.easeNone).start(gameContext.getTweenManager());
 
       return o;
-   }
-
-   public void setAnimationWeapon(Mafiosi mafiosi)
-   {
-      rouletteBackground.getColor().a = 1;
-
    }
 
    @Override
@@ -247,6 +242,9 @@ public class RouletteMiniGame extends AbstractMiniGame
       System.out.println("=== NEW ROUND!!! ===");
       // Initialise first candidate to pull the trigger
       mafiosi = remainingCandidates.remove(0);
+
+      setRouletteAnimation(mafiosi);
+
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {
          Tween.call(new TweenCallback()
