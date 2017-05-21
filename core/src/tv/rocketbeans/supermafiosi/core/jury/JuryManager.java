@@ -11,6 +11,8 @@ import aurelienribon.tweenengine.TweenCallback;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import de.bitbrain.braingdx.GameContext;
 import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
 import de.bitbrain.braingdx.screens.AbstractScreen;
@@ -19,7 +21,14 @@ import java.util.ArrayList;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.AssetUtils;
-import tv.rocketbeans.supermafiosi.core.JuryMember;
+import tv.rocketbeans.supermafiosi.core.Dialog;
+import tv.rocketbeans.supermafiosi.core.DialogManager;
+import tv.rocketbeans.supermafiosi.core.MafiosiGameContext;
+import tv.rocketbeans.supermafiosi.core.jury.jurymember.Blobby;
+import tv.rocketbeans.supermafiosi.core.jury.jurymember.Eduard;
+import tv.rocketbeans.supermafiosi.core.jury.jurymember.Rick;
+import tv.rocketbeans.supermafiosi.minigame.MiniGameResult;
+import tv.rocketbeans.supermafiosi.ui.DialogBox;
 
 /**
  *
@@ -63,9 +72,9 @@ public class JuryManager
 
    private void setupJury()
    {
-      potenzialJuryMembers.add(new JuryMember("Rick Sanchez", Asset.Textures.JURY_RICK, Asset.Textures.JURY_RICK_ARM, Asset.Textures.AVATAR_01));
-      potenzialJuryMembers.add(new JuryMember("Eduard Laser", Asset.Textures.JURY_LASER, Asset.Textures.JURY_LASER_ARM, Asset.Textures.AVATAR_01));
-      potenzialJuryMembers.add(new JuryMember("Blobby", Asset.Textures.JURY_BLOB, Asset.Textures.JURY_BLOB_ARM, Asset.Textures.AVATAR_01));
+      potenzialJuryMembers.add(new Rick());
+      potenzialJuryMembers.add(new Eduard());
+      potenzialJuryMembers.add(new Blobby());
 
       findJury();
    }
@@ -76,77 +85,95 @@ public class JuryManager
    private void findJury()
    {
       juryMembers.add(potenzialJuryMembers.get(0));
+      potenzialJuryMembers.get(0).setTableposition(1);
       juryMembers.add(potenzialJuryMembers.get(1));
+      potenzialJuryMembers.get(1).setTableposition(2);
       juryMembers.add(potenzialJuryMembers.get(2));
+      potenzialJuryMembers.get(2).setTableposition(3);
    }
 
-   public void startRateJury(final AbstractScreen<SuperMafiosiGame> screen)
+   public void startRateJury(final GameContext gamecontext, final MiniGameResult minigameresult, final MafiosiGameContext mafiosigamecontext)
    {
       AudioManager.getInstance().fadeInMusic(Asset.Music.TENSION);
 
-      final Sound drum = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_DRUMROLL));
-      drum.loop();
+      final DialogManager dialogManager = new DialogManager();
+      setupUI(gamecontext.getStage(), dialogManager);
+      gamecontext.getInput().addProcessor(dialogManager);
 
-      final Sound clap1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_CLAPPING1));
-      final Sound boo = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_BOO));
-            
+      dialogManager.addDialog("Moderator", "dialog.moderator.judgejury", Asset.Textures.AVATAR_MODERATOR);
+
+      for (JuryMember jurymember : juryMembers)
+      {
+         dialogManager.addDialog(jurymember.getName(), jurymember.getJudgeText(minigameresult), jurymember.getAvatarSprite());
+      }
+
+      dialogManager.addListener(new DialogManager.DialogManagerListener()
+      {
+
+         @Override
+         public void afterLastDialog()
+         {
+            final Sound drum = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_DRUMROLL));
+            drum.loop();
+
+            final Sound clap1 = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_CLAPPING1));
+            final Sound boo = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.AUDIANCE_BOO));
+
             Tween.call(new TweenCallback()
             {
                private int tick = 0;
+
                @Override
                public void onEvent(int i, BaseTween<?> bt)
                {
-                  
-                    
-                    if(tick == 3)
-                    {
-                       drum.stop();
-                       setJuryResult(screen, 1, false);
-                       clap1.play();
-                    }
-                    
-                    if(tick == 13)
-                    {
-                       drum.loop();
-                    }
-                    
-                    if(tick == 15)
-                    {
-                       drum.stop();
-                       setJuryResult(screen, 2, true);
-                       boo.play();
-                    }
-                    
-                    if(tick == 25)
-                    {
-                       drum.loop();
-                    }
-                    
-                    
-                    if(tick == 27)
-                    {
-                       drum.stop();
-                       setJuryResult(screen, 3, true);
-                       boo.play();
-                    }
-                    
-                    tick++;
-                    
-                    
-                    
+                  if (tick == 3)
+                  {
+                     int counterNegative = 0;
+                     for (JuryMember jurymember : juryMembers)
+                     {
+                        setJuryResult(gamecontext, jurymember.getTableposition(), jurymember.getIsGettingBullet(minigameresult));
+                        if (jurymember.getIsGettingBullet(minigameresult))
+                        {
+                           counterNegative++;
+                        }
+                     }
+
+                     if (counterNegative >= 2)
+                     {
+                        mafiosigamecontext.addBullet(mafiosigamecontext.getPlayerMafiosi().getName());
+                        dialogManager.addDialog("Moderator", "dialog.moderator.judgebullet", Asset.Textures.AVATAR_MODERATOR);
+                        boo.play();
+                     }
+                     else
+                     {
+                        dialogManager.addDialog("Moderator", "dialog.moderator.judgenobullet", Asset.Textures.AVATAR_MODERATOR);
+                        clap1.play();
+                     }
+                     drum.stop();
+
+                  }
+
+                  tick++;
                }
-            }).repeat(Tween.INFINITY, 1f).start(screen.getTweenManager());
+            }).repeat(Tween.INFINITY, 1f).start(gamecontext.getTweenManager());
+
+         }
+
+         @Override
+         public void onDialog(Dialog dialog)
+         {
+         }
+      });
 
    }
 
-   private void setJuryResult(AbstractScreen<SuperMafiosiGame> screen, Integer jurymember, boolean hasBullet)
+   private void setJuryResult(GameContext gamecontext, Integer jurymember, boolean hasBullet)
    {
-
       Vector2 resultStartPoint_1 = new Vector2(320, 113);
       Vector2 resultStartPoint_2 = new Vector2(570, 113);
       Vector2 resultStartPoint_3 = new Vector2(850, 113);
 
-      GameObject juryResult = screen.getGameWorld().addObject();
+      GameObject juryResult = gamecontext.getGameWorld().addObject();
       Vector2 ratio = calcRatio();
       Vector2 dimesion_nonbullet = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_NONBULLET);
 
@@ -176,11 +203,11 @@ public class JuryManager
 
       if (hasBullet)
       {
-         screen.getRenderManager().register(TYPE_JURYBULLET, new SpriteRenderer(Asset.Textures.JURY_BULLET));
+         gamecontext.getRenderManager().register(TYPE_JURYBULLET, new SpriteRenderer(Asset.Textures.JURY_BULLET));
       }
       else
       {
-         screen.getRenderManager().register(TYPE_JURYNONBULLET, new SpriteRenderer(Asset.Textures.JURY_NONBULLET));
+         gamecontext.getRenderManager().register(TYPE_JURYNONBULLET, new SpriteRenderer(Asset.Textures.JURY_NONBULLET));
       }
 
    }
@@ -210,6 +237,14 @@ public class JuryManager
             juryObject.getColor().a = 0f;
          }
       }
+   }
+
+   private void setupUI(Stage stage, DialogManager dialogManager)
+   {
+      DialogBox dialogBox = new DialogBox(dialogManager);
+      dialogBox.setHeight(150f);
+      dialogBox.setWidth(Gdx.graphics.getWidth());
+      stage.addActor(dialogBox);
    }
 
    public void initRender(AbstractScreen<SuperMafiosiGame> screen)
@@ -257,16 +292,16 @@ public class JuryManager
          Vector2 dimension_jurymember = AssetUtils.getDimensionOfTexture(jurymember.getHeadSprite());
          o_jury.setDimensions(dimension_jurymember.x * ratio.x, dimension_jurymember.y * ratio.y);
          o_jury.setPosition(jurymembers_startpoint.x + i * next_Jury_Width, jurymembers_startpoint.y);
-      
+
          screen.getRenderManager().register(jurymember.getName(), new SpriteRenderer(jurymember.getHeadSprite()));
 
          juryObjects.add(o_jury);
-         
+
          GameObject o_jury_hands = screen.getGameWorld().addObject();
          o_jury_hands.setType(jurymember.getNameHands());
-         
+
          juryObjects.add(o_jury_hands);
-         
+
          Vector2 dimension_jurymember_hands = AssetUtils.getDimensionOfTexture(jurymember.getHandsSprite());
          /**
           * Special Case for blob
