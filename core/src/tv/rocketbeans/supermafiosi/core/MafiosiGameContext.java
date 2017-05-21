@@ -50,6 +50,12 @@ public class MafiosiGameContext {
 		return Math.max(miniGames.size(), 2); // do not count the last game = roulette
 	}
 	
+	public void clearActiveMafiosis() {
+		for (Mafiosi m : getCandidates()) {
+			m.setActive(false);
+		}
+	}
+	
 	public void addBullet(String candidateName) {
 		Integer value = bullets.get(candidateName);
 		if (bullets.get(candidateName) == null) {

@@ -238,6 +238,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
    @Override
    public void cleanup()
    {
+	  mafiosiGameContext.clearActiveMafiosis();
       mafiosiGameContext.getDialogManager().removeListener(afterAllDialogsListener);
       firedRoasts.clear();
    }

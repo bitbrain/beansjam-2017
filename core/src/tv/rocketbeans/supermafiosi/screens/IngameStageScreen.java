@@ -293,7 +293,6 @@ public class IngameStageScreen extends AbstractScreen<SuperMafiosiGame>
    private void setupMiniGameFramework()
    {
       player = new Mafiosi("Lerry Sanchez", Message.DIALOG_EDUARDLASER_GREETING, 38, Asset.Textures.LERRY_SANCHEZ_STAGE, Asset.Textures.KAPPO);
-      player.setActive(true);
       setupMafiosis(300f, 300f,
               new Mafiosi("Tron Jawolta", Message.DIALOG_LERRY_GREETING, 47, Asset.Textures.TRON_JAWOLTA_STAGE, Asset.Textures.AVATAR_TRON_JAWOLTA),
               player,

@@ -244,6 +244,7 @@ public class RouletteMiniGame extends AbstractMiniGame
    @Override
    public void cleanup()
    {
+	  context.clearActiveMafiosis();
       context.getDialogManager().removeListener(dialogListener);
    }
 
