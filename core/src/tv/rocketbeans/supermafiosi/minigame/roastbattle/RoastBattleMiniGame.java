@@ -188,6 +188,7 @@ public class RoastBattleMiniGame extends AbstractMiniGame
             
             JuryManager.getInstance().setJurySceneVisible(true);
             JuryManager.getInstance().startRateJury(gameContext, result, mafiosiGameContext);
+            
              
          }
       } );
