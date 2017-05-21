@@ -300,6 +300,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       mafiosi = remainingCandidates.remove(0);
       mafiosi.setActive(true);
 
+      // FIXME Haaahlp!
       //setRouletteAnimation(mafiosi);
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {

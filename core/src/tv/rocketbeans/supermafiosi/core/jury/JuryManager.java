@@ -230,11 +230,13 @@ public class JuryManager
 
    private void setJuryResult(GameContext gamecontext, Integer jurymember, boolean hasBullet)
    {
+	   // FIXME Haalph -> no bullets are shown?!
       Vector2 resultStartPoint_1 = new Vector2(320, 113);
       Vector2 resultStartPoint_2 = new Vector2(570, 113);
       Vector2 resultStartPoint_3 = new Vector2(850, 113);
 
       GameObject juryResult = gamecontext.getGameWorld().addObject();
+      juryResult.setZIndex(50f);
       Vector2 ratio = calcRatio();
       Vector2 dimesion_nonbullet = AssetUtils.getDimensionOfTexture(Asset.Textures.JURY_NONBULLET);
       juryObjects.add(juryResult);

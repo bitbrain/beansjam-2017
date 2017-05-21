@@ -1,11 +1,13 @@
 package tv.rocketbeans.supermafiosi.minigame;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 
 import de.bitbrain.braingdx.behavior.BehaviorAdapter;
 import de.bitbrain.braingdx.world.GameObject;
+import tv.rocketbeans.supermafiosi.minigame.MiniGame.MiniGameListener;
 
 /**
  * Manages mini games by accessing a minigame pool.
@@ -25,11 +27,20 @@ public class MiniGameManager extends BehaviorAdapter {
 			miniGame.cleanup();
 			// TODO tell Jury about the results
 			System.out.println(result);
+			for (MiniGameListener l : listeners) {
+				l.onComplete(miniGame, result);
+			}
 		}
 	};
 	
+	private List<MiniGameListener> listeners = new ArrayList<MiniGameListener>();
+	
 	public MiniGameManager(List<MiniGame> miniGames) {
 		pool = new MiniGamePool(miniGames);
+	}
+	
+	public void addListener(MiniGameListener l) {
+		this.listeners.add(l);
 	}
 	
 	public void triggerNextMiniGame() {
