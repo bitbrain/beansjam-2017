@@ -92,12 +92,14 @@ public class RouletteMiniGame extends AbstractMiniGame
             System.out.println("waiting for player confirmation...");
             return;
          }
+         
+         setRouletteAnimation(mafiosi);
          Tween.call(new TweenCallback()
          {
             @Override
             public void onEvent(int arg0, BaseTween<?> arg1)
             {
-               pullTrigger();
+            	pullTrigger();
             }
          }).delay(2f).start(SharedTweenManager.getInstance());
       }
@@ -256,7 +258,7 @@ public class RouletteMiniGame extends AbstractMiniGame
    {
       GameObject o = gameContext.getGameWorld().addObject();
       o.setType(type);
-      o.setPosition(200, 250);
+      o.setPosition(100, 250);
       o.setDimensions(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
       o.getColor().a = 0f;
       o.setZIndex(101);
@@ -301,9 +303,8 @@ public class RouletteMiniGame extends AbstractMiniGame
       }
       mafiosi = remainingCandidates.remove(0);
       mafiosi.setActive(true);
-
-      // FIXME Haaahlp!
-      setRouletteAnimation(mafiosi);
+      setRouletteAnimation(null);
+      
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {
          Tween.call(new TweenCallback()
