@@ -71,6 +71,10 @@ public interface Asset
       String MENU_CHAR_SELECT_INTRO = "music/opener_char-select_Intro.ogg";
       String MENU_CHAR_SELECT_MAIN = "music/opener_char-select_Main.ogg";
 
+      String MENU_MINIGAME_ROASTME_MUSIC_INTRO = "music/game_one_Intro.ogg";
+      String MENU_MINIGAME_ROASTME_MUSIC_MAIN= "music/game_one_Main.ogg";
+      
+      
       String TENSION = "music/tension_1_Main.ogg";
       
       

@@ -71,6 +71,9 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             assets.put(Asset.Music.TENSION, Music.class);
             assets.put(Asset.Music.AUDIANCE_HAPPY, Music.class);
             
+            assets.put(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_INTRO, Music.class);
+            assets.put(Asset.Music.MENU_MINIGAME_ROASTME_MUSIC_MAIN, Music.class);
+            
             /*
             * Sounds
             */
