@@ -22,6 +22,8 @@ public class MafiosiAssetLoader implements GameAssetLoader {
             /**
              * Textures
              */
+		assets.put(Asset.Textures.LOGO_BEANSJAM, Texture.class);
+		assets.put(Asset.Textures.LOGO_WEESEKS, Texture.class);
 		assets.put(Asset.Textures.BUTTON_9PATCH, Texture.class);
 		assets.put(Asset.Textures.LABEL_9PATCH, Texture.class);
 		assets.put(Asset.Textures.PANEL_9PATCH, Texture.class);

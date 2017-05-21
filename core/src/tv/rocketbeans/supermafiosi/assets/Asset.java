@@ -84,6 +84,9 @@ public interface Asset
       String KRANKENBETT = "textures/krankenbett.png";
       String OLDDON = "textures/DON1.png";
       String KAPPO = "textures/Capo.png";
+      
+      String LOGO_WEESEKS = "textures/weeseeks.png";
+      String LOGO_BEANSJAM = "textures/beansjam.png";
    }
 
    public interface Sounds

@@ -16,6 +16,7 @@ import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.assets.MafiosiAssetLoader;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
 import tv.rocketbeans.supermafiosi.screens.IngameStageScreen;
+import tv.rocketbeans.supermafiosi.screens.InitialCreditsScreen;
 import tv.rocketbeans.supermafiosi.screens.IntroScreen;
 import tv.rocketbeans.supermafiosi.ui.Styles;
 
@@ -49,7 +50,7 @@ public class SuperMafiosiGame extends BrainGdxGame
 //         }
          return new IngameStageScreen(this);
       }
-      return new IntroScreen(this);
+      return new InitialCreditsScreen(this);
    }
 
 }
