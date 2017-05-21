@@ -2,6 +2,8 @@ package tv.rocketbeans.supermafiosi.minigame;
 
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+
 import de.bitbrain.braingdx.behavior.BehaviorAdapter;
 import de.bitbrain.braingdx.world.GameObject;
 
@@ -31,6 +33,7 @@ public class MiniGameManager extends BehaviorAdapter {
 	}
 	
 	public void triggerNextMiniGame() {
+		Gdx.app.log("INFO", "Next minigame triggered!");
 		if (pool.hasMiniGamesLeft()) {
 			isMinigameActive = true;
 			currentMiniGame = pool.fetchNext();
