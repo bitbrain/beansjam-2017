@@ -69,5 +69,11 @@ public interface Message {
 	String MINIGAME_ROAST_PAPER_4 = "minigame.roast.paper.4";
 	String MINIGAME_ROAST_PAPER_5 = "minigame.roast.paper.5";
 	String MINIGAME_ROAST_PAPER_6 = "minigame.roast.paper.6";
+	
+	String MINIGAME_ROULETTE_DEATHWISH_1 = "minigame.roulette.deathwish.1";
+	String MINIGAME_ROULETTE_DEATHWISH_2 = "minigame.roulette.deathwish.2";
+	String MINIGAME_ROULETTE_DEATHWISH_3 = "minigame.roulette.deathwish.3";
+	String MINIGAME_ROULETTE_DEATHWISH_4 = "minigame.roulette.deathwish.4";
+	String MINIGAME_ROULETTE_DEATHWISH_5 = "minigame.roulette.deathwish.5";
 
 }
