@@ -163,6 +163,7 @@ public class DialogBox extends Actor {
 		     .target(0f)
 		     .ease(TweenEquations.easeInCubic)
 		     .start(tweenManager);
+			avatarBouncing.setValue(0f);
 			Tween.to(avatarBouncing, ValueTween.VALUE, 0.5f)
 		     .target(15f)
 		     .ease(TweenEquations.easeInCubic)
