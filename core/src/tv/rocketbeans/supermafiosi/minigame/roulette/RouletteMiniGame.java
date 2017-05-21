@@ -247,6 +247,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       o.setDimensions(Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getHeight());
       o.getColor().a = 0f;
       o.setZIndex(100);
+      gameContext.getRenderManager().unregister(type);
       gameContext.getRenderManager().register(type, new SpriteRenderer(path));
       return o;
    }
@@ -258,6 +259,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       o.setPosition(200, 250);
       o.setDimensions(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
       o.getColor().a = 0f;
+      o.setZIndex(101);
       gameContext.getRenderManager().register(type, new SpriteRenderer(path));
 
       Tween.to(o, GameObjectTween.POS_Y, 0.75f).target(220).repeatYoyo(Tween.INFINITY, 0.75f).ease(TweenEquations.easeNone).start(gameContext.getTweenManager());
@@ -301,7 +303,7 @@ public class RouletteMiniGame extends AbstractMiniGame
       mafiosi.setActive(true);
 
       // FIXME Haaahlp!
-      //setRouletteAnimation(mafiosi);
+      setRouletteAnimation(mafiosi);
       if (mafiosi.equals(context.getPlayerMafiosi()))
       {
          Tween.call(new TweenCallback()
@@ -343,7 +345,6 @@ public class RouletteMiniGame extends AbstractMiniGame
       {
          System.out.println("SHOOT!");
          setBoom();
-
          setRouletteAnimation(null);
 
          if (mafiosi != null)
@@ -380,9 +381,7 @@ public class RouletteMiniGame extends AbstractMiniGame
          Toast.getInstance().doToast("MISS!");
          System.out.println("MISS!");
          remainingCandidates.add(mafiosi);
-         context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
          nextPlayer();
-         setRouletteAnimation(null);
       }
 
    }
