@@ -252,7 +252,7 @@ public class RouletteMiniGame extends AbstractMiniGame
    @Override
    public void cleanup()
    {
-	  context.clearActiveMafiosis();
+      context.clearActiveMafiosis();
       context.getDialogManager().removeListener(dialogListener);
    }
 
@@ -329,21 +329,44 @@ public class RouletteMiniGame extends AbstractMiniGame
 
          setRouletteAnimation(null);
 
-         shootCurrentPlayer();
-         SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
+         if (mafiosi != null)
+         {
+            if (mafiosi.getName().contains("Trumpf"))
+            {
+               System.out.println("dead trumpf");
+               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.TRUMPF_DEAD_STAGE));
+            }
+            if (mafiosi.getName().contains("Jawolta"))
+            {
+                System.out.println("dead Jawolta");
+               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.TRON_DEAD_STAGE));
+            }
 
-      }
-      else
-      {
-         SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
-         Toast.getInstance().doToast("MISS!");
-         System.out.println("MISS!");
-         remainingCandidates.add(mafiosi);
-         context.getDialogManager().addDialog(mafiosi.getName(), getRandomDeathWish(), mafiosi.getAvatarId());
-         nextPlayer();
-         setRouletteAnimation(null);
+            if (mafiosi.getName().contains("Sanchez"))
+            {
+                System.out.println("dead Sanchez");
+               gameContext.getRenderManager().register(mafiosi, new SpriteRenderer(Asset.Textures.SANCHEZ_DEAD_STAGE));
+            }
+
+            shootCurrentPlayer();
+            SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
+
+         }
+         else
+         {
+            SharedAssetManager.getInstance().get(Asset.Sounds.TRIGGER_NO_BULLET, Sound.class).play(1f, (float) (0.7f + Math.random() * 0.5f), 0f);
+            Toast.getInstance().doToast("MISS!");
+            System.out.println("MISS!");
+            remainingCandidates.add(mafiosi);
+            context.getDialogManager().addDialog(mafiosi.getName(), Message.MAINMENU_BUTTON_EXITGAME, mafiosi.getAvatarId());
+            nextPlayer();
+            setRouletteAnimation(null);
+         }
       }
    }
+   
+
+   
 
    private void shootCurrentPlayer()
    {

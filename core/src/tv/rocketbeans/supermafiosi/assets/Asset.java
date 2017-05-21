@@ -73,6 +73,10 @@ public interface Asset
 
       String BOOM = "textures/BOOM.png";
       
+      
+      String TRON_DEAD_STAGE = "textures/trav_dead_stage.png";
+      String TRUMPF_DEAD_STAGE = "textures/trump_dead_stage.png";
+      String SANCHEZ_DEAD_STAGE = "textures/larry_dead_stage.png";
      
       /**
        * Intro
