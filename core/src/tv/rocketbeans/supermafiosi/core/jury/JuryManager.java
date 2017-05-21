@@ -16,6 +16,7 @@ import de.bitbrain.braingdx.GameContext;
 import de.bitbrain.braingdx.audio.AudioManager;
 import de.bitbrain.braingdx.graphics.renderer.SpriteRenderer;
 import de.bitbrain.braingdx.screens.AbstractScreen;
+import de.bitbrain.braingdx.tweens.SharedTweenManager;
 import de.bitbrain.braingdx.world.GameObject;
 import java.util.ArrayList;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
@@ -175,7 +176,18 @@ public class JuryManager
                         boo.play();
                         dialogManager.removeListener(this_);
                         AudioManager.getInstance().fadeOutMusic(Asset.Music.TENSION);
-                        minigameManager.triggerNextMiniGame();
+                        Tween.call(new TweenCallback() {
+							@Override
+							public void onEvent(int arg0, BaseTween<?> arg1) {
+								setJurySceneVisible(false);
+							}
+                        }).delay(5f).start(SharedTweenManager.getInstance());
+                        Tween.call(new TweenCallback() {
+							@Override
+							public void onEvent(int arg0, BaseTween<?> arg1) {
+		                        minigameManager.triggerNextMiniGame();
+							}
+                        }).delay(10f).start(SharedTweenManager.getInstance());
                      }
                      else
                      {
@@ -183,7 +195,18 @@ public class JuryManager
                         clap1.play();
                         dialogManager.removeListener(this_);
                         AudioManager.getInstance().fadeOutMusic(Asset.Music.TENSION);
-                        minigameManager.triggerNextMiniGame();
+                        Tween.call(new TweenCallback() {
+							@Override
+							public void onEvent(int arg0, BaseTween<?> arg1) {
+								setJurySceneVisible(false);
+							}
+                        }).delay(5f).start(SharedTweenManager.getInstance());
+                        Tween.call(new TweenCallback() {
+							@Override
+							public void onEvent(int arg0, BaseTween<?> arg1) {
+		                        minigameManager.triggerNextMiniGame();
+							}
+                        }).delay(10f).start(SharedTweenManager.getInstance());
                      }
                      drum.stop();
 
