@@ -36,8 +36,6 @@ public class SuperMafiosiGame extends BrainGdxGame
       Styles.init();
       Bundle.load();
       AudioManager.getInstance().setVolume(Config.MUSIC_VOLUME);
-      // Temporarily set to German for now
-      Bundle.setLocale(Locale.GERMAN);
       if (Config.DEBUG)
       {
 
