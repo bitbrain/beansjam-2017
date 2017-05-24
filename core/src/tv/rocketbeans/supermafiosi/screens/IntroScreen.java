@@ -6,9 +6,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenEquations;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -27,6 +25,7 @@ import de.bitbrain.braingdx.world.GameObject;
 import tv.rocketbeans.supermafiosi.SuperMafiosiGame;
 import tv.rocketbeans.supermafiosi.assets.Asset;
 import tv.rocketbeans.supermafiosi.core.DialogManager;
+import tv.rocketbeans.supermafiosi.core.SoundManager;
 import tv.rocketbeans.supermafiosi.graphics.BitmapFontBaker;
 import tv.rocketbeans.supermafiosi.i18n.Bundle;
 import tv.rocketbeans.supermafiosi.i18n.Message;
@@ -66,9 +65,6 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
          private Label introlabel5 = null;
          private DialogManager dialogManager = new DialogManager();
          private GameObject donImageObject = null;
-         private Sound EKG_BEEP = null;
-         private Sound EKG_STALL = null;
-
          @Override
          public void onEvent(int i, BaseTween<?> bt)
          {
@@ -101,9 +97,8 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
                dialogManager.addDialog("Cappo", Message.INTRO_KAPPO_2, Asset.Textures.KAPPO);
                donImageObject = showDonImage(stage, dialogManager);
 
-               EKG_BEEP = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.EKG_BEEP));
-               EKG_BEEP.loop();
-
+               SoundManager.getInstance().loopSound("EKG_BEEP", Asset.Sounds.EKG_BEEP);
+             
             }
 
             if (tick == 20)
@@ -153,9 +148,11 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
             if (tick == 60)
             {
-               EKG_BEEP.stop();
-               EKG_STALL = Gdx.audio.newSound(Gdx.files.internal(Asset.Sounds.EKG_STALL));
-               EKG_STALL.loop();
+               
+               SoundManager.getInstance().stopSound("EKG_BEEP");
+               SoundManager.getInstance().loopSound("EKG_STALL", Asset.Sounds.EKG_STALL);
+               
+          
                dialogManager.nextDialog();
                dialogManager.nextDialog();
             }
@@ -175,7 +172,7 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
 
             if (tick == 75)
             {
-               EKG_STALL.stop();
+               SoundManager.getInstance().stopSound("EKG_STALL");
                dialogManager.nextDialog();
                introlabel3 = showIntroText(stage, Bundle.translations.get(Message.INTRO_SPEAKER_3));
             }
@@ -218,6 +215,9 @@ public class IntroScreen extends AbstractScreen<SuperMafiosiGame>
             menu_music_main.setLooping(true);
             AudioManager.getInstance().stopMusic(Asset.Music.DYING_DON);
             AudioManager.getInstance().playMusic(Asset.Music.MENU_CHAR_SELECT_MAIN);
+
+            SoundManager.getInstance().stopAllSounds();
+            
             getGame().setScreen(new MenuScreen(getGame()));
             return false;
          }
