@@ -18,6 +18,7 @@ allprojects {
         appName = "supermafiosi"
         gdxVersion = '1.9.6'
         roboVMVersion = '2.3.0'
+        box2DLightsVersion = '1.4'
         ashleyVersion = '1.7.0'
         aiVersion = '1.8.0'
     }
@@ -27,7 +28,9 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-        maven { url 'https://nexus.k40s.net/repository/braingdx' }
+        maven { url 'https://nexus.k40s.net/repository/braingdx' }         
+        maven { url 'https://jitpack.io' }   
+        
     }
 }
 
@@ -56,8 +59,8 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
         compile 'de.bitbrain.braingdx:braingdx-core:0.0.1'
-	      compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:sources'
-	      compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:javadoc'
+	compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:sources'
+	compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:javadoc'
     }
 }
 
