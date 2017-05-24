@@ -28,7 +28,9 @@ allprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
-		maven { url 'https://jitpack.io' }
+        maven { url 'https://nexus.k40s.net/repository/braingdx' }         
+        maven { url 'https://jitpack.io' }   
+        
     }
 }
 
@@ -56,9 +58,9 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"
-		compile 'com.github.bitbrain.braingdx:braingdx-core:deploy-SNAPSHOT'
-		compile 'com.github.bitbrain.braingdx:braingdx-core:deploy-SNAPSHOT:sources'
-		compile 'com.github.bitbrain.braingdx:braingdx-core:deploy-SNAPSHOT:javadoc'
+        compile 'de.bitbrain.braingdx:braingdx-core:0.0.1'
+	compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:sources'
+	compile 'de.bitbrain.braingdx:braingdx-core:0.0.1:javadoc'
     }
 }
 
